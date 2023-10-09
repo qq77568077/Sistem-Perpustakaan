@@ -2,27 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\RoleDataTable;
-use App\Http\Requests\RoleRequest;
-use App\Models\Role;
-use Illuminate\Contracts\Auth\Access\Gate;
+use App\DataTables\PermissionDataTable;
+use App\Http\Requests\PermissionRequest;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
+
     public function __construct()
     {
-        $this->middleware('can:create konfigurasi/roles')->only('create');
+        $this->middleware('can:create konfigurasi/permissions')->only('create');
     }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(RoleDataTable $dataTable)
+    public function index(PermissionDataTable $dataTable)
     {
-        $this->authorize('read konfigurasi/roles');
-        return $dataTable->render('konfigurasi.role');
+        //
+        $this->authorize('read konfigurasi/permissions');
+        return $dataTable->render('konfigurasi.permission');
     }
 
     /**
@@ -32,7 +35,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('konfigurasi.role-action', ['role' => new Role()]);
+        return view('konfigurasi.permission-action', ['permission' => new Permission()]);
     }
 
     /**
@@ -41,14 +44,16 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoleRequest $request, Role $role)
+    public function store(PermissionRequest $request, Permission $permission)
     {
-        Role::create($request->all());
-        
+        //
+        Permission::create($request->all());
+
         return response()->json([
             'status' => 'success',
             'message' => 'Create data successfully'
         ]);
+
     }
 
     /**
@@ -68,10 +73,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Permission $permission)
     {
         //
-        return view('konfigurasi.role-action', compact('role'));
+        return view('konfigurasi.permission-action', compact('permission'));
 
     }
 
@@ -82,18 +87,17 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleRequest $request, Role $role)
+    public function update(PermissionRequest $request, Permission $permission)
     {
         //
-        $role->name = $request->name;
-        $role->guard_name = $request->guard_name;
-        $role->save();
+        $permission->name = $request->name;
+        $permission->guard_name = $request->guard_name;
+        $permission->save();
 
         return response()->json([
             'status' => 'success',
             'message' => 'updated data successfully'
         ]);
-
     }
 
     /**
@@ -102,10 +106,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Permission $permission)
     {
         //
-        $role->delete();
+        $permission->delete();
         return response()->json([
             'status' => 'success',
             'message' => 'Delete data successfully'

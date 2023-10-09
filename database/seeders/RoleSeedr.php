@@ -62,17 +62,35 @@ class RoleSeedr extends Seeder
             $role_prodi = Role::create(['name' => 'prodi']);
             $role_koorLab = Role::create(['name' => 'koorLab']);
             $role_admin = Role::create(['name' => 'admin']);
-    
-            $permission = Permission::create(['name' =>'read role']);
-            $permission = Permission::create(['name' =>'create role']);
-            $permission = Permission::create(['name' =>'update role']);
-            $permission = Permission::create(['name' =>'delete role']);
 
-            $role_admin->givePermissionTo('read role');
-            $role_admin->givePermissionTo('create role');
-            $role_admin->givePermissionTo('update role');
-            $role_admin->givePermissionTo('delete role');
+            //konfigurasi role
+            $permission = Permission::create(['name' =>'read konfigurasi']);
+            $permission = Permission::create(['name' =>'read konfigurasi/roles']);
+            $permission = Permission::create(['name' =>'create konfigurasi/roles']);
+            $permission = Permission::create(['name' =>'update konfigurasi/roles']);
+            $permission = Permission::create(['name' =>'delete konfigurasi/roles']);
+            
+            //konfigurasi permission
+            $permission = Permission::create(['name' =>'read konfigurasi/permissions']);
+            $permission = Permission::create(['name' =>'create konfigurasi/permissions']);
+            $permission = Permission::create(['name' =>'update konfigurasi/permissions']);
+            $permission = Permission::create(['name' =>'delete konfigurasi/permissions']);
+
+
+            //give permission roles
+            $role_admin->givePermissionTo(['read konfigurasi/roles','read konfigurasi']);
+            $role_admin->givePermissionTo('create konfigurasi/roles');
+            $role_admin->givePermissionTo('update konfigurasi/roles');
+            $role_admin->givePermissionTo('delete konfigurasi/roles');
+
+            //give permission permission
+            $role_admin->givePermissionTo('read konfigurasi/permissions');
+            $role_admin->givePermissionTo('create konfigurasi/permissions');
+            $role_admin->givePermissionTo('update konfigurasi/permissions');
+            $role_admin->givePermissionTo('delete konfigurasi/permissions');
     
+
+            //role
             $perpustakaan->assignRole('perpustakaan');
             $mahasiswa->assignRole('mahasiswa');
             $prodi->assignRole('prodi');
