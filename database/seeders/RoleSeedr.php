@@ -76,6 +76,25 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' =>'update konfigurasi/permissions']);
             $permission = Permission::create(['name' =>'delete konfigurasi/permissions']);
 
+            //layanan Plagiarism
+            $permission = Permission::create(['name' =>'read layanan']);
+            $permission = Permission::create(['name' =>'read layanan/plagiarism']);
+            $permission = Permission::create(['name' =>'create layanan/plagiarism']);
+            $permission = Permission::create(['name' =>'update layanan/plagiarism']);
+            $permission = Permission::create(['name' =>'delete layanan/plagiarism']);
+
+            //layanan BerkasTA
+            $permission = Permission::create(['name' =>'read layanan/berkasTa']);
+            $permission = Permission::create(['name' =>'create layanan/berkasTa']);
+            $permission = Permission::create(['name' =>'update layanan/berkasTa']);
+            $permission = Permission::create(['name' =>'delete layanan/berkasTa']);
+
+            //layanan jilid laporan
+            $permission = Permission::create(['name' =>'read layanan/jilidLaporan']);
+            $permission = Permission::create(['name' =>'create layanan/jilidLaporan']);
+            $permission = Permission::create(['name' =>'update layanan/jilidLaporan']);
+            $permission = Permission::create(['name' =>'delete layanan/jilidLaporan']);
+
 
             //give permission roles
             $role_admin->givePermissionTo(['read konfigurasi/roles','read konfigurasi']);
@@ -88,7 +107,30 @@ class RoleSeedr extends Seeder
             $role_admin->givePermissionTo('create konfigurasi/permissions');
             $role_admin->givePermissionTo('update konfigurasi/permissions');
             $role_admin->givePermissionTo('delete konfigurasi/permissions');
+
+
+             //give permission layanan plagiarism
+
+             $role_admin->givePermissionTo(['read layanan/plagiarism','read layanan']);
+             $role_admin->givePermissionTo('create layanan/plagiarism');
+             $role_admin->givePermissionTo('update layanan/plagiarism');
+             $role_admin->givePermissionTo('delete layanan/plagiarism');
+
+             //give permission layanan berkasTa
+
+             $role_admin->givePermissionTo('read layanan/berkasTa');
+             $role_admin->givePermissionTo('create layanan/berkasTa');
+             $role_admin->givePermissionTo('update layanan/berkasTa');
+             $role_admin->givePermissionTo('delete layanan/berkasTa');
+
+             //give permission layanan Jilid
+
+             $role_admin->givePermissionTo('read layanan/jilidLaporan');
+             $role_admin->givePermissionTo('create layanan/jilidLaporan');
+             $role_admin->givePermissionTo('update layanan/jilidLaporan');
+             $role_admin->givePermissionTo('delete layanan/jilidLaporan');
     
+             
 
             //role
             $perpustakaan->assignRole('perpustakaan');

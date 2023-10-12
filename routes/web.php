@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\BerkasTaController;
+use App\Http\Controllers\JilidLaporanController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PlagiarismController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +39,15 @@ require __DIR__ . '/auth.php';
 Route::middleware('auth')->group(function () {
     Route::resource('konfigurasi/roles', RoleController::class);
     Route::resource('konfigurasi/permissions', PermissionController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('konfigurasi/roles', RoleController::class);
+    Route::resource('konfigurasi/permissions', PermissionController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('layanan/plagiarism', PlagiarismController::class);
+    Route::resource('layanan/berkasTa', BerkasTaController::class);
+    Route::resource('layanan/jilidLaporan', JilidLaporanController::class);
 });

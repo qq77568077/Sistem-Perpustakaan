@@ -44,5 +44,15 @@ class NavigationSeeder extends Seeder
             "url"  => 'layanan/plagiarism',
             "icon" => '',
             ]);
+            $transaksi->subMenus()->create([
+            "name" => 'Jilid Laporan',
+            "url"  => 'layanan/jilidLaporan',
+            "icon" => '',
+            ]);
+            $transaksi->subMenus()->create([
+            "name" => 'Berkas Ta',
+            "url"  => 'layanan/berkasTa',
+            "icon" => '',
+            ]);
     }
 }

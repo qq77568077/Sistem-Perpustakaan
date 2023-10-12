@@ -10,7 +10,7 @@
                 </a>
             </div> -->
     <div class="sidebar-header">
-        <div class="text">Sistem Perpustakaan</div>
+        <div class="text">Library</div>
         <div class="close-sidebar action-toggle">
             <i class="ti-close"></i>
         </div>
@@ -38,7 +38,7 @@
             @endcan --}}
 
             @foreach(getMenus() as $menu)
-            {{-- @can('read '. $menu->url) --}}
+            @can('read '. $menu->url)
                 <li class="{{ request()->segment(1) == $menu->url ? 'active open' : ''}}">
                     <a href="#" class="main-menu has-dropdown">
                         <i class="{{$menu->icon}}"></i>
@@ -46,15 +46,15 @@
                     </a>
                     <ul class="sub-menu {{request()->segment(1) == $menu->url ? 'expand' : '' }}">
                         @foreach($menu->subMenus as $submenu)
-                            {{-- @can('read '. $submenu->url) --}}
+                            @can('read '. $submenu->url)
                                 <li class="{{ request()->segment(1) == explode('/',$submenu->url)[0] && request()->segment(2) == explode('/',$submenu->url)[1] ? 'active' : ''}}">
                                     <a href="{{url($submenu->url)}}" class="link"><span>{{$submenu->name}}</span></a>
                                 </li>
-                            {{-- @endcan --}}
+                            @endcan
                         @endforeach
                     </ul>
                 </li>
-            {{-- @endcan --}}
+            @endcan
             @endforeach
         </ul>
     </div>
