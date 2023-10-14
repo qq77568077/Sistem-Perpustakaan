@@ -1,7 +1,3 @@
-composer install
-
-php artisan migrate:fresh --seed
-
 create datatables
 
 cara membuat datatable
@@ -25,8 +21,6 @@ php artisan make:model BerkasTa -m
 
 php artisan make:controller JilidLaporanController -r
 php artisan make:model JilidLaporan -m 
-
-
 
 # Example
 
@@ -59,4 +53,17 @@ php artisan make:model Flight --all
 php artisan make:model Member --pivot
 
 
+
+
+## instalasi
+
+git clone https://github.com/MuhammadWildanf/SistemPerpus.git
+
+composer install
+
+php artisan migrate:fresh --seed
+
+php artisan serve
+
+mmebuat database di phpmyadmin dengan nama SistemPerpus
 
