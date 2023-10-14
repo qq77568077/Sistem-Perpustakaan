@@ -162,7 +162,7 @@ class RoleSeedr extends Seeder
 
              //give permission layanan berkasTa
 
-             $role_mahasiswa->givePermissionTo('read layanan/berkasTa');
+             $role_perpustakaan->givePermissionTo('read layanan/berkasTa');
              $role_perpustakaan->givePermissionTo('update layanan/berkasTa');
 
              //give permission layanan Jilid
