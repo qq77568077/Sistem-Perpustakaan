@@ -45,8 +45,17 @@ class PlagiarismController extends Controller
      */
     public function store(Request $request , Plagiarism $plagiarism)
     {
+        // $request->validate([
+        //     'file' => 'required|mimes|max:10240', // doc format dan maksimal 10 MB
+        // ]);
+
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+        $file->storeAs('documents', $fileName);
+
+
         Plagiarism::create([
-            'file' => $request->file,
+            'file' => $fileName,
             'hasil_cek' => 'Belum ada hasil',
             'status' => 'Belum validasi',
         ]);
