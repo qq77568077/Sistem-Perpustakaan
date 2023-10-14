@@ -14,6 +14,7 @@ php artisan datatables:make jilidLaporan
 
 php artisan make:request PermissionRequest
 php artisan make:request PlagiarismRequest
+php artisan make:request JilidRequest
 
 
 php artisan make:controller PlagiarismController -r

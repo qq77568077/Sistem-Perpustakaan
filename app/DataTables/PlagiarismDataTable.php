@@ -83,7 +83,6 @@ class PlagiarismDataTable extends DataTable
            Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
            Column::make('created_at'),
            Column::make('file'),
-           Column::make('score'),
            Column::make('hasil_cek'),
            Column::make('status'),
            Column::computed('action')

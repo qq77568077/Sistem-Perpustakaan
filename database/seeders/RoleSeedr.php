@@ -95,6 +95,7 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' =>'update layanan/jilidLaporan']);
             $permission = Permission::create(['name' =>'delete layanan/jilidLaporan']);
 
+            //role admin
 
             //give permission roles
             $role_admin->givePermissionTo(['read konfigurasi/roles','read konfigurasi']);
@@ -103,10 +104,10 @@ class RoleSeedr extends Seeder
             $role_admin->givePermissionTo('delete konfigurasi/roles');
 
             //give permission permission
-            $role_admin->givePermissionTo('read konfigurasi/permissions');
-            $role_admin->givePermissionTo('create konfigurasi/permissions');
-            $role_admin->givePermissionTo('update konfigurasi/permissions');
-            $role_admin->givePermissionTo('delete konfigurasi/permissions');
+            // $role_admin->givePermissionTo('read konfigurasi/permissions');
+            // $role_admin->givePermissionTo('create konfigurasi/permissions');
+            // $role_admin->givePermissionTo('update konfigurasi/permissions');
+            // $role_admin->givePermissionTo('delete konfigurasi/permissions');
 
 
              //give permission layanan plagiarism
@@ -129,8 +130,53 @@ class RoleSeedr extends Seeder
              $role_admin->givePermissionTo('create layanan/jilidLaporan');
              $role_admin->givePermissionTo('update layanan/jilidLaporan');
              $role_admin->givePermissionTo('delete layanan/jilidLaporan');
+
+             //role mahasiswa
+             //give permission layanan plagiarism
+
+             $role_mahasiswa->givePermissionTo(['read layanan/plagiarism','read layanan']);
+             $role_mahasiswa->givePermissionTo('create layanan/plagiarism');
+             $role_mahasiswa->givePermissionTo('update layanan/plagiarism');
+             $role_mahasiswa->givePermissionTo('delete layanan/plagiarism');
+
+             //give permission layanan berkasTa
+
+             $role_mahasiswa->givePermissionTo('read layanan/berkasTa');
+             $role_mahasiswa->givePermissionTo('create layanan/berkasTa');
+             $role_mahasiswa->givePermissionTo('update layanan/berkasTa');
+             $role_mahasiswa->givePermissionTo('delete layanan/berkasTa');
+
+             //give permission layanan Jilid
+
+             $role_mahasiswa->givePermissionTo('read layanan/jilidLaporan');
+             $role_mahasiswa->givePermissionTo('create layanan/jilidLaporan');
+             $role_mahasiswa->givePermissionTo('update layanan/jilidLaporan');
+             $role_mahasiswa->givePermissionTo('delete layanan/jilidLaporan');
+
+
+             //role perpustakaan
+             //give permission layanan plagiarism
+
+             $role_perpustakaan->givePermissionTo(['read layanan/plagiarism','read layanan']);
+             $role_perpustakaan->givePermissionTo('update layanan/plagiarism');
+
+             //give permission layanan berkasTa
+
+             $role_mahasiswa->givePermissionTo('read layanan/berkasTa');
+             $role_perpustakaan->givePermissionTo('update layanan/berkasTa');
+
+             //give permission layanan Jilid
+
+             $role_perpustakaan->givePermissionTo('read layanan/jilidLaporan');
+             $role_perpustakaan->givePermissionTo('update layanan/jilidLaporan');
+
+
+             //give permission layanan berkasTa
+
+             $role_prodi->givePermissionTo('read layanan/berkasTa', 'read layanan');
+             $role_koorLab->givePermissionTo('read layanan/berkasTa', 'read layanan');
+
     
-             
 
             //role
             $perpustakaan->assignRole('perpustakaan');

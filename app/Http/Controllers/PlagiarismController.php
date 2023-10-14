@@ -45,17 +45,12 @@ class PlagiarismController extends Controller
      */
     public function store(Request $request , Plagiarism $plagiarism)
     {
-        $data = new Plagiarism();
+        Plagiarism::create([
+            'file' => $request->file,
+            'hasil_cek' => 'Belum ada hasil',
+            'status' => 'Belum validasi',
+        ]);
 
-        $file = $request->file;
-
-        $filename = time(). '.' .$file->getClientOriginalExtension();
-
-        $request->file->move('assets', $filename);
-
-        $data->file = $file;
-
-        $data->save();
         return response()->json([
             'status' => 'success',
             'message' => 'Create data successfully'
@@ -94,7 +89,8 @@ class PlagiarismController extends Controller
     public function update(Request $request, Plagiarism $plagiarism)
     {
         //
-        $plagiarism->file = $request->name;
+        $plagiarism->file = $request->file;
+        $plagiarism->hasil_cek = $request->hasil_cek;
         $plagiarism->save();
 
         return response()->json([

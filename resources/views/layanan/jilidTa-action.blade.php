@@ -13,31 +13,31 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="file">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama">
+                        <input type="text" class="form-control" value="{{$jilid->name}}" id="nama" name="nama">
                     </div>
                     <div class="mb-3">
                         <label for="file">Page Berwarna</label>
-                        <input type="number" class="form-control" id="page_berwarna" name="page_berwarna">
+                        <input type="number" class="form-control" id="page_berwarna" {{$jilid->page_berwarna}}  name="page_berwarna">
                     </div>
                     <div class="mb-3">
                         <label for="file">Page Berwarna</label>
-                        <input type="number" class="form-control" id="page_hitamPutih" name="page_hitamPutih">
+                        <input type="number" class="form-control" id="page_hitamPutih" {{$jilid->page_hitamPutih}} name="page_hitamPutih">
                     </div>
                     <div class="mb-3">
                         <label for="file">Exemplar</label>
-                        <input type="number" class="form-control" id="exemplar" name="exemplar">
+                        <input type="number" class="form-control" id="exemplar" {{$jilid->exemplar}} name="exemplar">
                     </div>
                     <div class="mb-3">
                         <label for="file">Total</label>
-                        <input type="number" class="form-control" id="total" name="total">
+                        <input type="number" class="form-control" id="total" {{$jilid->total}} name="total">
                     </div>
                     <div class="mb-3">
                         <label for="file">Bukti Pembayaran</label>
-                        <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran">
+                        <input type="file" class="form-control" id="bukti_pembayaran" {{$jilid->bukti_pembayaran}} name="bukti_pembayaran">
                     </div>
                     <div class="mb-3">
                         <label for="file">File</label>
-                        <input type="file" class="form-control" id="file" name="file">
+                        <input type="file" class="form-control" id="file" {{$jilid->file}} name="file">
                     </div>
                 </div>
             </div>

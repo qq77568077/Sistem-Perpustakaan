@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\jilidLaporanDataTable;
+use App\Http\Requests\JilidRequest;
 use App\Models\JilidLaporan;
 use Illuminate\Http\Request;
 
@@ -43,9 +44,18 @@ class JilidLaporanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, JilidLaporan $jilid)
+    public function store(JilidRequest $request, JilidLaporan $jilid)
     {
-        JilidLaporan::create($request->all());
+        JilidLaporan::create([
+            'nama' => $request->nama,
+            'page_berwarna' => $request->page_berwarna,
+            'page_hitamPutih' => $request->page_hitamPutih,
+            'exemplar' => $request->exemplar,
+            'total' => $request->total,
+            'bukti_pembayaran' => $request->bukti_pembayaran,
+            'file' => $request->file,
+            'status' => 'Tidak Valid',
+        ]);
 
         return response()->json([
             'status' => 'success',

@@ -53,6 +53,7 @@
             url: `{{ url('layanan/plagiarism/create')}}`,
             success: function(res) {
                 $('#modalAction').find('.modal-dialog').html(res)
+                $('#modalAction').removeClass('edit-mode').find('#hasil_cek').parent().hide();
                 modal.show()
                 store()
             }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BerkasTaDataTable;
+use App\Models\BerkasTa;
 use Illuminate\Http\Request;
 
 class BerkasTaController extends Controller
@@ -18,10 +19,10 @@ class BerkasTaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(BerkasTaDataTable $dataTable)
+    public function index(BerkasTa $berkasTa)
     {
         $this->authorize('read layanan/berkasTa');
-        return $dataTable->render('layanan.berkas');
+        return view('layanan.berkas',  compact('berkasTa'));
     }
 
     /**

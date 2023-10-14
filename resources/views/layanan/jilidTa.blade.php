@@ -7,20 +7,21 @@
 
 <div class="main-content">
     <div class="title">
-        Layanan
+        Data Pengajuan Cetak Laporan
     </div>
     <div class="content-wrapper">
         <div class="row same-height">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Jilid Laporan</h4>
-                    </div>
-                    <div class="card-body">
                         @if (request()->user()->can('create layanan/jilidLaporan'))
                         <button type="button" class="btn btn-primary btn-sm mb-3 btn-add"> <i class="ti-plus"></i> Tambah</button>
                         @endif
-                        {{$dataTable->table()}}
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                                {{$dataTable->table()}}
+                        </div>
                     </div>
                 </div>
             </div>

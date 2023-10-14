@@ -12,7 +12,6 @@ class Plagiarism extends Model
 
     protected $fillable = [
         'file',
-        'score',
         'hasil_cek',
         'status'
     ]; 

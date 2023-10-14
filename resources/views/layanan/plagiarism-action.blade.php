@@ -13,7 +13,11 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="file">File</label>
-                        <input type="file" class="form-control" id="file" name="file">
+                        <input type="file" class="form-control" value="{{$plagiarism->file}}" id="file" name="file" {{$plagiarism->id ? 'readonly' : ''}}>
+                    </div>
+                    <div class="mb-3" {{$plagiarism->id ? 'edit-mode' : ''}}>
+                        <label for="hasil_cek">Hasil Cek</label>
+                        <input type="file" class="form-control" value="{{$plagiarism->hasil_cek}}" id="hasil_cek" name="hasil_cek">
                     </div>
                 </div>
             </div>

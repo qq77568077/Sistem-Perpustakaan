@@ -7,21 +7,37 @@
 
 <div class="main-content">
     <div class="title">
-        Layanan
+        Data Pengumpulan Berkas Ta
     </div>
     <div class="content-wrapper">
         <div class="row same-height">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Berkas Ta</h4>
-                    </div>
-                    <div class="card-body">
-                        
                         @if (request()->user()->can('create layanan/berkasTa'))
                         <button type="button" class="btn btn-primary btn-sm mb-3 btn-add"> <i class="ti-plus"></i> Tambah</button>
                         @endif
-                        {{$dataTable->table()}}
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Berkas Tugas Akhir</th>
+                                        <th>status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($berkasTa  as $berkas)
+                                    <tr id="index_{{ $berkas->id }}">
+                                        <td>{{ $berkas->status }}</td>
+                                        <td>Action</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,7 +59,6 @@
 <script src="{{asset('')}}vendor/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{asset('')}}vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{asset('')}}vendor/sweetalert2/sweetalert2.all.min.js"></script>
-{{$dataTable->scripts()}}
 
 <script>
     const modal = new bootstrap.Modal($('#modalAction'))
@@ -146,5 +161,5 @@
 
     })
 </script>
-
+    
 @endpush
