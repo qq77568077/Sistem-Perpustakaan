@@ -19,6 +19,18 @@
                         <label for="hasil_cek">Hasil Cek</label>
                         <input type="file" class="form-control" value="{{$plagiarism->hasil_cek}}" id="hasil_cek" name="hasil_cek">
                     </div>
+                    <div class="mb-3" {{$plagiarism->id ? 'edit-mode' : ''}}>
+                        <label for="hasil_cek">Status</label>
+                        <select class="form-select" id="status" name="status">
+                            <option selected>Open this select menu</option>
+                            @php
+                                $array = ["Validasi", "Belum Validasi"];
+                            @endphp
+                            @foreach($array as $element)
+                                <option value="{{ $element }}">{{ $element }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,4 +15,9 @@ class Plagiarism extends Model
         'hasil_cek',
         'status'
     ]; 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

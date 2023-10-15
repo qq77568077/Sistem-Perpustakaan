@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('berkas_tas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string('kategori');
             $table->string('laporan_ta');
             $table->string('dokumen_penunjang');

@@ -5,7 +5,6 @@ php artisan datatables:make Plagiarism
 php artisan datatables:make BerkasTa
 php artisan datatables:make jilidLaporan
 
-
 //request validasi
 
 php artisan make:request PermissionRequest
@@ -50,7 +49,7 @@ php artisan make:model Flight -mfsc
 php artisan make:model Flight --all
  
 # Generate a pivot model...
-php artisan make:model Member --pivot
+php artisan make:model cekplagiarism --pivot
 
 
 
@@ -60,6 +59,7 @@ php artisan make:model Member --pivot
 git clone https://github.com/MuhammadWildanf/SistemPerpus.git
 
 composer install
+
 
 php artisan migrate:fresh --seed
 

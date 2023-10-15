@@ -19,7 +19,6 @@
                         @endif
                     </div>
                     <div class="card-body">
-                       
                         {{$dataTable->table()}}
                     </div>
                 </div>
@@ -54,6 +53,7 @@
             success: function(res) {
                 $('#modalAction').find('.modal-dialog').html(res)
                 $('#modalAction').removeClass('edit-mode').find('#hasil_cek').parent().hide();
+                $('#modalAction').removeClass('edit-mode').find('#status').parent().hide();
                 modal.show()
                 store()
             }

@@ -22,7 +22,9 @@ class PlagiarismController extends Controller
     {
         //
         $this->authorize('read layanan/plagiarism');
-        return $dataTable->render('layanan.plagiarism');
+        $plagiarisms = Plagiarism::where('user_id', auth()->id())->get();
+        return $dataTable->render('layanan.plagiarism', compact('plagiarisms'));
+        // return view('layanan.plagiarism', compact('plagiarisms'));
 
 
     }
@@ -48,17 +50,24 @@ class PlagiarismController extends Controller
         // $request->validate([
         //     'file' => 'required|mimes|max:10240', // doc format dan maksimal 10 MB
         // ]);
+        $plagiarism = new Plagiarism();
 
+        //upload file
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
-        $file->storeAs('documents', $fileName);
+        $file->storeAs('plagiarism', $fileName);
 
+        $plagiarism->user_id = auth()->id();
+        $plagiarism->file = $fileName;
+        $plagiarism->hasil_cek = 'Belum ada hasil';
+        $plagiarism->status = 'Belum validasi';
+        $plagiarism->save();
 
-        Plagiarism::create([
-            'file' => $fileName,
-            'hasil_cek' => 'Belum ada hasil',
-            'status' => 'Belum validasi',
-        ]);
+        // Plagiarism::create([
+        //     'file' => $fileName,
+        //     'hasil_cek' => 'Belum ada hasil',
+        //     'status' => 'Belum validasi',
+        // ]);
 
         return response()->json([
             'status' => 'success',
@@ -98,8 +107,17 @@ class PlagiarismController extends Controller
     public function update(Request $request, Plagiarism $plagiarism)
     {
         //
-        $plagiarism->file = $request->file;
-        $plagiarism->hasil_cek = $request->hasil_cek;
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+        $file->storeAs('plagiarism', $fileName);
+
+        $hasil = $request->file('hasil_cek');
+        $hasilName = $file->getClientOriginalName();
+        $hasil->storeAs('plagiarism', $hasilName);
+
+        $plagiarism->file = $fileName;
+        $plagiarism->hasil_cek = $hasilName;
+        $plagiarism->status = $request->status;
         $plagiarism->save();
 
         return response()->json([

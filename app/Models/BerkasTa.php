@@ -21,4 +21,9 @@ class BerkasTa extends Model
         'artikel_jurnal',
         'status'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
