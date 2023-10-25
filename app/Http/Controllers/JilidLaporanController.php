@@ -46,16 +46,20 @@ class JilidLaporanController extends Controller
      */
     public function store(JilidRequest $request, JilidLaporan $jilid)
     {
-        JilidLaporan::create([
-            'nama' => $request->nama,
-            'page_berwarna' => $request->page_berwarna,
-            'page_hitamPutih' => $request->page_hitamPutih,
-            'exemplar' => $request->exemplar,
-            'total' => $request->total,
-            'bukti_pembayaran' => $request->bukti_pembayaran,
-            'file' => $request->file,
-            'status' => 'Tidak Valid',
-        ]);
+
+        $jilid = new JilidLaporan();
+
+        $jilid->user_id = auth()->id();
+        $jilid->nama = $request->nama;
+        $jilid->page_berwarna = $request->page_berwarna;
+        $jilid->page_hitamPutih = $request->page_hitamPutih;
+        $jilid->exemplar = $request->exemplar;
+        $jilid->cover = $request->cover;
+        $jilid->total = $request->total;
+        $jilid->bukti_pembayaran = $request->bukti_pembayaran;
+        $jilid->file = $request->file;
+        $jilid->status = 'Tidak Valid';
+        $jilid->save();
 
         return response()->json([
             'status' => 'success',
@@ -97,10 +101,12 @@ class JilidLaporanController extends Controller
     public function update(Request $request, JilidLaporan $jilid)
     {
         //
+        $jilid->user_id = auth()->id();
         $jilid->nama = $request->nama;
         $jilid->page_berwarna = $request->page_berwarna;
         $jilid->page_hitamPutih = $request->page_hitamPutih;
         $jilid->exemplar = $request->exemplar;
+        $jilid->cover = $request->cover;
         $jilid->total = $request->total;
         $jilid->bukti_pembayaran = $request->bukti_pembayaran;
         $jilid->file = $request->file;

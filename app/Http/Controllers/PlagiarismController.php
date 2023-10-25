@@ -53,12 +53,13 @@ class PlagiarismController extends Controller
         $plagiarism = new Plagiarism();
 
         //upload file
-        $file = $request->file('file');
-        $fileName = $file->getClientOriginalName();
-        $file->storeAs('plagiarism', $fileName);
+        // $file = $request->file('file');
+        // $fileName = $file->getClientOriginalName();
+        // $file->storeAs('plagiarism', $fileName);
 
         $plagiarism->user_id = auth()->id();
-        $plagiarism->file = $fileName;
+        // $plagiarism->file = $fileName;
+        $plagiarism->file =$request->file;
         $plagiarism->hasil_cek = 'Belum ada hasil';
         $plagiarism->status = 'Belum validasi';
         $plagiarism->save();
@@ -107,16 +108,19 @@ class PlagiarismController extends Controller
     public function update(Request $request, Plagiarism $plagiarism)
     {
         //
-        $file = $request->file('file');
-        $fileName = $file->getClientOriginalName();
-        $file->storeAs('plagiarism', $fileName);
+        // $file = $request->file('file');
+        // $fileName = $file->getClientOriginalName();
+        // $file->storeAs('plagiarism', $fileName);
 
-        $hasil = $request->file('hasil_cek');
-        $hasilName = $file->getClientOriginalName();
-        $hasil->storeAs('plagiarism', $hasilName);
+        // $hasil = $request->file('hasil_cek');
+        // $hasilName = $file->getClientOriginalName();
+        // $hasil->storeAs('plagiarism', $hasilName);
 
-        $plagiarism->file = $fileName;
-        $plagiarism->hasil_cek = $hasilName;
+        $plagiarism->user_id = auth()->id();
+        // $plagiarism->file = $fileName; //jika upload file
+        $plagiarism->file = $request->file;
+        // $plagiarism->hasil_cek = $hasilName; //jika upload file
+        $plagiarism->hasil_cek = $request->hasil_cek;
         $plagiarism->status = $request->status;
         $plagiarism->save();
 

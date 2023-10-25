@@ -2,10 +2,10 @@
 
 namespace App\DataTables;
 
-use App\Models\jilidLaporan;
+use App\Models\Price;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
 use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -13,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class jilidLaporanDataTable extends DataTable
+class PriceDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -28,11 +28,11 @@ class jilidLaporanDataTable extends DataTable
             ->addColumn('action', function ($row) {
                 $action = '';
 
-                if(Gate::allows('update layanan/jilidLaporan')){
-                    $action =  '<button type="button" data-id='.$row->id.' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
+                if (Gate::allows('update konfigurasi/prices')) {
+                    $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
                 }
-                if(Gate::allows('delete layanan/jilidLaporan')){
-                    $action .=  ' <button type="button" data-id='.$row->id.' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
+                if (Gate::allows('delete konfigurasi/prices')) {
+                    $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
                 }
 
                 return $action;
@@ -42,10 +42,10 @@ class jilidLaporanDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\jilidLaporan $model
+     * @param \App\Models\Price $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(jilidLaporan $model): QueryBuilder
+    public function query(Price $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -58,8 +58,8 @@ class jilidLaporanDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('jilidlaporan-table')
-                    ->parameters(['searchDelay' => 1000])
+            ->parameters(['searchDelay' => 1000])
+            ->setTableId('price-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1);
@@ -74,15 +74,10 @@ class jilidLaporanDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
-            Column::make('nama'),
-            Column::make('page_berwarna'),
-            Column::make('page_hitamPutih'),
-            Column::make('exemplar'),
-            Column::make('cover'),
-            Column::make('total'),
-            Column::make('bukti_pembayaran'),
-            Column::make('file'),
-            Column::make('status'),
+            Column::make('pageBerwarnaPrice'),
+            Column::make('pageHitamPutihPrice'),
+            Column::make('coverprice'),
+            Column::make('perjilidprice'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -98,6 +93,6 @@ class jilidLaporanDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'jilidLaporan_' . date('YmdHis');
+        return 'Price_' . date('YmdHis');
     }
 }

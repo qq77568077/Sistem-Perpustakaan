@@ -75,6 +75,11 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' =>'create konfigurasi/permissions']);
             $permission = Permission::create(['name' =>'update konfigurasi/permissions']);
             $permission = Permission::create(['name' =>'delete konfigurasi/permissions']);
+            
+            $permission = Permission::create(['name' =>'read konfigurasi/prices']);
+            $permission = Permission::create(['name' =>'create konfigurasi/prices']);
+            $permission = Permission::create(['name' =>'update konfigurasi/prices']);
+            $permission = Permission::create(['name' =>'delete konfigurasi/prices']);
 
             //layanan Plagiarism
             $permission = Permission::create(['name' =>'read layanan']);
@@ -108,6 +113,16 @@ class RoleSeedr extends Seeder
             // $role_admin->givePermissionTo('create konfigurasi/permissions');
             // $role_admin->givePermissionTo('update konfigurasi/permissions');
             // $role_admin->givePermissionTo('delete konfigurasi/permissions');
+
+            $role_admin->givePermissionTo('read konfigurasi/prices');
+            $role_admin->givePermissionTo('create konfigurasi/prices');
+            $role_admin->givePermissionTo('update konfigurasi/prices');
+            $role_admin->givePermissionTo('delete konfigurasi/prices');
+
+            $role_perpustakaan->givePermissionTo('read konfigurasi/prices');
+            $role_perpustakaan->givePermissionTo('create konfigurasi/prices');
+            $role_perpustakaan->givePermissionTo('update konfigurasi/prices');
+            $role_perpustakaan->givePermissionTo('delete konfigurasi/prices');
 
 
              //give permission layanan plagiarism

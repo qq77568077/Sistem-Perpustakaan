@@ -32,6 +32,11 @@ class NavigationSeeder extends Seeder
             "url"  => 'konfigurasi/permissions',
             "icon" => '',
             ]);
+            $konfigurasi->subMenus()->create([
+                "name" => 'Harga',
+                "url"  => 'konfigurasi/prices',
+                "icon" => '',
+                ]);
 
        $transaksi =  Navigation::create([
         "name" => 'Layanan',

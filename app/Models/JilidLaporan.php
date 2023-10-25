@@ -14,6 +14,7 @@ class JilidLaporan extends Model
         'page_berwarna',
         'page_hitamPutih',
         'exemplar',
+        'cover',
         'total',
         'bukti_pembayaran',
         'file',

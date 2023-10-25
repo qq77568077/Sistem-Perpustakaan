@@ -4,6 +4,8 @@ cara membuat datatable
 php artisan datatables:make Plagiarism
 php artisan datatables:make BerkasTa
 php artisan datatables:make jilidLaporan
+php artisan datatables:make Price
+
 
 //request validasi
 

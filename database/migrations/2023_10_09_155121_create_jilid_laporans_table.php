@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('nama');
-            $table->string('page_berwarna');
-            $table->string('page_hitamPutih');
-            $table->string('exemplar');
-            $table->string('total');
+            $table->biginteger('page_berwarna');
+            $table->biginteger('page_hitamPutih');
+            $table->biginteger('exemplar');
+            $table->biginteger('cover');
+            $table->biginteger('total');
             $table->string('bukti_pembayaran');
             $table->string('file');
             $table->string('status');

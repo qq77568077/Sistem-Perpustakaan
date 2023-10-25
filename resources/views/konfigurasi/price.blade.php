@@ -7,38 +7,20 @@
 
 <div class="main-content">
     <div class="title">
-        Data Pengumpulan Berkas Ta
+        Konfigurasi
     </div>
     <div class="content-wrapper">
         <div class="row same-height">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        @if (request()->user()->can('create layanan/jilidLaporan'))
-                        <button type="button" class="btn btn-primary btn-sm mb-3 btn-add"> <i class="ti-plus"></i> Tambah</button>
-                        @endif
+                        <h4>Harga</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Berkas Tugas Akhir</th>
-                                        <th>status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Berkas Tugas Akhir</td>
-                                        <td>Berkas Tugas Akhir</td>
-                                        <td>Berkas Tugas Akhir</td>
-                                        <td>Action</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        @if (request()->user()->can('create konfigurasi/prices'))
+                        <button type="button" class="btn btn-primary btn-sm mb-3 btn-add"> <i class="ti-plus"></i> Tambah</button>
+                        @endif
+                        {{$dataTable->table()}}
                     </div>
                 </div>
             </div>
@@ -60,6 +42,7 @@
 <script src="{{asset('')}}vendor/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{asset('')}}vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{asset('')}}vendor/sweetalert2/sweetalert2.all.min.js"></script>
+{{$dataTable->scripts()}}
 
 <script>
     const modal = new bootstrap.Modal($('#modalAction'))
@@ -67,7 +50,7 @@
     $('.btn-add').on('click', function() {
         $.ajax({
             method: 'GET',
-            url: `{{ url('layanan/jilidLaporan/create')}}`,
+            url: `{{ url('konfigurasi/prices/create')}}`,
             success: function(res) {
                 $('#modalAction').find('.modal-dialog').html(res)
                 modal.show()
@@ -95,7 +78,7 @@
                 processData: false,
                 contentType: false,
                 success: function(res) {
-                    window.LaravelDataTables["jilidlaporan-table"].ajax.reload()
+                    window.LaravelDataTables["price-table"].ajax.reload()
                     modal.hide()
                 },
                 error: function(res) {
@@ -111,8 +94,8 @@
             })
         })
     }
-    
-    $('#jilidlaporan-table').on('click', '.action', function() {
+
+    $('#price-table').on('click', '.action', function() {
         let data = $(this).data()
         let id = data.id
         let jenis = data.jenis
@@ -131,12 +114,12 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         method: 'DELETE',
-                        url: `{{ url('layanan/jilidLaporan/')}}/${id}`,
+                        url: `{{ url('konfigurasi/prices/')}}/${id}`,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(res) {
-                            window.LaravelDataTables["jilidlaporan-table"].ajax.reload()
+                            window.LaravelDataTables["price-table"].ajax.reload()
 
                             Swal.fire(
                                 'Deleted!',
@@ -152,7 +135,7 @@
 
         $.ajax({
             method: 'get',
-            url: `{{ url('layanan/jilidLaporan/')}}/${id}/edit`,
+            url: `{{ url('konfigurasi/prices/')}}/${id}/edit`,
             success: function(res) {
                 $('#modalAction').find('.modal-dialog').html(res)
                 modal.show()
