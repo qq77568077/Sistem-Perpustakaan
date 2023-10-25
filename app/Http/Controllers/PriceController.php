@@ -96,8 +96,10 @@ class PriceController extends Controller
     public function update(Request $request, Price $price)
     {
         //
-        $price->jenis = $request->jenis;
-        $price->harga = $request->harga;
+        $price->pageBerwarnaPrice = $request->pageBerwarnaPrice;
+        $price->pageHitamPutihPrice = $request->pageHitamPutihPrice;
+        $price->coverprice = $request->coverprice;
+        $price->perjilidprice = $request->perjilidprice;
         $price->save();
 
         return response()->json([

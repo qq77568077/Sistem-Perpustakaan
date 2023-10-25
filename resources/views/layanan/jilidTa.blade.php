@@ -139,6 +139,7 @@
             url: `{{ url('layanan/jilidLaporan/')}}/${id}/edit`,
             success: function(res) {
                 $('#modalAction').find('.modal-dialog').html(res)
+                console.log(res);
                 modal.show()
                 store()
             }

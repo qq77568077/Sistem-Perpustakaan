@@ -11,7 +11,7 @@ class BerkasTaController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:create layanan/plagiarism')->only('create');
+        $this->middleware('can:create layanan/berkasTa')->only('create');
     }
 
     /**
@@ -33,6 +33,8 @@ class BerkasTaController extends Controller
     public function create()
     {
         //
+        return view('layanan.berkas-action', ['berkas' => new BerkasTa()]);
+
     }
 
     /**

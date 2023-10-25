@@ -24,15 +24,21 @@ class jilidLaporanDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->editColumn('created_at', function ($row) {
+                return $row->created_at->format('d-m-Y H:i:s');
+            })
+            ->editColumn('updated_at', function ($row) {
+                return $row->updated_at->format('d-m-Y H:i:s');
+            })
             ->addIndexColumn('')
             ->addColumn('action', function ($row) {
                 $action = '';
 
-                if(Gate::allows('update layanan/jilidLaporan')){
-                    $action =  '<button type="button" data-id='.$row->id.' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
+                if (Gate::allows('update layanan/jilidLaporan')) {
+                    $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
                 }
-                if(Gate::allows('delete layanan/jilidLaporan')){
-                    $action .=  ' <button type="button" data-id='.$row->id.' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
+                if (Gate::allows('delete layanan/jilidLaporan')) {
+                    $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
                 }
 
                 return $action;
@@ -58,8 +64,8 @@ class jilidLaporanDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('jilidlaporan-table')
-                    ->parameters(['searchDelay' => 1000])
+            ->setTableId('jilidlaporan-table')
+            ->parameters(['searchDelay' => 1000])
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1);

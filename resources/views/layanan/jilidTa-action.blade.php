@@ -1,47 +1,47 @@
 <div class="modal-content">
-    <form id="formAction" action="{{$jilid->id ? route('jilidLaporan.update' , $jilid->id ) : route('jilidLaporan.store')}} " method="post" enctype="multipart/form-data">
-        @csrf
-        @if($jilid->id)
+    <form id="formAction" action="{{$JilidLaporan->id ? route('jilidLaporan.update' , $JilidLaporan->id ) : route('jilidLaporan.store')}} " method="post" enctype="multipart/form-data">
+        @csrf 
+        @if($JilidLaporan->id)
         @method('put')
         @endif
         <div class="modal-header">
-            <h5 class="modal-title" id="largeModalLabel">Jilid Laporan</h5>
+            <h5 class="modal-title" id="largeModalLabel">Jilid</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
-                        <label for="file">Nama</label>
-                        <input type="text" class="form-control" value="{{$jilid->name}}" id="nama" name="nama">
+                        <label for="file">File</label>
+                        <input type="text" class="form-control" value="{{$JilidLaporan->nama}}" id="nama" name="nama">
                     </div>
                     <div class="mb-3">
-                        <label for="file">Page Berwarna</label>
-                        <input type="number" class="form-control" id="page_berwarna" {{$jilid->page_berwarna}}  name="page_berwarna">
+                        <label for="page_berwarna">Jumlah Halaman Berwarna</label>
+                        <input type="number" class="form-control" value="{{$JilidLaporan->page_berwarna}}" id="page_berwarna" name="page_berwarna">
                     </div>
                     <div class="mb-3">
-                        <label for="file">Page Berwarna</label>
-                        <input type="number" class="form-control" id="page_hitamPutih" {{$jilid->page_hitamPutih}} name="page_hitamPutih">
+                        <label for="page_hitamPutih">Jumlah Halaman Hitam/Putih</label>
+                        <input type="number" class="form-control" value="{{$JilidLaporan->page_hitamPutih}}" id="page_hitamPutih" name="page_hitamPutih">
                     </div>
                     <div class="mb-3">
-                        <label for="file">cover</label>
-                        <input type="number" class="form-control" id="cover" {{$jilid->cover}} name="cover">
+                        <label for="exemplar">Jumlah Exemplar</label>
+                        <input type="number" class="form-control" value="{{$JilidLaporan->exemplar}}" id="exemplar" name="exemplar">
                     </div>
                     <div class="mb-3">
-                        <label for="file">Exemplar</label>
-                        <input type="number" class="form-control" id="exemplar" {{$jilid->exemplar}} name="exemplar">
+                        <label for="cover">Cover</label>
+                        <input type="number" class="form-control" value="{{$JilidLaporan->cover}}" id="cover" name="cover">
                     </div>
                     <div class="mb-3">
-                        <label for="file">Total</label>
-                        <input type="number" class="form-control" id="total" {{$jilid->total}} name="total">
+                        <label for="total">Total</label>
+                        <input type="number" class="form-control" value="{{$JilidLaporan->total}}" id="total" name="total">
                     </div>
                     <div class="mb-3">
                         <label for="file">File</label>
-                        <input type="text" class="form-control" id="file" {{$jilid->file}} name="file">
+                        <input type="number" class="form-control" value="{{$JilidLaporan->file}}" id="file" name="file">
                     </div>
                     <div class="mb-3">
-                        <label for="file">Bukti Pembayaran</label>
-                        <input type="text" class="form-control" id="bukti_pembayaran" {{$jilid->bukti_pembayaran}} name="bukti_pembayaran">
+                        <label for="bukti_pembayaran">Bukti Pembayaran</label>
+                        <input type="number" class="form-control" value="{{$JilidLaporan->bukti_pembayaran}}" id="bukti_pembayaran" name="bukti_pembayaran">
                     </div>
                 </div>
             </div>
@@ -55,6 +55,7 @@
 
 
 <script>
+    
     function updateCalculations() {
     const pageBerwarna = parseFloat(document.getElementById("page_berwarna").value);
     const pageHitamPutih = parseFloat(document.getElementById("page_hitamPutih").value);

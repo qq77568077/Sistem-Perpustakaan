@@ -14,7 +14,6 @@ class JilidLaporanController extends Controller
         $this->middleware('can:create layanan/jilidLaporan')->only('create');
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +34,7 @@ class JilidLaporanController extends Controller
     public function create()
     {
         //
-        return view('layanan.jilidTa-action', ['jilid' => new JilidLaporan()]);
+        return view('layanan.jilidTa-action', ['JilidLaporan' => new JilidLaporan()]);
     }
 
     /**
@@ -44,22 +43,22 @@ class JilidLaporanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JilidRequest $request, JilidLaporan $jilid)
+    public function store(JilidRequest $request, JilidLaporan $JilidLaporan)
     {
 
-        $jilid = new JilidLaporan();
+        $JilidLaporan = new JilidLaporan();
 
-        $jilid->user_id = auth()->id();
-        $jilid->nama = $request->nama;
-        $jilid->page_berwarna = $request->page_berwarna;
-        $jilid->page_hitamPutih = $request->page_hitamPutih;
-        $jilid->exemplar = $request->exemplar;
-        $jilid->cover = $request->cover;
-        $jilid->total = $request->total;
-        $jilid->bukti_pembayaran = $request->bukti_pembayaran;
-        $jilid->file = $request->file;
-        $jilid->status = 'Tidak Valid';
-        $jilid->save();
+        $JilidLaporan->user_id = auth()->id();
+        $JilidLaporan->nama = $request->nama;
+        $JilidLaporan->page_berwarna = $request->page_berwarna;
+        $JilidLaporan->page_hitamPutih = $request->page_hitamPutih;
+        $JilidLaporan->exemplar = $request->exemplar;
+        $JilidLaporan->cover = $request->cover;
+        $JilidLaporan->total = $request->total;
+        $JilidLaporan->bukti_pembayaran = $request->bukti_pembayaran;
+        $JilidLaporan->file = $request->file;
+        $JilidLaporan->status = 'Tidak Valid';
+        $JilidLaporan->save();
 
         return response()->json([
             'status' => 'success',
@@ -84,10 +83,10 @@ class JilidLaporanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(JilidLaporan $jilid)
+    public function edit(JilidLaporan $JilidLaporan)
     {
         //
-        return view('layanan.jilidTa-action', compact('jilid'));
+        return view('layanan.jilidTa-action', compact('JilidLaporan'));
 
     }
 
@@ -98,20 +97,20 @@ class JilidLaporanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JilidLaporan $jilid)
+    public function update(Request $request, JilidLaporan $JilidLaporan)
     {
         //
-        $jilid->user_id = auth()->id();
-        $jilid->nama = $request->nama;
-        $jilid->page_berwarna = $request->page_berwarna;
-        $jilid->page_hitamPutih = $request->page_hitamPutih;
-        $jilid->exemplar = $request->exemplar;
-        $jilid->cover = $request->cover;
-        $jilid->total = $request->total;
-        $jilid->bukti_pembayaran = $request->bukti_pembayaran;
-        $jilid->file = $request->file;
-        $jilid->status = $request->status;
-        $jilid->save();
+        $JilidLaporan->user_id = auth()->id();
+        $JilidLaporan->nama = $request->nama;
+        $JilidLaporan->page_berwarna = $request->page_berwarna;
+        $JilidLaporan->page_hitamPutih = $request->page_hitamPutih;
+        $JilidLaporan->exemplar = $request->exemplar;
+        $JilidLaporan->cover = $request->cover;
+        $JilidLaporan->total = $request->total;
+        $JilidLaporan->bukti_pembayaran = $request->bukti_pembayaran;
+        $JilidLaporan->file = $request->file;
+        $JilidLaporan->status = $request->status;
+        $JilidLaporan->save();
 
         return response()->json([
             'status' => 'success',
@@ -125,9 +124,9 @@ class JilidLaporanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JilidLaporan $jilid)
+    public function destroy(JilidLaporan $JilidLaporan)
     {
-        $jilid->delete();
+        $JilidLaporan->delete();
         return response()->json([
             'status' => 'success',
             'message' => 'Delete data successfully'

@@ -34,11 +34,11 @@ class PlagiarismDataTable extends DataTable
             ->addColumn('action', function ($row) {
                 $action = '';
 
-                if(Gate::allows('update layanan/plagiarism')){
-                    $action =  '<button type="button" data-id='.$row->id.' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
+                if (Gate::allows('update layanan/plagiarism')) {
+                    $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
                 }
-                if(Gate::allows('delete layanan/plagiarism')){
-                    $action .=  ' <button type="button" data-id='.$row->id.' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
+                if (Gate::allows('delete layanan/plagiarism')) {
+                    $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
                 }
 
                 return $action;
@@ -79,17 +79,17 @@ class PlagiarismDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-           // Column::make('id'),
-           Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
-           Column::make('created_at'),
-           Column::make('file'),
-           Column::make('hasil_cek'),
-           Column::make('status'),
-           Column::computed('action')
-               ->exportable(false)
-               ->printable(false)
-               ->width(80)
-               ->addClass('text-center'),
+            // Column::make('id'),
+            Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
+            Column::make('created_at'),
+            Column::make('file'),
+            Column::make('hasil_cek'),
+            Column::make('status'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(80)
+                ->addClass('text-center'),
         ];
     }
 
