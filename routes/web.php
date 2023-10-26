@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BerkasTaController;
-use App\Http\Controllers\JilidLaporanController;
+use App\Http\Controllers\JilidController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PlagiarismController;
 use App\Http\Controllers\PriceController;
@@ -47,6 +47,4 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('layanan/plagiarism', PlagiarismController::class);
-    Route::resource('layanan/berkasTa', BerkasTaController::class);
-    Route::resource('layanan/jilidLaporan', JilidLaporanController::class);
 });

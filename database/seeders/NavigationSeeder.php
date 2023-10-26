@@ -51,12 +51,12 @@ class NavigationSeeder extends Seeder
             ]);
             $transaksi->subMenus()->create([
             "name" => 'Jilid Laporan',
-            "url"  => 'layanan/jilidLaporan',
+            "url"  => 'layanan/jilid',
             "icon" => '',
             ]);
             $transaksi->subMenus()->create([
             "name" => 'Berkas Ta',
-            "url"  => 'layanan/berkasTa',
+            "url"  => 'layanan/berkas',
             "icon" => '',
             ]);
     }

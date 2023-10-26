@@ -5,21 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BerkasTa extends Model
+class Jilid extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'kategori',
-        'laporan_ta',
-        'dokumen_penunjang',
-        'file_presentasi',
-        'product',
-        'haki',
-        'video_trailer',
-        'poster',
-        'artikel_jurnal',
-        'status'
+        'nama',
+        'page_berwarna',
+        'page_hitamPutih',
+        'exemplar',
+        'cover',
+        'total',
+        'bukti_pembayaran',
+        'file',
+        'status',
     ];
 
     public function user()
