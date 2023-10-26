@@ -10,7 +10,7 @@ class Jilid extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama',
+        'judul',
         'page_berwarna',
         'page_hitamPutih',
         'exemplar',
@@ -18,8 +18,9 @@ class Jilid extends Model
         'total',
         'bukti_pembayaran',
         'file',
+        'keterangan',
         'status',
-    ];
+    ]; 
 
     public function user()
     {

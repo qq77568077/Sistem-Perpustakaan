@@ -47,4 +47,5 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('layanan/plagiarism', PlagiarismController::class);
+    Route::resource('layanan/jilid', JilidController::class);
 });

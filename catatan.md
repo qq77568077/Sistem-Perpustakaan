@@ -1,27 +1,30 @@
-create datatables
+## create datatables
 
 cara membuat datatable
 php artisan datatables:make Plagiarism
-php artisan datatables:make BerkasTa
-php artisan datatables:make jilidLaporan
+php artisan datatables:make Berkas
+php artisan datatables:make Jilid
 php artisan datatables:make Price
 
 
 //request validasi
 
+## create Request
+
 php artisan make:request PermissionRequest
 php artisan make:request PlagiarismRequest
 php artisan make:request JilidRequest
 
+## create controller & model
 
 php artisan make:controller PlagiarismController -r
 php artisan make:model Plagiarism -m 
 
 php artisan make:controller BerkasTaController -r
-php artisan make:model BerkasTa -m 
+php artisan make:model Berkas -m 
 
-php artisan make:controller JilidLaporanController -r
-php artisan make:model JilidLaporan -m 
+php artisan make:controller JilidController -r
+php artisan make:model Jilid -m 
 
 # Example
 
@@ -52,7 +55,6 @@ php artisan make:model Flight --all
  
 # Generate a pivot model...
 php artisan make:model cekplagiarism --pivot
-
 
 
 
