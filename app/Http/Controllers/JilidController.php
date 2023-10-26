@@ -48,7 +48,7 @@ class JilidController extends Controller
         $jilid->total = $request->total;
         $jilid->bukti_pembayaran = $request->bukti_pembayaran;
         $jilid->file = $request->file;
-        $jilid->keterangan = 'Keterangan akan di isi di sini';
+        $jilid->keterangan = $request->keterangan;
         $jilid->status = 'Belum Validasi';
         $jilid->save();
 

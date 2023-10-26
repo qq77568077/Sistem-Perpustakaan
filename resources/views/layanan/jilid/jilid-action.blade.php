@@ -43,19 +43,19 @@
                         <label for="file">Link File Berkas</label>
                         <input type="text" class="form-control" value="{{$jilid->file}}" id="file" name="file">
                     </div>
-                    <div class="mb-3" {{$jilid->id ? 'edit-mode' : ''}}>
+                    <div class="mb-3">
                         <label for="keterangan">Keterangan</label>
-                        <input type="text" class="form-control" value="{{$jilid->keterangan}}" id="keterangan" name="keterangan">
-                    </div>
+                        <textarea class="form-control" id="keterangan" name='keterangan' value="{{$jilid->keterangan}}"></textarea>
+                      </div>
                     <div class="mb-3" {{$jilid->id ? 'edit-mode' : ''}}>
                         <label for="hasil_cek">Status</label>
                         <select class="form-select" id="status" name="status">
                             <option selected>Open this select menu</option>
                             @php
-                                $array = ["Validasi", "Belum Validasi"];
+                            $array = ["Validasi", "Belum Validasi"];
                             @endphp
                             @foreach($array as $element)
-                                <option value="{{ $element }}">{{ $element }}</option>
+                            <option value="{{ $element }}">{{ $element }}</option>
                             @endforeach
                         </select>
                     </div>
