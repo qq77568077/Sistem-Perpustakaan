@@ -13,7 +13,7 @@ class JilidController extends Controller
     {
         $this->middleware('can:create layanan/jilid')->only('create');
     }
-   
+
     public function index(JilidDataTable $dataTable)
     {
         $this->authorize('read layanan/jilid');
@@ -37,7 +37,7 @@ class JilidController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request ,  Jilid $jilid)
+    public function store(Request $request, Jilid $jilid)
     {
         $jilid = new Jilid();
         $jilid->judul = $request->judul;
@@ -59,12 +59,12 @@ class JilidController extends Controller
 
     }
 
-   
+
     public function show($id)
     {
     }
 
-    
+
     public function edit(Jilid $jilid)
     {
         return view('layanan.jilid.jilid-action', compact('jilid'));
