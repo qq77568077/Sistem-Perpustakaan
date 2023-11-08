@@ -50,6 +50,8 @@ class PlagiarismController extends Controller
         $plagiarism = new Plagiarism();
         $plagiarism->user_id = auth()->id();
         $plagiarism->file =$request->file;
+        $plagiarism->nama =$request->nama;
+        $plagiarism->nrp =$request->nrp;
         $plagiarism->hasil_cek = 'Belum ada hasil';
         $plagiarism->status = 'Belum validasi';
         $plagiarism->save();
@@ -93,6 +95,8 @@ class PlagiarismController extends Controller
     {
 
         $plagiarism->user_id = auth()->id();
+        $plagiarism->nama = $request->nama;
+        $plagiarism->nrp = $request->nrp;
         $plagiarism->file = $request->file;
         $plagiarism->hasil_cek = $request->hasil_cek;
         $plagiarism->status = $request->status;

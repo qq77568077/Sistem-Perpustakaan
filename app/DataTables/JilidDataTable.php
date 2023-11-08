@@ -78,6 +78,8 @@ class JilidDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('created_at'),
+            Column::make('nama'),
+            Column::make('nrp'),
             Column::make('judul'),
             Column::make('page_berwarna'),
             Column::make('page_hitamPutih'),

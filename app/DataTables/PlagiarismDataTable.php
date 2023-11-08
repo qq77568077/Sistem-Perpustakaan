@@ -82,6 +82,8 @@ class PlagiarismDataTable extends DataTable
             // Column::make('id'),
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('created_at'),
+            Column::make('nama'),
+            Column::make('nrp'),
             Column::make('file'),
             Column::make('hasil_cek'),
             Column::make('status'),

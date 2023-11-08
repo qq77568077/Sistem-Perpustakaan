@@ -12,6 +12,14 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
+                        <label for="nama">Nama</label>
+                        <input type="text" class="form-control" value="{{$jilid->nama}}" id="nama" name="nama">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nrp">NRP</label>
+                        <input type="text" class="form-control" value="{{$jilid->nrp}}" id="nrp" name="nrp">
+                    </div>
+                    <div class="mb-3">
                         <label for="judul">Judul</label>
                         <input type="text" class="form-control" value="{{$jilid->judul}}" id="judul" name="judul">
                     </div>
@@ -45,8 +53,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="keterangan">Keterangan</label>
-                        <textarea class="form-control" id="keterangan" name='keterangan' value="{{$jilid->keterangan}}"></textarea>
+                        <textarea class="form-control" id="keterangan" name='keterangan'>{{$jilid->keterangan}}</textarea>
                       </div>
+                      @if (request()->user()->can('status layanan/jilid'))
                     <div class="mb-3" {{$jilid->id ? 'edit-mode' : ''}}>
                         <label for="hasil_cek">Status</label>
                         <select class="form-select" id="status" name="status">
@@ -59,6 +68,7 @@
                             @endforeach
                         </select>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
