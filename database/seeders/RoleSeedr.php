@@ -87,6 +87,8 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' =>'create layanan/plagiarism']);
             $permission = Permission::create(['name' =>'update layanan/plagiarism']);
             $permission = Permission::create(['name' =>'delete layanan/plagiarism']);
+            $permission = Permission::create(['name' =>'keterangan layanan/plagiarism']);
+            $permission = Permission::create(['name' =>'hasil layanan/plagiarism']);
             $permission = Permission::create(['name' =>'status layanan/plagiarism']);
 
             //layanan BerkasTA
@@ -94,6 +96,7 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' =>'create layanan/berkas']);
             $permission = Permission::create(['name' =>'update layanan/berkas']);
             $permission = Permission::create(['name' =>'delete layanan/berkas']);
+            $permission = Permission::create(['name' =>'keterangan layanan/berkas']);
             $permission = Permission::create(['name' =>'status layanan/berkas']);
 
             //layanan jilid laporan
@@ -101,6 +104,7 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' =>'create layanan/jilid']);
             $permission = Permission::create(['name' =>'update layanan/jilid']);
             $permission = Permission::create(['name' =>'delete layanan/jilid']);
+            $permission = Permission::create(['name' =>'keterangan layanan/jilid']);
             $permission = Permission::create(['name' =>'status layanan/jilid']);
 
             //role admin
@@ -132,6 +136,10 @@ class RoleSeedr extends Seeder
              $role_admin->givePermissionTo('create layanan/plagiarism');
              $role_admin->givePermissionTo('update layanan/plagiarism');
              $role_admin->givePermissionTo('delete layanan/plagiarism');
+             $role_admin->givePermissionTo('hasil layanan/plagiarism');
+             $role_admin->givePermissionTo('keterangan layanan/plagiarism');
+             $role_admin->givePermissionTo('status layanan/plagiarism');
+
 
              //give permission layanan berkasTa
 
@@ -139,6 +147,8 @@ class RoleSeedr extends Seeder
              $role_admin->givePermissionTo('create layanan/berkas');
              $role_admin->givePermissionTo('update layanan/berkas');
              $role_admin->givePermissionTo('delete layanan/berkas');
+             $role_admin->givePermissionTo('keterangan layanan/berkas');
+             $role_admin->givePermissionTo('status layanan/berkas');
 
              //give permission layanan Jilid
 
@@ -146,6 +156,8 @@ class RoleSeedr extends Seeder
              $role_admin->givePermissionTo('create layanan/jilid');
              $role_admin->givePermissionTo('update layanan/jilid');
              $role_admin->givePermissionTo('delete layanan/jilid');
+             $role_admin->givePermissionTo('keterangan layanan/jilid');
+             $role_admin->givePermissionTo('status layanan/jilid');
 
              //role mahasiswa
              //give permission layanan plagiarism
@@ -175,18 +187,22 @@ class RoleSeedr extends Seeder
 
              $role_perpustakaan->givePermissionTo(['read layanan/plagiarism','read layanan']);
              $role_perpustakaan->givePermissionTo('update layanan/plagiarism');
+             $role_perpustakaan->givePermissionTo('hasil layanan/plagiarism');
+             $role_perpustakaan->givePermissionTo('keterangan layanan/plagiarism');
              $role_perpustakaan->givePermissionTo('status layanan/plagiarism');
 
              //give permission layanan berkasTa
 
              $role_perpustakaan->givePermissionTo('read layanan/berkas');
              $role_perpustakaan->givePermissionTo('update layanan/berkas');
+             $role_perpustakaan->givePermissionTo('keterangan layanan/berkas');
              $role_perpustakaan->givePermissionTo('status layanan/berkas');
 
              //give permission layanan Jilid
 
              $role_perpustakaan->givePermissionTo('read layanan/jilid');
              $role_perpustakaan->givePermissionTo('update layanan/jilid');
+             $role_perpustakaan->givePermissionTo('keterangan layanan/jilid');
              $role_perpustakaan->givePermissionTo('status layanan/jilid');
 
 

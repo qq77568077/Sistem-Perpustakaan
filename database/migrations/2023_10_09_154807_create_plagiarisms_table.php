@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('nrp');
             $table->foreignId('user_id')->constrained();
             $table->string('file');
-            $table->string('hasil_cek');
-            $table->string('status');
+            $table->string('hasil_cek')->nullable();
+            $table->string('keterangan')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

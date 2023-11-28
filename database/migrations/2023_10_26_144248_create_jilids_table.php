@@ -25,8 +25,8 @@ return new class extends Migration
             $table->integer('total');
             $table->string('bukti_pembayaran');
             $table->string('file');
-            $table->string('keterangan');
-            $table->string('status');
+            $table->string('keterangan')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

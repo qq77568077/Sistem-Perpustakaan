@@ -23,10 +23,7 @@ class PlagiarismController extends Controller
         //
         $this->authorize('read layanan/plagiarism');
         $plagiarisms = Plagiarism::where('user_id', auth()->id())->get();
-        return $dataTable->render('layanan.plagiarism.plagiarism', compact('plagiarisms'));
-        // return view('layanan.plagiarism', compact('plagiarisms'));
-
-
+        return $dataTable->with('plagiarisms', $plagiarisms)->render('layanan.plagiarism.plagiarism');
     }
 
     /**
@@ -99,6 +96,7 @@ class PlagiarismController extends Controller
         $plagiarism->nrp = $request->nrp;
         $plagiarism->file = $request->file;
         $plagiarism->hasil_cek = $request->hasil_cek;
+        $plagiarism->keterangan = $request->keterangan;
         $plagiarism->status = $request->status;
         $plagiarism->save();
 

@@ -24,6 +24,7 @@ class PlagiarismDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+        
             ->editColumn('created_at', function ($row) {
                 return $row->created_at->format('d-m-Y H:i:s');
             })
@@ -86,6 +87,7 @@ class PlagiarismDataTable extends DataTable
             Column::make('nrp'),
             Column::make('file'),
             Column::make('hasil_cek'),
+            Column::make('keterangan'),
             Column::make('status'),
             Column::computed('action')
                 ->exportable(false)

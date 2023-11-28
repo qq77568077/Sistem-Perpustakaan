@@ -60,11 +60,11 @@
                         <input type="text" class="form-control" value="{{ $jilid->file }}" id="file"
                             name="file">
                     </div>
+                    @if (request()->user()->can('status layanan/jilid'))
                     <div class="mb-3">
                         <label for="keterangan">Keterangan</label>
                         <textarea class="form-control" id="keterangan" name='keterangan'>{{$jilid->keterangan}}</textarea>
                       </div>
-                      @if (request()->user()->can('status layanan/jilid'))
                     <div class="mb-3" {{$jilid->id ? 'edit-mode' : ''}}>
                         <label for="hasil_cek">Status</label>
                         <select class="form-select" id="status" name="status">

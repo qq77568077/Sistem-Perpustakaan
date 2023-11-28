@@ -23,10 +23,19 @@
                         <label for="file">File</label>
                         <input type="text" class="form-control" value="{{$plagiarism->file}}" id="file" name="file" {{$plagiarism->id ? 'readonly' : ''}}>
                     </div>
+                    @if (request()->user()->can('hasil layanan/plagiarism'))
                     <div class="mb-3" {{$plagiarism->id ? 'edit-mode' : ''}}>
                         <label for="hasil_cek">Hasil Cek</label>
                         <input type="text" class="form-control" value="{{$plagiarism->hasil_cek}}" id="hasil_cek" name="hasil_cek">
                     </div>
+                    @endif
+                    @if (request()->user()->can('keterangan layanan/plagiarism'))
+                    <div class="mb-3" {{$plagiarism->id ? 'edit-mode' : ''}}>
+                        <label for="keterangan">keterangan</label>
+                        <input type="text" class="form-control" value="{{$plagiarism->keterangan}}" id="keterangan" name="keterangan">
+                    </div>
+                    @endif
+                    @if (request()->user()->can('status layanan/plagiarism'))
                     <div class="mb-3" {{$plagiarism->id ? 'edit-mode' : ''}}>
                         <label for="hasil_cek">Status</label>
                         <select class="form-select" id="status" name="status">
@@ -39,6 +48,7 @@
                             @endforeach
                         </select>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
