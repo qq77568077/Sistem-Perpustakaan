@@ -67,15 +67,24 @@
                       </div>
                     <div class="mb-3" {{$jilid->id ? 'edit-mode' : ''}}>
                         <label for="hasil_cek">Status</label>
-                        <select class="form-select" id="status" name="status">
+                        <select class="form-select" name="status">
                             <option selected>Open this select menu</option>
                             @php
                                 $array = ['Validasi', 'Belum Validasi'];
+                                $selectedStatus = isset($jilid[0]['status']) ? $jilid[0]['status'] : null;
                             @endphp
-                            @foreach ($array as $element)
-                                <option value="{{ $element }}">{{ $element }}</option>
+                            @foreach($array as $element)
+                                @if ($element === $selectedStatus)
+                                    <option value="{{ $element }}" selected>{{ $element }}</option>
+                                @else
+                                    <option value="{{ $element }}">{{ $element }}</option>
+                                @endif
                             @endforeach
                         </select>
+                        {{-- <select class="form-select" name="status">
+                            <option value="Validasi" {{ $jilid->status === 'Validasi' ? 'selected' : '' }}>Validasi</option>
+                            <option value="Belum Validasi" {{ $jilid->status === 'Belum Validasi' ? 'selected' : '' }}>Belum Validasi</option>
+                        </select> --}}
                     </div>
                     @endif
                 </div>
