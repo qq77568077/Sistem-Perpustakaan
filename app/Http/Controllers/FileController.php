@@ -71,6 +71,10 @@ class FileController extends Controller
     public function show($id)
     {
         //
+        $berka = File::findOrFail($id);
+
+        return view('layanan.file.file-detail', compact('berka'));
+
     }
 
     /**

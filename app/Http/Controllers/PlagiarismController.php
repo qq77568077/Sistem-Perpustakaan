@@ -67,7 +67,9 @@ class PlagiarismController extends Controller
      */
     public function show($id)
     {
-        //
+        $plagiarism = Plagiarism::findOrFail($id);
+
+        return view('layanan.plagiarism.plagiarism-detail', compact('plagiarism'));
     }
 
     /**

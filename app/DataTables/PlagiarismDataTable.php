@@ -42,6 +42,12 @@ class PlagiarismDataTable extends DataTable
                     $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
                 }
 
+                if (Gate::allows('detail layanan/plagiarism')) {
+                    $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="detail" class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>';
+                }
+                
+                
+
                 return $action;
             });
     }
@@ -85,8 +91,6 @@ class PlagiarismDataTable extends DataTable
             Column::make('created_at'),
             Column::make('nama'),
             Column::make('nrp'),
-            Column::make('file'),
-            Column::make('hasil_cek'),
             Column::make('keterangan'),
             Column::make('status'),
             Column::computed('action')

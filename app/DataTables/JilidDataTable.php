@@ -38,9 +38,14 @@ class JilidDataTable extends DataTable
                     $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
                 }
 
+                if (Gate::allows('detail layanan/jilid')) {
+                    $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="detail" class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>';
+                }
+
                 return $action;
             });
     }
+
 
     /**
      * Get query source of dataTable.
@@ -80,14 +85,14 @@ class JilidDataTable extends DataTable
             Column::make('created_at'),
             Column::make('nama'),
             Column::make('nrp'),
-            Column::make('judul'),
-            Column::make('page_berwarna'),
-            Column::make('page_hitamPutih'),
-            Column::make('exemplar'),
-            Column::make('cover'),
-            Column::make('total'),
-            Column::make('bukti_pembayaran'),
-            Column::make('file'),
+            // Column::make('judul'),
+            // Column::make('page_berwarna'),
+            // Column::make('page_hitamPutih'),
+            // Column::make('exemplar'),
+            // Column::make('cover'),
+            // Column::make('total'),
+            // Column::make('bukti_pembayaran'),
+            // Column::make('file'),
             Column::make('keterangan'),
             Column::make('status'),
             Column::computed('action')

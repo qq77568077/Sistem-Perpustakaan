@@ -64,6 +64,10 @@ class JilidController extends Controller
 
     public function show($id)
     {
+
+        $jilid = Jilid::findOrFail($id);
+
+        return view('layanan.jilid.jilid-detail', compact('jilid'));
     }
 
 

@@ -136,6 +136,21 @@
                 return
             }
 
+            if(jenis === 'detail'){
+            $.ajax({
+                        method: 'GET',
+                        url: `{{ url('layanan/jilid/')}}/${id}`,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(res) {
+                            console.log('berhasil' ,res);
+                            window.location.href = '{{ url('layanan/jilid/')}}/' + id;
+                        }
+                    })
+                    return
+        }
+
             $.ajax({
                 method: 'get',
                 url: `{{ url('layanan/jilid/') }}/${id}/edit`,

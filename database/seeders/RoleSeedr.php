@@ -89,6 +89,7 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' =>'delete layanan/plagiarism']);
             $permission = Permission::create(['name' =>'keterangan layanan/plagiarism']);
             $permission = Permission::create(['name' =>'hasil layanan/plagiarism']);
+            $permission = Permission::create(['name' =>'detail layanan/plagiarism']);
             $permission = Permission::create(['name' =>'status layanan/plagiarism']);
 
             //layanan BerkasTA
@@ -106,6 +107,7 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' =>'update layanan/jilid']);
             $permission = Permission::create(['name' =>'delete layanan/jilid']);
             $permission = Permission::create(['name' =>'keterangan layanan/jilid']);
+            $permission = Permission::create(['name' =>'detail layanan/jilid']);
             $permission = Permission::create(['name' =>'status layanan/jilid']);
 
             //role admin
@@ -139,6 +141,7 @@ class RoleSeedr extends Seeder
              $role_admin->givePermissionTo('delete layanan/plagiarism');
              $role_admin->givePermissionTo('hasil layanan/plagiarism');
              $role_admin->givePermissionTo('keterangan layanan/plagiarism');
+             $role_admin->givePermissionTo('detail layanan/plagiarism');
              $role_admin->givePermissionTo('status layanan/plagiarism');
 
 
@@ -159,6 +162,7 @@ class RoleSeedr extends Seeder
              $role_admin->givePermissionTo('update layanan/jilid');
              $role_admin->givePermissionTo('delete layanan/jilid');
              $role_admin->givePermissionTo('keterangan layanan/jilid');
+             $role_admin->givePermissionTo('detail layanan/jilid');
              $role_admin->givePermissionTo('status layanan/jilid');
 
              //role mahasiswa
@@ -168,6 +172,7 @@ class RoleSeedr extends Seeder
              $role_mahasiswa->givePermissionTo('create layanan/plagiarism');
              $role_mahasiswa->givePermissionTo('update layanan/plagiarism');
              $role_mahasiswa->givePermissionTo('delete layanan/plagiarism');
+             $role_mahasiswa->givePermissionTo('detail layanan/plagiarism');
 
              //give permission layanan berkasTa
 
@@ -183,6 +188,7 @@ class RoleSeedr extends Seeder
              $role_mahasiswa->givePermissionTo('create layanan/jilid');
              $role_mahasiswa->givePermissionTo('update layanan/jilid');
              $role_mahasiswa->givePermissionTo('delete layanan/jilid');
+             $role_mahasiswa->givePermissionTo('detail layanan/jilid');
 
 
              //role perpustakaan
@@ -193,6 +199,7 @@ class RoleSeedr extends Seeder
              $role_perpustakaan->givePermissionTo('hasil layanan/plagiarism');
              $role_perpustakaan->givePermissionTo('keterangan layanan/plagiarism');
              $role_perpustakaan->givePermissionTo('status layanan/plagiarism');
+             $role_perpustakaan->givePermissionTo('detail layanan/plagiarism');
 
              //give permission layanan berkasTa
 
@@ -208,6 +215,7 @@ class RoleSeedr extends Seeder
              $role_perpustakaan->givePermissionTo('update layanan/jilid');
              $role_perpustakaan->givePermissionTo('keterangan layanan/jilid');
              $role_perpustakaan->givePermissionTo('status layanan/jilid');
+             $role_perpustakaan->givePermissionTo('detail layanan/jilid');
 
 
              //give permission layanan berkasTa

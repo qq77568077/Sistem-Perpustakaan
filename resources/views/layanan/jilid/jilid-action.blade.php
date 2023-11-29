@@ -60,6 +60,10 @@
                         <input type="text" class="form-control" value="{{ $jilid->file }}" id="file"
                             name="file">
                     </div>
+                    <div class="mb-3">
+                        <label for="file">Link File Berkas</label>
+                            <a href="{{$jilid->file}}" target="_blank">{{$jilid->file}}</a>
+                    </div>
                     @if (request()->user()->can('status layanan/jilid'))
                     <div class="mb-3">
                         <label for="keterangan">Keterangan</label>
