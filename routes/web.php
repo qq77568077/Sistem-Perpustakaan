@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BerkasTaController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\JilidController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PlagiarismController;
@@ -48,4 +49,5 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('layanan/plagiarism', PlagiarismController::class);
     Route::resource('layanan/jilid', JilidController::class);
+    Route::resource('layanan/berkas', FileController::class);
 });

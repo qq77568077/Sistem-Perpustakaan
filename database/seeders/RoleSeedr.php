@@ -97,6 +97,7 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' =>'update layanan/berkas']);
             $permission = Permission::create(['name' =>'delete layanan/berkas']);
             $permission = Permission::create(['name' =>'keterangan layanan/berkas']);
+            $permission = Permission::create(['name' =>'detail layanan/berkas']);
             $permission = Permission::create(['name' =>'status layanan/berkas']);
 
             //layanan jilid laporan
@@ -148,6 +149,7 @@ class RoleSeedr extends Seeder
              $role_admin->givePermissionTo('update layanan/berkas');
              $role_admin->givePermissionTo('delete layanan/berkas');
              $role_admin->givePermissionTo('keterangan layanan/berkas');
+             $role_admin->givePermissionTo('detail layanan/berkas');
              $role_admin->givePermissionTo('status layanan/berkas');
 
              //give permission layanan Jilid
@@ -173,6 +175,7 @@ class RoleSeedr extends Seeder
              $role_mahasiswa->givePermissionTo('create layanan/berkas');
              $role_mahasiswa->givePermissionTo('update layanan/berkas');
              $role_mahasiswa->givePermissionTo('delete layanan/berkas');
+             $role_mahasiswa->givePermissionTo('detail layanan/berkas');
 
              //give permission layanan Jilid
 
@@ -197,6 +200,7 @@ class RoleSeedr extends Seeder
              $role_perpustakaan->givePermissionTo('update layanan/berkas');
              $role_perpustakaan->givePermissionTo('keterangan layanan/berkas');
              $role_perpustakaan->givePermissionTo('status layanan/berkas');
+             $role_perpustakaan->givePermissionTo('detail layanan/berkas');
 
              //give permission layanan Jilid
 

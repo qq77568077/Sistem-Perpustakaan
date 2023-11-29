@@ -20,8 +20,8 @@ php artisan make:request JilidRequest
 php artisan make:controller PlagiarismController -r
 php artisan make:model Plagiarism -m 
 
-php artisan make:controller BerkasTaController -r
-php artisan make:model Berkas -m 
+php artisan make:controller FileController -r
+php artisan make:model File -m 
 
 php artisan make:controller JilidController -r
 php artisan make:model Jilid -m 
