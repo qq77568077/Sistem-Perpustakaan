@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class File extends Model
+class Document extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'jenis_file',
-        'bukti_file',
-        'keterangan',
-        'status',
+        'dokumen',
     ];
 
-    public function user()
+    public function file()
     {
-        return $this->belongsTo(User::class);
+
+        return $this->hasMany(File::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Berka;
+use App\Models\Document;
 use App\Models\File;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -25,6 +26,16 @@ class BerkasDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+
+        ->editColumn('jenis_file', function ($row) {
+            // Mengambil data JenisFile berdasarkan relasi pada model File
+            $jenisFile = Document::find($row->id); // Ubah sesuai dengan relasi yang ada
+            if ($jenisFile) {
+                return $jenisFile->dokumen; // Ganti dengan nama field yang ingin ditampilkan
+            }
+            return ''; // Atau return kosong jika data tidak ditemukan
+        })
+
             ->editColumn('created_at', function ($row) {
                 return $row->created_at->format('d-m-Y H:i:s');
             })
@@ -88,9 +99,7 @@ class BerkasDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('created_at'),
-            Column::make('nama'),
-            Column::make('nrp'),
-            Column::make('keterangan'),
+            Column::make('jenis_file'),
             Column::make('status'),
             Column::computed('action')
                 ->exportable(false)

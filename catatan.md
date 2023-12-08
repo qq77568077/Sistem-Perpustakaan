@@ -23,6 +23,9 @@ php artisan make:model Plagiarism -m
 php artisan make:controller FileController -r
 php artisan make:model File -m 
 
+php artisan make:controller DocumentController -r
+php artisan make:model Document -m 
+
 php artisan make:controller JilidController -r
 php artisan make:model Jilid -m 
 

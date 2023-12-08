@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BerkasDataTable;
+use App\Models\Document;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -29,7 +30,10 @@ class FileController extends Controller
      */
     public function create()
     {
-        return view('layanan.file.file-action', ['berka' => new File()]);
+        $documents = Document::all();
+        $berka = new File(); // Instantiate a new File model object
+    
+        return view('layanan.file.file-action', compact('documents', 'berka'));
     }
 
     /**
@@ -42,18 +46,9 @@ class FileController extends Controller
     {
         $berka = new File();
         $berka->user_id = auth()->id();
-        $berka->nama = $request->nama;
-        $berka->nrp = $request->nrp;
-        $berka->judul = $request->judul;
-        $berka->laporan_ta = $request->laporan_ta;
-        $berka->dokumen_penunjang = $request->dokumen_penunjang;
-        $berka->file_presentasi = $request->file_presentasi;
-        $berka->product = $request->product;
-        $berka->haki = $request->haki;
-        $berka->video_trailer = $request->video_trailer;
-        $berka->poster = $request->poster;
-        $berka->artikel_jurnal = $request->artikel_jurnal;
-        $berka->status = 'Belum validasi';
+        $berka->jenis_file = $request->jenis_file;
+        $berka->bukti_file = $request->bukti_file;
+        $berka->status = 'Belum Validasi';
         $berka->save();
 
         return response()->json([
@@ -71,10 +66,10 @@ class FileController extends Controller
     public function show($id)
     {
         //
+        $documents = Document::all();
         $berka = File::findOrFail($id);
 
-        return view('layanan.file.file-detail', compact('berka'));
-
+        return view('layanan.file.file-detail', compact('documents', 'berka'));
     }
 
     /**
@@ -85,7 +80,8 @@ class FileController extends Controller
      */
     public function edit(File $berka)
     {
-        return view('layanan.file.file-action', compact('berka'));
+        $documents = Document::all();
+        return view('layanan.file.file-action',compact('documents', 'berka'));
     }
 
     /**
@@ -98,17 +94,8 @@ class FileController extends Controller
     public function update(Request $request, File $berka)
     {
         $berka->user_id = auth()->id();
-        $berka->nama = $request->nama;
-        $berka->nrp = $request->nrp;
-        $berka->judul = $request->judul;
-        $berka->laporan_ta = $request->laporan_ta;
-        $berka->dokumen_penunjang = $request->dokumen_penunjang;
-        $berka->file_presentasi = $request->file_presentasi;
-        $berka->product = $request->product;
-        $berka->haki = $request->haki;
-        $berka->video_trailer = $request->video_trailer;
-        $berka->poster = $request->poster;
-        $berka->artikel_jurnal = $request->artikel_jurnal;
+        $berka->jenis_file = $request->jenis_file;
+        $berka->bukti_file = $request->bukti_file;
         $berka->keterangan = $request->keterangan;
         $berka->status = $request->status;
         $berka->save();

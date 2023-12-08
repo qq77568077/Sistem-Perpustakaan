@@ -59,5 +59,10 @@ class NavigationSeeder extends Seeder
             "url"  => 'layanan/berkas',
             "icon" => '',
             ]);
+            $transaksi->subMenus()->create([
+            "name" => 'Berkas Ta',
+            "url"  => 'layanan/file',
+            "icon" => '',
+            ]);
     }
 }
