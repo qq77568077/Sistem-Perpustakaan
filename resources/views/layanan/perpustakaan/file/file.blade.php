@@ -13,7 +13,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            @if (request()->user()->can('create layanan/berkas'))
+                            @if (request()->user()->can('create layanan/file'))
                                 <button type="button" class="btn btn-primary btn-sm mb-3 btn-add"> <i class="ti-plus"></i>
                                     Tambah</button>
                             @endif
@@ -49,7 +49,7 @@
         $('.btn-add').on('click', function() {
             $.ajax({
                 method: 'GET',
-                url: `{{ url('layanan/berkas/create') }}`,
+                url: `{{ url('layanan/file/create') }}`,
                 success: function(res) {
                     console.log(res);
                     $('#modalAction').find('.modal-dialog').html(res)
@@ -80,7 +80,7 @@
                     processData: false,
                     contentType: false,
                     success: function(res) {
-                        window.LaravelDataTables["berkas-table"].ajax.reload()
+                        window.LaravelDataTables["document-table"].ajax.reload()
                         modal.hide()
                     },
                     error: function(res) {
@@ -98,7 +98,7 @@
             })
         }
 
-        $('#berkas-table').on('click', '.action', function() {
+        $('#document-table').on('click', '.action', function() {
             let data = $(this).data()
             let id = data.id
             let jenis = data.jenis
@@ -117,12 +117,12 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             method: 'DELETE',
-                            url: `{{ url('layanan/berkas/') }}/${id}`,
+                            url: `{{ url('layanan/file/') }}/${id}`,
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             success: function(res) {
-                                window.LaravelDataTables["berkas-table"].ajax.reload()
+                                window.LaravelDataTables["document-table"].ajax.reload()
 
                                 Swal.fire(
                                     'Deleted!',
@@ -139,13 +139,13 @@
             if(jenis === 'detail'){
             $.ajax({
                         method: 'GET',
-                        url: `{{ url('layanan/berkas/')}}/${id}`,
+                        url: `{{ url('layanan/file/')}}/${id}`,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(res) {
                             console.log('berhasil' ,res);
-                            window.location.href = '{{ url('layanan/berkas/')}}/' + id;
+                            window.location.href = '{{ url('layanan/file/')}}/' + id;
                         }
                     })
                     return
@@ -153,7 +153,7 @@
 
             $.ajax({
                 method: 'get',
-                url: `{{ url('layanan/berkas/') }}/${id}/edit`,
+                url: `{{ url('layanan/file/') }}/${id}/edit`,
                 success: function(res) {
                     $('#modalAction').find('.modal-dialog').html(res)
                     modal.show()

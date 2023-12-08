@@ -10,6 +10,7 @@ class File extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'jenis_file',
         'bukti_file',
         'keterangan',
@@ -18,6 +19,6 @@ class File extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

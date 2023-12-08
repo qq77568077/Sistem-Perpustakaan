@@ -5,6 +5,7 @@ php artisan datatables:make Plagiarism
 php artisan datatables:make Berkas
 php artisan datatables:make Jilid
 php artisan datatables:make Price
+php artisan datatables:make Document
 
 
 //request validasi

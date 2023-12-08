@@ -2,18 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\DocumentDataTable;
+use App\Models\Document;
+use App\Models\File;
 use Illuminate\Http\Request;
+
 
 class DocumentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:create layanan/file')->only('create');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DocumentDataTable $dataTable)
     {
-        //
+        $this->authorize('read layanan/file');
+        return $dataTable->render('layanan.perpustakaan.file.file');
     }
 
     /**
@@ -23,7 +34,10 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        //
+        $documents = Document::all();
+        $file = new File(); // Instantiate a new File model object
+    
+        return view('layanan.perpustakaan.file.file-action', compact('documents', 'file'));
     }
 
     /**
@@ -32,9 +46,19 @@ class DocumentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, File $file)
     {
-        //
+        $file = new File();
+        $file->user_id = auth()->id();
+        $file->jenis_file = $request->jenis_file;
+        $file->bukti_file = $request->bukti_file;
+        $file->status = 'Belum Validasi';
+        $file->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Create data successfully'
+        ]);
     }
 
     /**
@@ -45,7 +69,10 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        //
+        $documents = Document::all();
+        $file = File::findOrFail($id);
+
+        return view('layanan.perpustakaan.file.file-detail', compact('documents', 'file'));
     }
 
     /**
@@ -54,9 +81,10 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(File $file)
     {
-        //
+        $documents = Document::all();
+        return view('layanan.perpustakaan.file.file-action',compact('documents', 'file'));
     }
 
     /**
@@ -66,9 +94,19 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, File $file)
     {
-        //
+        $file->user_id = auth()->id();
+        $file->jenis_file = $request->jenis_file;
+        $file->bukti_file = $request->bukti_file;
+        $file->keterangan = $request->keterangan;
+        $file->status = $request->status;
+        $file->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'updated data successfully'
+        ]);
     }
 
     /**
@@ -77,8 +115,12 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(File $file)
     {
-        //
+        $file->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Delete data successfully'
+        ]);
     }
 }

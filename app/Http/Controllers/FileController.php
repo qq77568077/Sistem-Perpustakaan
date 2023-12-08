@@ -20,7 +20,7 @@ class FileController extends Controller
     {
         //
         $this->authorize('read layanan/berkas');
-        return $dataTable->render('layanan.file.file');
+        return $dataTable->render('layanan.mahasiswa.file.file');
     }
 
     /**
@@ -33,7 +33,7 @@ class FileController extends Controller
         $documents = Document::all();
         $berka = new File(); // Instantiate a new File model object
     
-        return view('layanan.file.file-action', compact('documents', 'berka'));
+        return view('layanan.mahasiswa.file.file-action', compact('documents', 'berka'));
     }
 
     /**
@@ -69,7 +69,7 @@ class FileController extends Controller
         $documents = Document::all();
         $berka = File::findOrFail($id);
 
-        return view('layanan.file.file-detail', compact('documents', 'berka'));
+        return view('layanan.mahasiswa.file.file-detail', compact('documents', 'berka'));
     }
 
     /**
@@ -81,7 +81,7 @@ class FileController extends Controller
     public function edit(File $berka)
     {
         $documents = Document::all();
-        return view('layanan.file.file-action',compact('documents', 'berka'));
+        return view('layanan.mahasiswa.file.file-action',compact('documents', 'berka'));
     }
 
     /**

@@ -17,7 +17,7 @@ class JilidController extends Controller
     public function index(JilidDataTable $dataTable)
     {
         $this->authorize('read layanan/jilid');
-        return $dataTable->render('layanan.jilid.jilid');
+        return $dataTable->render('layanan.mahasiswa.jilid.jilid');
 
     }
 
@@ -28,7 +28,7 @@ class JilidController extends Controller
      */
     public function create()
     {
-        return view('layanan.jilid.jilid-action', ['jilid' => new Jilid()]);
+        return view('layanan.mahasiswa.jilid.jilid-action', ['jilid' => new Jilid()]);
     }
 
     /**
@@ -73,7 +73,7 @@ class JilidController extends Controller
 
     public function edit(Jilid $jilid)
     {
-        return view('layanan.jilid.jilid-action', compact('jilid'));
+        return view('layanan.mahasiswa.jilid.jilid-action', compact('jilid'));
 
     }
 

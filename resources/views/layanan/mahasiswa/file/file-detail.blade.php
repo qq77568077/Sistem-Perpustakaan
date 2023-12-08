@@ -12,10 +12,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4>Nama</h4> 
-                        {{$berka->nama}}
-                        <hr>
-                        <h4>NRP</h4> 
-                        {{$berka->nrp}}
+                        {{$berka->user_id}}
                         <hr>
                         <h4>jenis File</h4> 
                         {{$berka->jenis_file}}

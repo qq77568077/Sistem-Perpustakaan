@@ -1,8 +1,8 @@
 <div class="modal-content">
-    <form id="formAction" action="{{ $berka->id ? route('berkas.update', $berka->id) : route('berkas.store') }} "
+    <form id="formAction" action="{{ $file->id ? route('file.update', $file->id) : route('file.store') }} "
         method="post" enctype="multipart/form-data">
         @csrf
-        @if ($berka->id)
+        @if ($file->id)
             @method('put')
         @endif
         <div class="modal-header">
@@ -18,7 +18,7 @@
                             <select class="form-select" aria-label="Default select example" id="jenis_file" name="jenis_file">
                                 <option value="">Open this select menu</option>
                                 @foreach ($documents as $document)
-                                    <option value="{{ $document->id }}" {{ $document->id == $berka->jenis_file ? 'selected' : '' }}>
+                                    <option value="{{ $document->id }}" {{ $document->id == $file->jenis_file ? 'selected' : '' }}>
                                         {{ $document->dokumen }}
                                     </option>
                                 @endforeach
@@ -28,15 +28,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="bukti_file">Bukti FIle</label>
-                        <input type="text" class="form-control" value="{{ $berka->bukti_file }}" id="bukti_file"
+                        <input type="text" class="form-control" value="{{ $file->bukti_file }}" id="bukti_file"
                             name="bukti_file">
                     </div>
-                    @if (request()->user()->can('status layanan/berkas'))
+                    @if (request()->user()->can('status layanan/file'))
                     <div class="mb-3">
                         <label for="keterangan">Keterangan</label>
-                        <textarea class="form-control" id="keterangan" name='keterangan'>{{$berka->keterangan}}</textarea>
+                        <textarea class="form-control" id="keterangan" name='keterangan'>{{$file->keterangan}}</textarea>
                       </div>
-                    <div class="mb-3" {{$berka->id ? 'edit-mode' : ''}}>
+                    <div class="mb-3" {{$file->id ? 'edit-mode' : ''}}>
                         <label for="hasil_cek">Status</label>
                         <select class="form-select" id="status" name="status">
                             <option value="">Open this select menu</option>
@@ -44,7 +44,7 @@
                                 $array = ['Validasi', 'Belum Validasi'];
                             @endphp
                             @foreach ($array as $element)
-                                <option value="{{ $element }}" {{ $element === $berka->status ? 'selected' : '' }}>
+                                <option value="{{ $element }}" {{ $element === $file->status ? 'selected' : '' }}>
                                     {{ $element }}
                                 </option>
                             @endforeach

@@ -23,7 +23,7 @@ class PlagiarismController extends Controller
         //
         $this->authorize('read layanan/plagiarism');
         $plagiarisms = Plagiarism::where('user_id', auth()->id())->get();
-        return $dataTable->with('plagiarisms', $plagiarisms)->render('layanan.plagiarism.plagiarism');
+        return $dataTable->with('plagiarisms', $plagiarisms)->render('layanan.mahasiswa.plagiarism.plagiarism');
     }
 
     /**
@@ -33,7 +33,7 @@ class PlagiarismController extends Controller
      */
     public function create()
     {
-        return view('layanan.plagiarism.plagiarism-action', ['plagiarism' => new Plagiarism()]);
+        return view('layanan.mahasiswa.plagiarism.plagiarism-action', ['plagiarism' => new Plagiarism()]);
     }
 
     /**
@@ -69,7 +69,7 @@ class PlagiarismController extends Controller
     {
         $plagiarism = Plagiarism::findOrFail($id);
 
-        return view('layanan.plagiarism.plagiarism-detail', compact('plagiarism'));
+        return view('layanan.mahasiswa.plagiarism.plagiarism-detail', compact('plagiarism'));
     }
 
     /**
@@ -80,7 +80,7 @@ class PlagiarismController extends Controller
      */
     public function edit(Plagiarism $plagiarism)
     {
-        return view('layanan.plagiarism.plagiarism-action', compact('plagiarism'));
+        return view('layanan.mahasiswa.plagiarism.plagiarism-action', compact('plagiarism'));
     }
 
     /**
