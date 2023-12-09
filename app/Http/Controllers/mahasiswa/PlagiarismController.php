@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\mahasiswa;
+use App\Http\Controllers\Controller;
 use App\DataTables\PlagiarismDataTable;
 use App\Models\Plagiarism;
 use Illuminate\Http\Request;

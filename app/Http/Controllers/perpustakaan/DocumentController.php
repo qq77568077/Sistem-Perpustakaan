@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\perpustakaan;
+use App\Http\Controllers\Controller;
 use App\DataTables\DocumentDataTable;
 use App\Models\Document;
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -21,10 +22,11 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(DocumentDataTable $dataTable)
+    public function index()
     {
         $this->authorize('read layanan/file');
-        return $dataTable->render('layanan.perpustakaan.file.file');
+        $files = File::with('user')->get()->groupBy('user_id');
+        return view('layanan.perpustakaan.file.file', compact('files'));
     }
 
     /**
@@ -96,7 +98,6 @@ class DocumentController extends Controller
      */
     public function update(Request $request, File $file)
     {
-        $file->user_id = auth()->id();
         $file->jenis_file = $request->jenis_file;
         $file->bukti_file = $request->bukti_file;
         $file->keterangan = $request->keterangan;

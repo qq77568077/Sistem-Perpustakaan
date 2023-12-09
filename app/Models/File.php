@@ -21,4 +21,9 @@ class File extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function document()
+    {
+        return $this->belongsTo(Document::class, 'jenis_file');
+    }
 }

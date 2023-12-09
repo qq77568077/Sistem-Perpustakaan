@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Plagiarism::class);
     }
+
+    public function files()
+{
+    return $this->hasMany(File::class, 'user_id');
+}
 }

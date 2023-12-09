@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\mahasiswa;
+use App\Http\Controllers\Controller;
 
 use App\DataTables\JilidDataTable;
 use App\Models\Jilid;

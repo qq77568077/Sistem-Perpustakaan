@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\mahasiswa;
+use App\Http\Controllers\Controller;
 
 use App\DataTables\BerkasDataTable;
 use App\Models\Document;

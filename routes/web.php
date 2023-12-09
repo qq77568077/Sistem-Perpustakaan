@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\BerkasTaController;
-use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\FileController;
-use App\Http\Controllers\JilidController;
+use App\Http\Controllers\perpustakaan\DocumentController;
+use App\Http\Controllers\mahasiswa\FileController;
+use App\Http\Controllers\mahasiswa\JilidController;
+use App\Http\Controllers\mahasiswa\PlagiarismController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\PlagiarismController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
