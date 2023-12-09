@@ -28,7 +28,7 @@
                                     <tr>
                                         <td>{{ $userFiles->first()->user->name }}</td>
                                         <td>
-                                            <a href="" class="btn btn-primary">Detail</a>
+                                            <button type="button" data-id="{{ $userId }}" data-jenis="detail" class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -49,4 +49,27 @@
     <script src="{{ asset('') }}vendor/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('') }}vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('') }}vendor/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.action').on('click', function() {
+                var userId = $(this).data('id');
+
+                // Lakukan permintaan AJAX
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('file.show', ':user_id') }}".replace(':user_id', userId),
+                    success: function(response) {
+                        // Lakukan sesuatu dengan respons dari AJAX, seperti menampilkan di modal atau halaman lain
+                        // Contoh: Redirect ke halaman file-detail
+                        window.location.href = "{{ route('file.show', ':user_id') }}".replace(':user_id', userId);
+                    },
+                    error: function(error) {
+                        // Tangani kesalahan jika ada
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

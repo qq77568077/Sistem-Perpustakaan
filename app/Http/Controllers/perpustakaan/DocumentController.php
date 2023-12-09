@@ -71,11 +71,11 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        $documents = Document::all();
-        $file = File::findOrFail($id);
+        $file = File::where('user_id', $id)->firstOrFail();
 
-        return view('layanan.perpustakaan.file.file-detail', compact('documents', 'file'));
+        return view('layanan.perpustakaan.file.file-detail', compact('file'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

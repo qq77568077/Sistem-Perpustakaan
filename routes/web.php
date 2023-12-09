@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('konfigurasi/permissions', PermissionController::class);
     Route::resource('konfigurasi/prices', PriceController::class);
     Route::get('konfigurasi/getPriceData', [PriceController::class, 'getPriceData']);
+    
 });
 
 
