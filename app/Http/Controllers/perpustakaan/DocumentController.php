@@ -76,7 +76,6 @@ class DocumentController extends Controller
         return view('layanan.perpustakaan.file.file-detail', compact('file'));
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *

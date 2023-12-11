@@ -26,9 +26,14 @@ class DocumentDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->editColumn('user_id', function ($row) {
-                return $row->user ? $row->user->name : 'No User';
-            })
+        ->editColumn('jenis_file', function ($row) {
+            // Mengambil data JenisFile berdasarkan relasi pada model File
+            $jenisFile = Document::find($row->id); // Ubah sesuai dengan relasi yang ada
+            if ($jenisFile) {
+                return $jenisFile->dokumen; // Ganti dengan nama field yang ingin ditampilkan
+            }
+            return ''; // Atau return kosong jika data tidak ditemukan
+        })
             ->addIndexColumn('')
             ->addColumn('action', function ($row) {
                 $action = '';
@@ -58,8 +63,7 @@ class DocumentDataTable extends DataTable
      */
     public function query(File $model): QueryBuilder
     {
-        return $model->select('user_id', DB::raw('MAX(id) AS id'))
-            ->groupBy('user_id');
+            return $model->newQuery();
     }
 
     /**
@@ -86,7 +90,10 @@ class DocumentDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
-            Column::make('user_id')->title('Nama Mahasiswa'),
+            Column::make('jenis_file'),
+            Column::make('bukti_file')->title('Bukti File'),
+            Column::make('keterangan'),
+            Column::make('status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
