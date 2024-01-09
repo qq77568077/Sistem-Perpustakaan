@@ -111,7 +111,7 @@
                 url: '{{ url('konfigurasi/getPriceData') }}',
                 method: 'GET',
                 success: function(response) {
-                    const data = response.data[0]; // Mengambil data dari respons
+                    const data = response.data; // Mengambil data dari respons
                     const totalPageBerwarna = pageBerwarna * data.pageBerwarnaPrice;
                     const totalPageHitamPutih = pageHitamPutih * data.pageHitamPutihPrice;
                     const totalCover = cover * data.coverprice;

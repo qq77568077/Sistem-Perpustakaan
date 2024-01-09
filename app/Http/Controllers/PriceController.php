@@ -27,7 +27,7 @@ class PriceController extends Controller
 
     public function getPriceData()
     {
-        $price = Price::get();
+        $price = Price::latest()->first();
         return response()->json([
             'success' => true,
             'message' => 'List data price',

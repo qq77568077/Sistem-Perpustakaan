@@ -33,9 +33,10 @@
                                         @foreach($document as $doc)
                                         <td>
                                             @php
-                                                $jenisFile = $userFiles->where('jenis_file', $doc->id)
-                                                                    ->where('status', 'Validasi')
-                                                                    ->first();
+                                            $jenisFile = 
+                                            $userFiles->where('jenis_file', $doc->id)
+                                                      ->where('status', 'Validasi')
+                                                      ->first();
                                             @endphp
                                             @if($jenisFile && $jenisFile->status === 'Validasi')
                                             <i class="fas fa-check-circle text-success"></i>
