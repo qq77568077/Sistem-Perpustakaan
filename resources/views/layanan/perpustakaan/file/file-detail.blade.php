@@ -87,9 +87,9 @@
                     processData: false,
                     contentType: false,
                     success: function(res) {
-                        $('#table-document').DataTable().ajax.reload(null, false); 
-                        $('#modalAction').modal('hide'); 
-                    },
+    $('#table-document').DataTable().ajax.reload(null, false);
+    $('#modalAction').modal('hide');
+},
                     error: function(res) {
                         let error = res.responseJSON?.errors
                         $(_form).find('.text-danger.text-small').remove()

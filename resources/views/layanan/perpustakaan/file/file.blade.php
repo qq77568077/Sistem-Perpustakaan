@@ -20,6 +20,9 @@
                                     <thead>
                                     <tr>
                                         <th>Mahasiswa</th>
+                                        @foreach($document as $doc)
+                                        <th>{{$doc->dokumen}}</th>
+                                        @endforeach
                                         <th>action</th>
                                     </tr>
                                     </thead>
@@ -27,6 +30,20 @@
                                     @foreach($files as $userId => $userFiles)
                                     <tr>
                                         <td>{{ $userFiles->first()->user->name }}</td>
+                                        @foreach($document as $doc)
+                                        <td>
+                                            @php
+                                                $jenisFile = $userFiles->where('jenis_file', $doc->id)
+                                                                    ->where('status', 'Validasi')
+                                                                    ->first();
+                                            @endphp
+                                            @if($jenisFile && $jenisFile->status === 'Validasi')
+                                            <i class="fas fa-check-circle text-success"></i>
+                                            @else
+                                            -
+                                            @endif
+                                        </td>
+                                    @endforeach
                                         <td>
                                             <button type="button" data-id="{{ $userId }}" data-jenis="detail" class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>
                                         </td>

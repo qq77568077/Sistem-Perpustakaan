@@ -26,7 +26,8 @@ class DocumentController extends Controller
     {
         $this->authorize('read layanan/file');
         $files = File::with('user')->get()->groupBy('user_id');
-        return view('layanan.perpustakaan.file.file', compact('files'));
+        $document = Document::orderby('id', 'asc')->get();
+        return view('layanan.perpustakaan.file.file', compact('document','files'));
     }
 
     /**
