@@ -46,6 +46,21 @@
 <script>
     const modal = new bootstrap.Modal($('#modalAction'))
 
+    function toggleAddButton() {
+        const totalRecords = window.LaravelDataTables["plagiarism-table"].page.info().recordsTotal;
+
+        if (totalRecords > 0) {
+            $('.btn-add').hide();
+        } else {
+            $('.btn-add').show();
+        }
+    }
+
+    // Trigger toggleAddButton on DataTable draw event
+    $('#plagiarism-table').on('draw.dt', function () {
+        toggleAddButton();
+    });
+
     $('.btn-add').on('click', function() {
         $.ajax({
             method: 'GET',
@@ -161,6 +176,8 @@
         })
 
     })
+
+    toggleAddButton();
 </script>
 
 @endpush
