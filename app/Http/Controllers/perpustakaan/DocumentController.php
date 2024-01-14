@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\perpustakaan;
+
 use App\Http\Controllers\Controller;
 use App\DataTables\DocumentDataTable;
+use App\Models\Category;
 use App\Models\Document;
 use App\Models\File;
 use App\Models\User;
@@ -22,12 +24,34 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('read layanan/file');
-        $files = File::with('user')->get()->groupBy('user_id');
+
+        // Retrieve categories from the database
+        $categories = Category::all();
+
+        $prodiFilter = $request->input('prodi');
+        $kategoriFilter = $request->input('kategori');
+
+        $files = File::with(['user', 'category'])
+            ->when($prodiFilter, function ($query) use ($prodiFilter) {
+                return $query->whereHas('user', function ($userQuery) use ($prodiFilter) {
+                    $userQuery->where('prodi', $prodiFilter);
+                });
+            })
+            ->when($kategoriFilter, function ($query) use ($kategoriFilter) {
+                return $query->whereHas('category', function ($categoryQuery) use ($kategoriFilter) {
+                    // Assuming kategori is a string, cast categories.id to a string
+                    $categoryQuery->where('id', '=', (string)$kategoriFilter);
+                });
+            })
+            ->get()
+            ->groupBy('user_id');
+
         $document = Document::orderby('id', 'asc')->get();
-        return view('layanan.perpustakaan.file.file', compact('document','files'));
+
+        return view('layanan.perpustakaan.file.file', compact('document', 'files', 'categories'));
     }
 
     /**
@@ -39,7 +63,7 @@ class DocumentController extends Controller
     {
         $documents = Document::all();
         $file = new File(); // Instantiate a new File model object
-    
+
         return view('layanan.perpustakaan.file.file-action', compact('documents', 'file'));
     }
 
@@ -86,7 +110,7 @@ class DocumentController extends Controller
     public function edit(File $file)
     {
         $documents = Document::all();
-        return view('layanan.perpustakaan.file.file-action',compact('documents', 'file'));
+        return view('layanan.perpustakaan.file.file-action', compact('documents', 'file'));
     }
 
     /**

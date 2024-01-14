@@ -12,6 +12,7 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col">
+                    
                     <div class="mb-3">
                         <label for="jenis_file">Jenis</label>
                         <div class="mb-3">
@@ -24,7 +25,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        
                     </div>
                     <div class="mb-3">
                         <label for="bukti_file">Bukti FIle</label>

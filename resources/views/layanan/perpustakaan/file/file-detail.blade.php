@@ -21,6 +21,7 @@
                         <table class="table" id="table-document">
                             <tr>
                                 <thead>
+                                    <th>Kategori</th>
                                     <th>Jenis File</th>
                                     <th>Bukti File</th>
                                     <th>Keterangan</th>
@@ -30,6 +31,7 @@
                                 <tbody >
                                     @foreach($file->user->files as $d)
                                     <tr id="index_{{ $d->id }}">
+                                        <td>{{$d->kategori}}</td>
                                         <td>{{$d->document->dokumen}}</td>
                                         <td><a href="{{$d->bukti_file}}" target="_blank">Link File</a></td>
                                         <td>{{$d->keterangan}}</td>

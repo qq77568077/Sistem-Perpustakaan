@@ -8,6 +8,24 @@
         <div class="title">
             Data Berkas TA
         </div>
+        <div class="col-md-5">
+            <form action="{{ route('file.index') }}" method="GET">
+                <div class="mb-3">
+                    <label for="prodiFilter">Filter Prodi:</label>
+                    <input type="text" class="form-control" id="prodiFilter" name="prodi" />
+                </div>
+                <div class="mb-3">
+                    <label for="kategoriFilter">Filter Kategori TA:</label>
+                    <select class="form-select" id="kategoriFilter" name="kategori">
+                        <option value="">All</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->kategori_ta }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Apply Filters</button>
+            </form>
+        </div>
         <div class="content-wrapper">
             <div class="row same-height">
                 <div class="col-md-12">
@@ -16,10 +34,14 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" id="myTable">
                                     <thead>
                                     <tr>
-                                        <th>Mahasiswa</th>
+                                        <th>#</th>
+                                        <th>Prodi</th>
+                                        <th>NRP</th>
+                                        <th>Nama</th>
+                                        <th>Kategori TA</th>
                                         @foreach($document as $doc)
                                         <th>{{$doc->dokumen}}</th>
                                         @endforeach
@@ -27,9 +49,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                        @php $counter = 1; @endphp
                                     @foreach($files as $userId => $userFiles)
                                     <tr>
+                                        <td>{{ $counter++ }}</td>
+                                        <td>{{ $userFiles->first()->user->prodi }}</td>
+                                        <td>{{ $userFiles->first()->user->nrp }}</td>
                                         <td>{{ $userFiles->first()->user->name }}</td>
+                                        <td>{{ $userFiles->first()->category->kategori_ta }} </td>
                                         @foreach($document as $doc)
                                         <td>
                                             @php
@@ -69,6 +96,9 @@
     <script src="{{ asset('') }}vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
     <script>
+        $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
         $(document).ready(function() {
             $('.action').on('click', function() {
                 var userId = $(this).data('id');

@@ -42,14 +42,52 @@ class RoleSeedr extends Seeder
                 'name'  => 'perpustakaan'
             ], $default_user_value));
     
-            $mahasiswa = User::create(array_merge([
-                'email' => 'mahasiswa@stiki.ac.id',
-                'name'  => 'mahasiswa'
+            $mahasiswa1 = User::create(array_merge([
+                'email' => 'farel@stiki.ac.id',
+                'name'  => 'farel',
+                'nrp'  => '181111001',
+                'prodi'  => 'TI',
+            ], $default_user_value));
+
+            $mahasiswa2 = User::create(array_merge([
+                'email' => 'ramadhan@stiki.ac.id',
+                'name'  => 'ramadhan',
+                'nrp'  => '181111002',
+                'prodi'  => 'MI',
+            ], $default_user_value));
+
+            $mahasiswa3 = User::create(array_merge([
+                'email' => 'abid@stiki.ac.id',
+                'name'  => 'abid',
+                'nrp'  => '181111003',
+                'prodi'  => 'SI',
+            ], $default_user_value));
+
+            $mahasiswa4 = User::create(array_merge([
+                'email' => 'yusan@stiki.ac.id',
+                'name'  => 'yusan',
+                'nrp'  => '181111003',
+                'prodi'  => 'DKV',
             ], $default_user_value));
     
-            $prodi = User::create(array_merge([
-                'email' => 'prodi@stiki.ac.id',
-                'name'  => 'prodi'
+            $prodid3 = User::create(array_merge([
+                'email' => 'prodid3si@stiki.ac.id',
+                'name'  => 'Prodi D3 SI'
+            ], $default_user_value));
+
+            $proditi = User::create(array_merge([
+                'email' => 'proditi@stiki.ac.id',
+                'name'  => 'Prodi TI'
+            ], $default_user_value));
+
+            $prodisi = User::create(array_merge([
+                'email' => 'prodisi@stiki.ac.id',
+                'name'  => 'Prodi SI'
+            ], $default_user_value));
+
+            $prodidkv = User::create(array_merge([
+                'email' => 'prodidkv@stiki.ac.id',
+                'name'  => 'Prodi DKV'
             ], $default_user_value));
     
             $koorLab = User::create(array_merge([
@@ -128,10 +166,10 @@ class RoleSeedr extends Seeder
             $role_admin->givePermissionTo('delete konfigurasi/roles');
 
             //give permission permission
-            // $role_admin->givePermissionTo('read konfigurasi/permissions');
-            // $role_admin->givePermissionTo('create konfigurasi/permissions');
-            // $role_admin->givePermissionTo('update konfigurasi/permissions');
-            // $role_admin->givePermissionTo('delete konfigurasi/permissions');
+            $role_admin->givePermissionTo('read konfigurasi/permissions');
+            $role_admin->givePermissionTo('create konfigurasi/permissions');
+            $role_admin->givePermissionTo('update konfigurasi/permissions');
+            $role_admin->givePermissionTo('delete konfigurasi/permissions');
 
             $role_admin->givePermissionTo('read konfigurasi/prices');
             $role_admin->givePermissionTo('create konfigurasi/prices');
@@ -246,8 +284,14 @@ class RoleSeedr extends Seeder
 
             //role
             $perpustakaan->assignRole('perpustakaan');
-            $mahasiswa->assignRole('mahasiswa');
-            $prodi->assignRole('prodi');
+            $mahasiswa1->assignRole('mahasiswa');
+            $mahasiswa2->assignRole('mahasiswa');
+            $mahasiswa3->assignRole('mahasiswa');
+            $mahasiswa4->assignRole('mahasiswa');
+            $prodid3->assignRole('prodi');
+            $proditi->assignRole('prodi');
+            $prodisi->assignRole('prodi');
+            $prodidkv->assignRole('prodi');
             $koorLab->assignRole('koorLab');
             $admin->assignRole('admin');
 

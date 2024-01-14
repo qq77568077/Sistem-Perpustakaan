@@ -11,6 +11,7 @@ class File extends Model
 
     protected $fillable = [
         'user_id',
+        'kategori',
         'jenis_file',
         'bukti_file',
         'keterangan',
@@ -20,6 +21,11 @@ class File extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'kategori');
     }
 
     public function document()
