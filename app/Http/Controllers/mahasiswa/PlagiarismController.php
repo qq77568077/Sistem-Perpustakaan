@@ -93,7 +93,7 @@ class PlagiarismController extends Controller
     public function update(Request $request, Plagiarism $plagiarism)
     {
 
-        $plagiarism->user_id = auth()->id();
+        // $plagiarism->user_id = auth()->id();
         $plagiarism->nama = $request->nama;
         $plagiarism->nrp = $request->nrp;
         $plagiarism->file = $request->file;

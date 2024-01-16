@@ -13,11 +13,11 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="file">Nama</label>
-                        <input type="text" class="form-control" value="{{ auth()->user()->name }}" id="nama" name="nama" {{$plagiarism->id ? 'readonly' : ''}}>
+                        <input type="text" class="form-control" value="{{ $plagiarism->nama }}" id="nama" name="nama" {{$plagiarism->id ? 'readonly' : ''}}>
                     </div>
                     <div class="mb-3">
                         <label for="file">NRP</label>
-                        <input type="text" class="form-control" value="{{ auth()->user()->nrp }}" id="nrp" name="nrp" {{$plagiarism->id ? 'readonly' : ''}}>
+                        <input type="text" class="form-control" value="{{ $plagiarism->nrp }}" id="nrp" name="nrp" {{$plagiarism->id ? 'readonly' : ''}}>
                     </div>
                     <div class="mb-3">
                         <label for="file">File</label>
