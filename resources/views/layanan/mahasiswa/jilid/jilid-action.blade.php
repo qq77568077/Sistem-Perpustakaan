@@ -14,11 +14,11 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="nama">Nama</label>
-                        <input type="text" class="form-control" value="{{ auth()->user()->name }}" id="nama" name="nama">
+                        <input type="text" class="form-control" value="{{ $jilid->nama }}" id="nama" name="nama">
                     </div>
                     <div class="mb-3">
                         <label for="nrp">NRP</label>
-                        <input type="text" class="form-control" value="{{ auth()->user()->nrp }}" id="nrp" name="nrp">
+                        <input type="text" class="form-control" value="{{ $jilid->nrp }}" id="nrp" name="nrp">
                     </div>
                     <div class="mb-3">
                         <label for="judul">Judul</label>

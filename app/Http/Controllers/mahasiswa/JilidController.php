@@ -41,6 +41,7 @@ class JilidController extends Controller
     public function store(Request $request, Jilid $jilid)
     {
         $jilid = new Jilid();
+        $jilid->user_id = auth()->id();
         $jilid->nama = $request->nama;
         $jilid->nrp = $request->nrp;
         $jilid->judul = $request->judul;
