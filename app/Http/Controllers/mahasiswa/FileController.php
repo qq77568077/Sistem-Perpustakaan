@@ -90,8 +90,9 @@ class FileController extends Controller
      */
     public function edit(File $berka)
     {
+        $categories = Category::all();
         $documents = Document::all();
-        return view('layanan.mahasiswa.file.file-action', compact('documents', 'berka'));
+        return view('layanan.mahasiswa.file.file-action', compact('categories','documents', 'berka'));
     }
 
     /**
