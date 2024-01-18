@@ -21,16 +21,17 @@
                         <a type="button" class="btn btn-primary btn-sm mb-3 btn-add" href="{{ route('users.create') }}"> <i class="ti-plus"></i> Tambah</a>
                         @endif
                         <table class="table table-bordered">
-                            <tr>
+                            <tr align="center" valign="middle">
                               <th>No</th>
                               <th>Name</th>
                               <th>Email</th>
                               <th>Roles</th>
                               <th width="280px">Action</th>
                             </tr>
+                            @php $counter = 1; @endphp
                             @foreach ($data as $key => $user)
-                             <tr>
-                               <td></td>
+                             <tr align="center" valign="middle">
+                               <td>{{ $counter++ }}</td>
                                <td>{{ $user->name }}</td>
                                <td>{{ $user->email }}</td>
                                <td>

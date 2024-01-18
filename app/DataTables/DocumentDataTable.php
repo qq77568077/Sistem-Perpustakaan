@@ -26,14 +26,14 @@ class DocumentDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-        ->editColumn('jenis_file', function ($row) {
-            // Mengambil data JenisFile berdasarkan relasi pada model File
-            $jenisFile = Document::find($row->id); // Ubah sesuai dengan relasi yang ada
-            if ($jenisFile) {
-                return $jenisFile->dokumen; // Ganti dengan nama field yang ingin ditampilkan
-            }
-            return ''; // Atau return kosong jika data tidak ditemukan
-        })
+            ->editColumn('jenis_file', function ($row) {
+                // Mengambil data JenisFile berdasarkan relasi pada model File
+                $jenisFile = Document::find($row->id); // Ubah sesuai dengan relasi yang ada
+                if ($jenisFile) {
+                    return $jenisFile->dokumen; // Ganti dengan nama field yang ingin ditampilkan
+                }
+                return ''; // Atau return kosong jika data tidak ditemukan
+            })
             ->addIndexColumn('')
             ->addColumn('action', function ($row) {
                 $action = '';
@@ -63,7 +63,7 @@ class DocumentDataTable extends DataTable
      */
     public function query(File $model): QueryBuilder
     {
-            return $model->newQuery();
+        return $model->newQuery();
     }
 
     /**

@@ -1,8 +1,9 @@
 <div class="modal-content">
-    <form id="formAction" action="{{$role->id ? route('roles.update' , $role->id ) : route('roles.store')}} " method="post">
+    <form id="formAction" action="{{ $role->id ? route('roles.update', $role->id) : route('roles.store') }} "
+        method="post">
         @csrf
-        @if($role->id)
-        @method('put')
+        @if ($role->id)
+            @method('put')
         @endif
         <div class="modal-header">
             <h5 class="modal-title" id="largeModalLabel">Modal title</h5>
@@ -13,13 +14,15 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="name">Name</label>
-                        <input type="text" placeholder="Input Role" value="{{$role->name}}" class="form-control" id="name" name="name">
+                        <input type="text" placeholder="Input Role" value="{{ $role->name }}" class="form-control"
+                            id="name" name="name">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mb-3">
                         <label for="guard_name">Guard</label>
-                        <input type="text" placeholder="Input Role" value="{{$role->guard_name}}" class="form-control" id="guard_name" name="guard_name">
+                        <input type="text" placeholder="Input Role" value="{{ $role->guard_name }}"
+                            class="form-control" id="guard_name" name="guard_name">
                     </div>
                 </div>
             </div>

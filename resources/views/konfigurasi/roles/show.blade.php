@@ -17,7 +17,7 @@
                         <h4>Roles</h4>
                     </div>
                     <div class="card-body">
-                        <a type="button" class="btn btn-primary btn-sm mb-3 btn-add" href="{{ route('roles.index') }}"> <i class="ti-back"></i> Back</a>
+                        <a type="button" class="btn btn-primary btn-sm mb-3 btn-add" href="{{ route('roles.index') }}"> <i class="ti-back-left"></i> Back</a>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
