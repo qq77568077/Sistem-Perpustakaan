@@ -7,6 +7,7 @@ use App\Http\Controllers\mahasiswa\JilidController;
 use App\Http\Controllers\mahasiswa\PlagiarismController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PriceController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('konfigurasi/roles', RoleController::class);
     Route::resource('konfigurasi/permissions', PermissionController::class);
     Route::resource('konfigurasi/prices', PriceController::class);
+    Route::resource('konfigurasi/users', UserController::class);
     Route::get('konfigurasi/getPriceData', [PriceController::class, 'getPriceData']);
     
 });

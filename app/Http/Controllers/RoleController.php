@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\DataTables\RoleDataTable;
 use App\Http\Requests\RoleRequest;
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -19,10 +21,10 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(RoleDataTable $dataTable)
+    public function index(Request $request)
     {
-        $this->authorize('read konfigurasi/roles');
-        return $dataTable->render('konfigurasi.role');
+        $roles  = Role::get();
+        return view('konfigurasi.roles.index', compact('roles'));
     }
 
     /**
@@ -32,7 +34,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('konfigurasi.role-action', ['role' => new Role()]);
+        $permission = Permission::get();
+        return view('konfigurasi.roles.create', compact('permission'));
     }
 
     /**
@@ -41,14 +44,18 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoleRequest $request, Role $role)
+    public function store(Request $request)
     {
-        Role::create($request->all());
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Create data successfully'
+        $this->validate($request, [
+            'name' => 'required|unique:roles,name',
+            'permission' => 'required',
         ]);
+
+        $role = Role::create(['name' => $request->input('name')]);
+        $role->syncPermissions($request->input('permission'));
+
+        return redirect()->route('konfigurasi.roles.index')
+            ->with('success', 'Role created successfully');
     }
 
     /**
@@ -59,7 +66,11 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $role = Role::find($id);
+        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
+            ->where("role_has_permissions.role_id", $id)
+            ->get();
+        return view('konfigurasi.roles.show', compact('role'));
     }
 
     /**
@@ -68,11 +79,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit($id)
     {
-        //
-        return view('konfigurasi.role-action', compact('role'));
+        $role = Role::find($id);
+        $permission = Permission::get();
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
 
+        return view('konfigurasi.roles.edit', compact('role', 'permission', 'rolePermissions'));
     }
 
     /**
@@ -82,18 +97,21 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleRequest $request, Role $role)
+    public function update(Request $request, $id)
     {
-        //
-        $role->name = $request->name;
-        $role->guard_name = $request->guard_name;
-        $role->save();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'updated data successfully'
+        $this->validate($request, [
+            'name' => 'required',
+            'permission' => 'required',
         ]);
 
+        $role = Role::find($id);
+        $role->name = $request->input('name');
+        $role->save();
+
+        $role->syncPermissions($request->input('permission'));
+
+        return redirect()->route('konfigurasi.roles.index')
+            ->with('success', 'Role updated successfully');
     }
 
     /**
@@ -102,13 +120,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy($id)
     {
-        //
-        $role->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Delete data successfully'
-        ]);
+        DB::table("roles")->where('id',$id)->delete();
+        return redirect()->route('konfigurasi.roles.index')
+                        ->with('success','Role deleted successfully');
     }
 }

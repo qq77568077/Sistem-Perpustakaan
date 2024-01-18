@@ -38,6 +38,12 @@ class NavigationSeeder extends Seeder
                 "icon" => '',
                 ]);
 
+            $konfigurasi->subMenus()->create([
+                "name" => 'Data User',
+                "url"  => 'konfigurasi/users',
+                "icon" => '',
+                ]);
+
        $transaksi =  Navigation::create([
         "name" => 'Layanan',
         "url"  => 'layanan',

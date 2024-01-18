@@ -109,15 +109,20 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' =>'delete konfigurasi/roles']);
             
             //konfigurasi permission
-            $permission = Permission::create(['name' =>'read konfigurasi/permissions']);
-            $permission = Permission::create(['name' =>'create konfigurasi/permissions']);
-            $permission = Permission::create(['name' =>'update konfigurasi/permissions']);
-            $permission = Permission::create(['name' =>'delete konfigurasi/permissions']);
+            // $permission = Permission::create(['name' =>'read konfigurasi/permissions']);
+            // $permission = Permission::create(['name' =>'create konfigurasi/permissions']);
+            // $permission = Permission::create(['name' =>'update konfigurasi/permissions']);
+            // $permission = Permission::create(['name' =>'delete konfigurasi/permissions']);
             
             $permission = Permission::create(['name' =>'read konfigurasi/prices']);
             $permission = Permission::create(['name' =>'create konfigurasi/prices']);
             $permission = Permission::create(['name' =>'update konfigurasi/prices']);
             $permission = Permission::create(['name' =>'delete konfigurasi/prices']);
+
+            $permission = Permission::create(['name' =>'read konfigurasi/users']);
+            $permission = Permission::create(['name' =>'create konfigurasi/users']);
+            $permission = Permission::create(['name' =>'update konfigurasi/users']);
+            $permission = Permission::create(['name' =>'delete konfigurasi/users']);
 
             //layanan Plagiarism
             $permission = Permission::create(['name' =>'read layanan']);
@@ -166,10 +171,10 @@ class RoleSeedr extends Seeder
             $role_admin->givePermissionTo('delete konfigurasi/roles');
 
             //give permission permission
-            $role_admin->givePermissionTo('read konfigurasi/permissions');
-            $role_admin->givePermissionTo('create konfigurasi/permissions');
-            $role_admin->givePermissionTo('update konfigurasi/permissions');
-            $role_admin->givePermissionTo('delete konfigurasi/permissions');
+            // $role_admin->givePermissionTo('read konfigurasi/permissions');
+            // $role_admin->givePermissionTo('create konfigurasi/permissions');
+            // $role_admin->givePermissionTo('update konfigurasi/permissions');
+            // $role_admin->givePermissionTo('delete konfigurasi/permissions');
 
             $role_admin->givePermissionTo('read konfigurasi/prices');
             $role_admin->givePermissionTo('create konfigurasi/prices');
@@ -179,6 +184,10 @@ class RoleSeedr extends Seeder
             $role_perpustakaan->givePermissionTo('read konfigurasi/prices');
             $role_perpustakaan->givePermissionTo('update konfigurasi/prices');
 
+            $role_admin->givePermissionTo('read konfigurasi/users');
+            $role_admin->givePermissionTo('create konfigurasi/users');
+            $role_admin->givePermissionTo('update konfigurasi/users');
+            $role_admin->givePermissionTo('delete konfigurasi/users');
 
              //give permission layanan plagiarism
 
