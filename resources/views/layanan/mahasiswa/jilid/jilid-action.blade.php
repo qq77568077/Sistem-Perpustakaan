@@ -13,14 +13,6 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" value="{{ $jilid->nama }}" id="nama" name="nama">
-                    </div>
-                    <div class="mb-3">
-                        <label for="nrp">NRP</label>
-                        <input type="text" class="form-control" value="{{ $jilid->nrp }}" id="nrp" name="nrp">
-                    </div>
-                    <div class="mb-3">
                         <label for="judul">Judul</label>
                         <input type="text" class="form-control" value="{{ $jilid->judul }}" id="judul"
                             name="judul">

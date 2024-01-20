@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('jilids', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('nama');
-            $table->string('nrp');
             $table->string('judul');
             $table->integer('page_berwarna');
             $table->integer('page_hitamPutih');

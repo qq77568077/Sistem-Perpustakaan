@@ -2,6 +2,7 @@
 
 cara membuat datatable
 php artisan datatables:make Plagiarism
+php artisan datatables:make PengajuanPlagiarism
 php artisan datatables:make Berkas
 php artisan datatables:make Jilid
 php artisan datatables:make Price
@@ -19,6 +20,8 @@ php artisan make:request JilidRequest
 ## create controller & model
 
 php artisan make:controller PlagiarismController -r
+php artisan make:controller perpustakaan/PengajuanPlagiarismController -r
+php artisan make:controller perpustakaan/PengajuanJilidController -r
 php artisan make:model Plagiarism -m 
 
 php artisan make:controller FileController -r
@@ -29,9 +32,6 @@ php artisan make:model Document -m
 
 php artisan make:controller JilidController -r
 php artisan make:model Jilid -m 
-
-php artisan make:controller UserController -r
-
 
 # Example
 

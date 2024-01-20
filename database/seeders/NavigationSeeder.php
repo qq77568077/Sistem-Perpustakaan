@@ -38,12 +38,6 @@ class NavigationSeeder extends Seeder
                 "icon" => '',
                 ]);
 
-            $konfigurasi->subMenus()->create([
-                "name" => 'Data User',
-                "url"  => 'konfigurasi/users',
-                "icon" => '',
-                ]);
-
        $transaksi =  Navigation::create([
         "name" => 'Layanan',
         "url"  => 'layanan',
@@ -56,10 +50,20 @@ class NavigationSeeder extends Seeder
             "icon" => '',
             ]);
             $transaksi->subMenus()->create([
+            "name" => 'Plagiarism',
+            "url"  => 'layanan/pengajuan-plagiarism',
+            "icon" => '',
+            ]);
+            $transaksi->subMenus()->create([
             "name" => 'Jilid Laporan',
             "url"  => 'layanan/jilid',
             "icon" => '',
             ]);
+            $transaksi->subMenus()->create([
+                "name" => 'Jilid Laporan',
+                "url"  => 'layanan/pengajuan-jilid',
+                "icon" => '',
+                ]);
             $transaksi->subMenus()->create([
             "name" => 'Berkas Ta',
             "url"  => 'layanan/berkas',

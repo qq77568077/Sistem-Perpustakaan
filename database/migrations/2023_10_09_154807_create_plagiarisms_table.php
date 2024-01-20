@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('plagiarisms', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('nrp');
             $table->foreignId('user_id')->constrained();
             $table->string('file');
             $table->string('hasil_cek')->nullable();

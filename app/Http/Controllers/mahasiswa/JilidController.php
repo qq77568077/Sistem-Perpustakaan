@@ -42,8 +42,6 @@ class JilidController extends Controller
     {
         $jilid = new Jilid();
         $jilid->user_id = auth()->id();
-        $jilid->nama = $request->nama;
-        $jilid->nrp = $request->nrp;
         $jilid->judul = $request->judul;
         $jilid->page_berwarna = $request->page_berwarna;
         $jilid->page_hitamPutih = $request->page_hitamPutih;
@@ -88,8 +86,7 @@ class JilidController extends Controller
      */
     public function update(Request $request, Jilid $jilid)
     {
-        $jilid->nama = $request->nama;
-        $jilid->nrp = $request->nrp;
+        $jilid->user_id = auth()->id();
         $jilid->judul = $request->judul;
         $jilid->page_berwarna = $request->page_berwarna;
         $jilid->page_hitamPutih = $request->page_hitamPutih;

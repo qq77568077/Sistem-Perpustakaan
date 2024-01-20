@@ -12,14 +12,6 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
-                        <label for="file">Nama</label>
-                        <input type="text" class="form-control" value="{{ $plagiarism->nama }}" id="nama" name="nama" {{$plagiarism->id ? 'readonly' : ''}}>
-                    </div>
-                    <div class="mb-3">
-                        <label for="file">NRP</label>
-                        <input type="text" class="form-control" value="{{ $plagiarism->nrp }}" id="nrp" name="nrp" {{$plagiarism->id ? 'readonly' : ''}}>
-                    </div>
-                    <div class="mb-3">
                         <label for="file">File</label>
                         <input type="text" class="form-control" value="{{$plagiarism->file}}" id="file" name="file" {{$plagiarism->id ? 'readonly' : ''}}>
                     </div>

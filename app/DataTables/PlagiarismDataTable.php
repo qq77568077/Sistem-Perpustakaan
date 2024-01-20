@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Plagiarism;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\EloquentDataTable;
@@ -60,7 +61,9 @@ class PlagiarismDataTable extends DataTable
      */
     public function query(Plagiarism $model): QueryBuilder
     {
-        return $model->newQuery();
+        $loggedInUserId = Auth::id();
+        return $model->select(['id','user_id','file','keterangan','status' ,'created_at', 'updated_at'])
+        ->where('user_id', $loggedInUserId);
     }
 
     /**
@@ -88,9 +91,7 @@ class PlagiarismDataTable extends DataTable
         return [
             // Column::make('id'),
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
-            Column::make('created_at'),
-            Column::make('nama'),
-            Column::make('nrp'),
+            Column::make('created_at')->title('Tanggal Pengajuan'),
             Column::make('keterangan'),
             Column::make('status'),
             Column::computed('action')

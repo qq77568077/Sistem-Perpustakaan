@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\mahasiswa;
+
 use App\Http\Controllers\Controller;
 use App\DataTables\PlagiarismDataTable;
 use App\Models\Plagiarism;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PlagiarismController extends Controller
@@ -20,10 +22,16 @@ class PlagiarismController extends Controller
      */
     public function index(PlagiarismDataTable $dataTable)
     {
-        //
         $this->authorize('read layanan/plagiarism');
+
+        $user = User::find(auth()->id()); // Fetch the user details
+
         $plagiarisms = Plagiarism::where('user_id', auth()->id())->get();
-        return $dataTable->with('plagiarisms', $plagiarisms)->render('layanan.mahasiswa.plagiarism.plagiarism');
+
+        return $dataTable->with([
+            'plagiarisms' => $plagiarisms,
+            'user' => $user, 
+        ])->render('layanan.mahasiswa.plagiarism.plagiarism', compact('user'));
     }
 
     /**
@@ -42,13 +50,11 @@ class PlagiarismController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , Plagiarism $plagiarism)
+    public function store(Request $request, Plagiarism $plagiarism)
     {
         $plagiarism = new Plagiarism();
         $plagiarism->user_id = auth()->id();
-        $plagiarism->file =$request->file;
-        $plagiarism->nama =$request->nama;
-        $plagiarism->nrp =$request->nrp;
+        $plagiarism->file = $request->file;
         $plagiarism->hasil_cek = 'Belum ada hasil';
         $plagiarism->status = 'Belum validasi';
         $plagiarism->save();
@@ -93,9 +99,7 @@ class PlagiarismController extends Controller
     public function update(Request $request, Plagiarism $plagiarism)
     {
 
-        // $plagiarism->user_id = auth()->id();
-        $plagiarism->nama = $request->nama;
-        $plagiarism->nrp = $request->nrp;
+        $plagiarism->user_id = auth()->id();
         $plagiarism->file = $request->file;
         $plagiarism->hasil_cek = $request->hasil_cek;
         $plagiarism->keterangan = $request->keterangan;

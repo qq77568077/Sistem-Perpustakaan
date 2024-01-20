@@ -10,6 +10,7 @@ class Jilid extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'judul',
         'page_berwarna',
         'page_hitamPutih',
