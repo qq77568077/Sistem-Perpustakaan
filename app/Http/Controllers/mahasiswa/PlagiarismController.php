@@ -24,14 +24,8 @@ class PlagiarismController extends Controller
     {
         $this->authorize('read layanan/plagiarism');
 
-        $user = User::find(auth()->id()); // Fetch the user details
 
-        $plagiarisms = Plagiarism::where('user_id', auth()->id())->get();
-
-        return $dataTable->with([
-            'plagiarisms' => $plagiarisms,
-            'user' => $user, 
-        ])->render('layanan.mahasiswa.plagiarism.plagiarism', compact('user'));
+        return $dataTable->render('layanan.mahasiswa.plagiarism.plagiarism', compact('user'));
     }
 
     /**

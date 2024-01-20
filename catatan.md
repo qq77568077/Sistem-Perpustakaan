@@ -32,6 +32,7 @@ php artisan make:model Document -m
 
 php artisan make:controller JilidController -r
 php artisan make:model Jilid -m 
+php artisan make:model Pengumpulan -m 
 
 # Example
 

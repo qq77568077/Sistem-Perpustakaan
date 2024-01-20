@@ -11,11 +11,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4>Nama</h4> 
-                        {{$jilid->nama}}
-                        <hr>
-                        <h4>NRP</h4> 
-                        {{$jilid->nrp}}
+                        
+                        <h4>Jenis Pengumpulan</h4> 
+                        {{$jilid->jenis_pengumpulan}}
                         <hr>
                         <h4>Judul</h4> 
                         {{$jilid->judul}}

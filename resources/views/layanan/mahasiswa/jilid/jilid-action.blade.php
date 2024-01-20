@@ -13,6 +13,17 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
+                        <label for="jenis_pengumpulan">Jenis Pengumpulan</label>
+                        <select class="form-select" aria-label="Default select example" id="jenis_pengumpulan" name="jenis_pengumpulan">
+                            <option value="">Open this select menu</option>
+                            @foreach ($pengumpulan as $p)
+                                <option value="{{ $p->id }}" {{ $p->id == $jilid->jenis_pengumpulan ? 'selected' : '' }}>
+                                    {{ $p->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="judul">Judul</label>
                         <input type="text" class="form-control" value="{{ $jilid->judul }}" id="judul"
                             name="judul">

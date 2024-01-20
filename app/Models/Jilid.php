@@ -11,6 +11,7 @@ class Jilid extends Model
 
     protected $fillable = [
         'user_id',
+        'jenis_pengumpulan',
         'judul',
         'page_berwarna',
         'page_hitamPutih',
@@ -26,5 +27,9 @@ class Jilid extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function pengumpulan()
+    {
+        return $this->belongsTo(Pengumpulan::class, 'jenis_pengumpulan');
     }
 }

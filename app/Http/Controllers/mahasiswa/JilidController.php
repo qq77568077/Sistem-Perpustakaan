@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\DataTables\JilidDataTable;
 use App\Models\Jilid;
+use App\Models\Pengumpulan;
 use Illuminate\Http\Request;
 
 class JilidController extends Controller
@@ -29,7 +30,9 @@ class JilidController extends Controller
      */
     public function create()
     {
-        return view('layanan.mahasiswa.jilid.jilid-action', ['jilid' => new Jilid()]);
+        $pengumpulan = Pengumpulan::all();
+        $jilid = new Jilid();
+        return view('layanan.mahasiswa.jilid.jilid-action', compact('pengumpulan', 'jilid'));
     }
 
     /**
@@ -42,6 +45,7 @@ class JilidController extends Controller
     {
         $jilid = new Jilid();
         $jilid->user_id = auth()->id();
+        $jilid->jenis_pengumpulan = $request->jenis_pengumpulan;
         $jilid->judul = $request->judul;
         $jilid->page_berwarna = $request->page_berwarna;
         $jilid->page_hitamPutih = $request->page_hitamPutih;
@@ -67,13 +71,14 @@ class JilidController extends Controller
 
         $jilid = Jilid::findOrFail($id);
 
-        return view('layanan.jilid.jilid-detail', compact('jilid'));
+        return view('layanan.mahasiswa.jilid.jilid-detail', compact('jilid'));
     }
 
 
     public function edit(Jilid $jilid)
     {
-        return view('layanan.mahasiswa.jilid.jilid-action', compact('jilid'));
+        $pengumpulan = Pengumpulan::all();
+        return view('layanan.mahasiswa.jilid.jilid-action', compact('pengumpulan','jilid'));
 
     }
 
@@ -87,6 +92,7 @@ class JilidController extends Controller
     public function update(Request $request, Jilid $jilid)
     {
         $jilid->user_id = auth()->id();
+        $jilid->jenis_pengumpulan = $request->jenis_pengumpulan;
         $jilid->judul = $request->judul;
         $jilid->page_berwarna = $request->page_berwarna;
         $jilid->page_hitamPutih = $request->page_hitamPutih;

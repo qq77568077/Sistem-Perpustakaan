@@ -214,13 +214,13 @@ class RoleSeedr extends Seeder
 
             //give permission layanan berkasTa mhs
 
-            $role_admin->givePermissionTo('read layanan/berkas');
-            $role_admin->givePermissionTo('create layanan/berkas');
-            $role_admin->givePermissionTo('update layanan/berkas');
-            $role_admin->givePermissionTo('delete layanan/berkas');
-            $role_admin->givePermissionTo('keterangan layanan/berkas');
-            $role_admin->givePermissionTo('detail layanan/berkas');
-            $role_admin->givePermissionTo('status layanan/berkas');
+            // $role_admin->givePermissionTo('read layanan/berkas');
+            // $role_admin->givePermissionTo('create layanan/berkas');
+            // $role_admin->givePermissionTo('update layanan/berkas');
+            // $role_admin->givePermissionTo('delete layanan/berkas');
+            // $role_admin->givePermissionTo('keterangan layanan/berkas');
+            // $role_admin->givePermissionTo('detail layanan/berkas');
+            // $role_admin->givePermissionTo('status layanan/berkas');
 
             //give permission layanan berkasTa perpustakaan
 
@@ -234,13 +234,13 @@ class RoleSeedr extends Seeder
 
             //give permission layanan Jilid
 
-            $role_admin->givePermissionTo('read layanan/jilid');
-            $role_admin->givePermissionTo('create layanan/jilid');
-            $role_admin->givePermissionTo('update layanan/jilid');
-            $role_admin->givePermissionTo('delete layanan/jilid');
-            $role_admin->givePermissionTo('keterangan layanan/jilid');
-            $role_admin->givePermissionTo('detail layanan/jilid');
-            $role_admin->givePermissionTo('status layanan/jilid');
+            $role_admin->givePermissionTo('read layanan/pengajuan-jilid');
+            $role_admin->givePermissionTo('create layanan/pengajuan-jilid');
+            $role_admin->givePermissionTo('update layanan/pengajuan-jilid');
+            $role_admin->givePermissionTo('delete layanan/pengajuan-jilid');
+            $role_admin->givePermissionTo('keterangan layanan/pengajuan-jilid');
+            $role_admin->givePermissionTo('detail layanan/pengajuan-jilid');
+            $role_admin->givePermissionTo('status layanan/pengajuan-jilid');
 
             //role mahasiswa
             //give permission layanan plagiarism

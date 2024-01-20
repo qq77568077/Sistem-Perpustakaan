@@ -21,6 +21,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Tanggal Pengajuan</th>
+                                        <th>Jenis Pengumpulan</th>
                                         <th>Prodi</th>
                                         <th>NRP</th>
                                         <th>Nama</th>
@@ -34,6 +35,7 @@
                                         <tr>
                                             <td>{{ $counter++ }}</td>
                                             <td>{{ $j->created_at }}</td>
+                                            <td>{{ $j->jenis_pengumpulan }}</td>
                                             <td>{{ $j->user->prodi }}</td>
                                             <td>{{ $j->user->nrp }}</td>
                                             <td>{{ $j->user->name }}</td>
