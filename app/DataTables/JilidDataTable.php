@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Jilid;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -55,7 +56,9 @@ class JilidDataTable extends DataTable
      */
     public function query(Jilid $model): QueryBuilder
     {
-        return $model->newQuery();
+        $loggedInUserId = Auth::id();
+        return $model->select(['id','user_id','keterangan','status' ,'created_at', 'updated_at'])
+        ->where('user_id', $loggedInUserId);
     }
 
     /**

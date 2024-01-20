@@ -20,6 +20,7 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Tanggal Pengajuan</th>
                                         <th>Prodi</th>
                                         <th>NRP</th>
                                         <th>Nama</th>
@@ -29,15 +30,18 @@
                                     <tbody>
                                             @php $counter = 1; @endphp
                                         @foreach($jilid as $userId => $userFiles)
+                                    @foreach($userFiles as $j)
                                         <tr>
                                             <td>{{ $counter++ }}</td>
-                                            <td>{{ $userFiles->first()->user->prodi }}</td>
-                                            <td>{{ $userFiles->first()->user->nrp }}</td>
-                                            <td>{{ $userFiles->first()->user->name }}</td>
+                                            <td>{{ $j->created_at }}</td>
+                                            <td>{{ $j->user->prodi }}</td>
+                                            <td>{{ $j->user->nrp }}</td>
+                                            <td>{{ $j->user->name }}</td>
                                             <td>
                                                 <button type="button" data-id="{{ $userId }}" data-jenis="detail" class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>
                                             </td>
                                         </tr>
+                                @endforeach
                                     @endforeach
                                 </tbody>
                                 </table>
