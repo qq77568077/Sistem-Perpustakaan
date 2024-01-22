@@ -48,6 +48,19 @@ class FileController extends Controller
      */
     public function store(Request $request, File $berka)
     {
+
+        $user = auth()->user();
+        $existingEntry = File::where('user_id', auth()->id())
+            ->where('kategori', $request->kategori)
+            ->first();
+
+        if ($existingEntry) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Anda sudah memiliki entri dengan jenis Kategori ini.'
+            ]);
+        }
+
         $berka = new File();
         $berka->user_id = auth()->id();
         $berka->kategori = $request->kategori;

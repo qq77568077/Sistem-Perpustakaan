@@ -37,6 +37,10 @@ class BerkasDataTable extends DataTable
             }
             return ''; // Atau return kosong jika data tidak ditemukan
         })
+        ->addColumn('kategori', function ($row) {
+            // Menggunakan relasi untuk mengakses data pengumpulan
+            return optional($row->category)->kategori_ta;
+        })
 
             ->editColumn('created_at', function ($row) {
                 return $row->created_at->format('d-m-Y H:i:s');
@@ -74,7 +78,7 @@ class BerkasDataTable extends DataTable
     public function query(File $model): QueryBuilder
     {
         $loggedInUserId = Auth::id();
-        return $model->select(['id', 'user_id', 'jenis_file','status', 'created_at', 'updated_at'])
+        return $model->select(['id', 'user_id','kategori', 'jenis_file','status', 'created_at', 'updated_at'])
         ->where('user_id', $loggedInUserId);
     }
 
@@ -104,6 +108,7 @@ class BerkasDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('created_at'),
             Column::make('user_id')->title('Nama Mahasiswa'),
+            Column::make('kategori'),
             Column::make('jenis_file'),
             Column::make('status'),
             Column::computed('action')
