@@ -28,8 +28,9 @@ class Jilid extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
     public function pengumpulan()
     {
-        return $this->belongsTo(Pengumpulan::class, 'jenis_pengumpulan');
+        return $this->belongsTo(Pengumpulan::class, 'jenis_pengumpulan','id');
     }
 }

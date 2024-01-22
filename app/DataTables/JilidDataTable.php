@@ -28,6 +28,10 @@ class JilidDataTable extends DataTable
             ->editColumn('created_at', function ($row) {
                 return $row->created_at->format('d-m-Y H:i:s');
             })
+            ->addColumn('jenis_pengumpulan', function ($row) {
+                // Menggunakan relasi untuk mengakses data pengumpulan
+                return optional($row->pengumpulan)->nama;
+            })
             ->addIndexColumn('')
             ->addColumn('action', function ($row) {
                 $action = '';
@@ -57,7 +61,7 @@ class JilidDataTable extends DataTable
     public function query(Jilid $model): QueryBuilder
     {
         $loggedInUserId = Auth::id();
-        return $model->select(['id','user_id','keterangan','status' ,'created_at', 'updated_at'])
+        return $model->select(['id','user_id','jenis_pengumpulan','keterangan','status' ,'created_at', 'updated_at'])
         ->where('user_id', $loggedInUserId);
     }
 
@@ -86,6 +90,7 @@ class JilidDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('created_at')->title('Tanggal Pengajuan'),
+            Column::make('jenis_pengumpulan'),
             Column::make('keterangan'),
             Column::make('status'),
             Column::computed('action')

@@ -25,7 +25,7 @@ class PlagiarismController extends Controller
         $this->authorize('read layanan/plagiarism');
 
 
-        return $dataTable->render('layanan.mahasiswa.plagiarism.plagiarism', compact('user'));
+        return $dataTable->render('layanan.mahasiswa.plagiarism.plagiarism');
     }
 
     /**

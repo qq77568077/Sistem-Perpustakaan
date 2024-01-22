@@ -11,12 +11,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4>Nama</h4> 
+                        {{-- <h4>Nama</h4> 
                         {{$plagiarism->nama}}
                         <hr>
                         <h4>NRP</h4> 
                         {{$plagiarism->nrp}}
-                        <hr>
+                        <hr> --}}
                         <h4>File</h4> 
                         <a href="{{$plagiarism->file}}" target="_blank">{{$plagiarism->file}}</a>
                         <hr>

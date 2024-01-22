@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\mahasiswa;
+
 use App\Http\Controllers\Controller;
 
 use App\DataTables\JilidDataTable;
@@ -20,7 +21,6 @@ class JilidController extends Controller
     {
         $this->authorize('read layanan/jilid');
         return $dataTable->render('layanan.mahasiswa.jilid.jilid');
-
     }
 
     /**
@@ -43,6 +43,21 @@ class JilidController extends Controller
      */
     public function store(Request $request, Jilid $jilid)
     {
+        $userRole = auth()->user()->role; // Ganti 'role' dengan nama kolom aktual di model User Anda
+
+        // Periksa apakah pengguna sudah memiliki entri dengan jenis_pengumpulan 'TA' atau 'PKL'
+        $existingEntry = Jilid::where('user_id', auth()->id())
+            ->where('jenis_pengumpulan', $request->jenis_pengumpulan)
+            ->first();
+
+        if ($existingEntry) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Anda sudah memiliki entri dengan jenis pengumpulan ini.'
+            ]);
+        }
+
+
         $jilid = new Jilid();
         $jilid->user_id = auth()->id();
         $jilid->jenis_pengumpulan = $request->jenis_pengumpulan;
@@ -62,7 +77,6 @@ class JilidController extends Controller
             'status' => 'success',
             'message' => 'Create data successfully'
         ]);
-
     }
 
 
@@ -78,8 +92,7 @@ class JilidController extends Controller
     public function edit(Jilid $jilid)
     {
         $pengumpulan = Pengumpulan::all();
-        return view('layanan.mahasiswa.jilid.jilid-action', compact('pengumpulan','jilid'));
-
+        return view('layanan.mahasiswa.jilid.jilid-action', compact('pengumpulan', 'jilid'));
     }
 
     /**
@@ -91,6 +104,23 @@ class JilidController extends Controller
      */
     public function update(Request $request, Jilid $jilid)
     {
+
+        $userRole = auth()->user()->role; // Ganti 'role' dengan nama kolom aktual di model User Anda
+
+        // Periksa apakah pengguna sudah memiliki entri dengan jenis_pengumpulan 'TA' atau 'PKL'
+        $existingEntry = Jilid::where('user_id', auth()->id())
+            ->whereIn('jenis_pengumpulan', [1, 2])
+            ->where('id', '!=', $jilid->id) // Excluding the current entry from the check for update
+            ->first();
+
+        if ($existingEntry) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Anda sudah memiliki entri dengan jenis pengumpulan TA atau PKL.'
+            ]);
+        }
+
+
         $jilid->user_id = auth()->id();
         $jilid->jenis_pengumpulan = $request->jenis_pengumpulan;
         $jilid->judul = $request->judul;

@@ -13,7 +13,7 @@
                     <div class="card-body">
                         
                         <h4>Jenis Pengumpulan</h4> 
-                        {{$jilid->jenis_pengumpulan}}
+                        {{$jilid->pengumpulan->nama}}
                         <hr>
                         <h4>Judul</h4> 
                         {{$jilid->judul}}
