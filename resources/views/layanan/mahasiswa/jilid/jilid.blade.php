@@ -80,14 +80,22 @@
                     processData: false,
                     contentType: false,
                     success: function(res) {
-                        window.LaravelDataTables["jilid-table"].ajax.reload()
-                        modal.hide()
+                        if (res.status === 'success') {
+                            window.LaravelDataTables["jilid-table"].ajax.reload()
+                            modal.hide()
 
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: res.message,
-                        });
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: res.message,
+                            });
+                        } else if (res.status === 'error') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: res.message,
+                            });
+                        }
                     },
                     error: function(res) {
                         let error = res.responseJSON?.errors

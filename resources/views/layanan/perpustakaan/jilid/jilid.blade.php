@@ -25,6 +25,7 @@
                                         <th>Prodi</th>
                                         <th>NRP</th>
                                         <th>Nama</th>
+                                        <th>Status</th>
                                         <th>action</th>
                                     </tr>
                                     </thead>
@@ -39,6 +40,7 @@
                                             <td>{{ $j->user->prodi }}</td>
                                             <td>{{ $j->user->nrp }}</td>
                                             <td>{{ $j->user->name }}</td>
+                                            <td>{{ $j->status }}</td>
                                             <td>
                                                 <button type="button" data-id="{{ $userId }}" data-jenis="detail" class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>
                                             </td>

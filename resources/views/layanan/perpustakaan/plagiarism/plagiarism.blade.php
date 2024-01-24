@@ -28,6 +28,7 @@
                                     <th>Prodi</th>
                                     <th>NRP</th>
                                     <th>Nama</th>
+                                    <th>Status</th>
                                     <th>action</th>
                                 </tr>
                                 </thead>
@@ -41,6 +42,7 @@
                                         <td>{{ $plagiarism->user->prodi }}</td>
                                         <td>{{ $plagiarism->user->nrp }}</td>
                                         <td>{{ $plagiarism->user->name }}</td>
+                                        <td>{{ $plagiarism->status }}</td>
                                         <td>
                                             <button type="button" data-id="{{ $userId }}" data-jenis="detail" class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>
                                         </td>
