@@ -4,6 +4,7 @@ namespace App\Http\Controllers\perpustakaan;
 
 use App\Http\Controllers\Controller;
 use App\Models\Jilid;
+use App\Models\Pengumpulan;
 use Illuminate\Http\Request;
 
 class PengajuanJilidController extends Controller
@@ -18,15 +19,15 @@ class PengajuanJilidController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('read layanan/pengajuan-jilid');
 
-        $jilid = Jilid::with('user')
+        $jilids = Jilid::with('user')
             ->get()
             ->groupBy('user_id');
-
-        return view('layanan.perpustakaan.jilid.jilid', compact('jilid'));
+        // dd($jilids);
+        return view('layanan.perpustakaan.jilid.jilid', compact('jilids'));
     }
 
     /**
@@ -69,9 +70,10 @@ class PengajuanJilidController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Jilid $jilid)
+    public function edit(Jilid $pengajuan_jilid)
     {
-        return view('layanan.perpustakaan.jilid.jilid-action', compact('jilid'));
+        $pengumpulan = Pengumpulan::all();
+        return view('layanan.perpustakaan.jilid.jilid-action', compact('pengumpulan', 'pengajuan_jilid'));
     }
 
     /**
@@ -81,11 +83,11 @@ class PengajuanJilidController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jilid $jilid)
+    public function update(Request $request, Jilid $pengajuan_jilid)
     {
-        $jilid->keterangan = $request->keterangan;
-        $jilid->status = $request->status;
-        $jilid->save();
+        $pengajuan_jilid->keterangan = $request->keterangan;
+        $pengajuan_jilid->status = $request->status;
+        $pengajuan_jilid->save();
 
         return response()->json([
             'status' => 'success',

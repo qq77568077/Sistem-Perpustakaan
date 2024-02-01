@@ -41,9 +41,9 @@
                         <div class="mb-3" {{ $file->id ? 'edit-mode' : '' }}>
                             <label for="hasil_cek">Status</label>
                             <select class="form-select" id="status" name="status">
-                                <option value="">Open this select menu</option>
+                                <option value="" disabled>Open this select menu</option>
                                 @php
-                                    $array = ['Validasi', 'Belum Validasi'];
+                                    $array = ['Valid', 'Belum Validasi','Tidak Valid' ];
                                 @endphp
                                 @foreach ($array as $element)
                                     <option value="{{ $element }}"

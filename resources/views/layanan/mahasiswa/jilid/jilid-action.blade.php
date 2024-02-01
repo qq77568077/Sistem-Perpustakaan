@@ -44,9 +44,14 @@
                             name="exemplar">
                     </div>
                     <div class="mb-3">
-                        <label for="cover">Jumlah Cover</label>
-                        <input type="number" class="form-control" value="{{ $jilid->cover }}" id="cover"
-                            name="cover">
+                        <label for="hard_jilid">Jumlah Hard File</label>
+                        <input type="number" class="form-control" value="{{ $jilid->hard_jilid }}" id="hard_jilid"
+                            name="hard_jilid">
+                    </div>
+                    <div class="mb-3">
+                        <label for="soft_jilid">Jumlah Soft File</label>
+                        <input type="number" class="form-control" value="{{ $jilid->soft_jilid }}" id="soft_jilid"
+                            name="soft_jilid">
                     </div>
                     <div class="mb-3">
                         <label for="total">Total</label>
@@ -104,10 +109,11 @@
     function updateCalculations() {
         const pageBerwarna = parseFloat(document.getElementById("page_berwarna").value);
         const pageHitamPutih = parseFloat(document.getElementById("page_hitamPutih").value);
-        const cover = parseFloat(document.getElementById("cover").value);
+        const hard_jilid = parseFloat(document.getElementById("hard_jilid").value);
+        const soft_jilid = parseFloat(document.getElementById("soft_jilid").value);
         const exemplar = parseFloat(document.getElementById("exemplar").value);
 
-        if (!isNaN(pageBerwarna) && !isNaN(pageHitamPutih) && !isNaN(cover) && !isNaN(exemplar)) {
+        if (!isNaN(pageBerwarna) && !isNaN(pageHitamPutih) && !isNaN(hard_jilid) && !isNaN(soft_jilid) && !isNaN(exemplar)) {
             //ini mengambil dari table price 
 
             $.ajax({
@@ -117,9 +123,9 @@
                     const data = response.data; // Mengambil data dari respons
                     const totalPageBerwarna = pageBerwarna * data.pageBerwarnaPrice;
                     const totalPageHitamPutih = pageHitamPutih * data.pageHitamPutihPrice;
-                    const totalCover = cover * data.coverprice;
-                    const totalPerjilid = exemplar * data.perjilidprice;
-                    const total = (totalPageBerwarna + totalPageHitamPutih + totalCover + totalPerjilid);
+                    const totalHardjilid = hard_jilid * data.hardjilidprice;
+                    const totalSoftjilid = soft_jilid * data.softjilidprice;
+                    const total = (totalPageBerwarna + totalPageHitamPutih + totalSoftjilid + totalHardjilid);
                     document.getElementById("total").value = total;
                 },
                 error: function(xhr, status, error) {
@@ -133,7 +139,8 @@
     document.getElementById("page_berwarna").addEventListener("input", updateCalculations);
     document.getElementById("page_hitamPutih").addEventListener("input", updateCalculations);
     document.getElementById("exemplar").addEventListener("input", updateCalculations);
-    document.getElementById("cover").addEventListener("input", updateCalculations);
+    document.getElementById("hard_jilid").addEventListener("input", updateCalculations);
+    document.getElementById("soft_jilid").addEventListener("input", updateCalculations);
 
     // Calculate initial values
     updateCalculations();

@@ -13,6 +13,7 @@ class Plagiarism extends Model
     protected $fillable = [
         'user_id',
         'file',
+        'similarity',
         'hasil_cek',
         'status'
     ]; 

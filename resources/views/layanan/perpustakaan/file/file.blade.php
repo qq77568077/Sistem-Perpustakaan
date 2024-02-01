@@ -13,14 +13,17 @@
                 <div class="row">
                     <div class="col-sm">
                         <label for="prodiFilter">Filter Prodi:</label>
-                        <input type="text" class="form-control" id="prodiFilter" name="prodi" />
+                        <input type="text" class="form-control" id="prodiFilter" name="prodi"
+                            value="{{ request()->input('prodi') }}" />
                     </div>
                     <div class="col-sm">
                         <label for="kategoriFilter">Filter Kategori TA:</label>
                         <select class="form-select" id="kategoriFilter" name="kategori">
                             <option value="">All</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->kategori_ta }}</option>
+                                <option value="{{ $category->id }}"
+                                    {{ request()->input('kategori') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->kategori_ta }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -30,24 +33,6 @@
             </form>
             <br>
         </div>
-        {{-- <div class="col-md-5">
-            <form action="{{ route('file.index') }}" method="GET">
-                <div class="mb-3">
-                    <label for="prodiFilter">Filter Prodi:</label>
-                    <input type="text" class="form-control" id="prodiFilter" name="prodi" />
-                </div>
-                <div class="mb-3">
-                    <label for="kategoriFilter">Filter Kategori TA:</label>
-                    <select class="form-select" id="kategoriFilter" name="kategori">
-                        <option value="">All</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->kategori_ta }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Apply Filters</button>
-            </form>
-        </div> --}}
         <div class="content-wrapper">
             <div class="row same-height">
                 <div class="col-md-12">

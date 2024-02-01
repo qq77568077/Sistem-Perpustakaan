@@ -21,7 +21,8 @@ return new class extends Migration
             $table->integer('page_berwarna');
             $table->integer('page_hitamPutih');
             $table->integer('exemplar');
-            $table->integer('cover');
+            $table->integer('soft_jilid');
+            $table->integer('hard_jilid');
             $table->integer('total');
             $table->string('bukti_pembayaran');
             $table->string('file');

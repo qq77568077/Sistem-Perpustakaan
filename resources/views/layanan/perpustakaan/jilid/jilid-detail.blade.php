@@ -16,9 +16,11 @@
                     <div class="card-body">
                         <h4>Nama</h4> 
                         {{$jilids->user->name}}
+                        <h4>NRP</h4> 
+                        {{$jilids->user->nrp}}
                         <div class="table-responsive">
                         <hr>
-                        <table class="table" id="table-document">
+                        <table class="table text-center" id="table-jilid">
                             <tr>
                                 <thead>
                                     <th>Judul</th>
@@ -33,13 +35,13 @@
                                     <th>status</th>
                                     <th>Action</th>
                                 </thead>
-                                <tbody >
-                                    @foreach($jilids->user->files as $d)
+                                <tbody>
+                                    @foreach($jilids->user->jilid as $d)
                                     <tr id="index_{{ $d->id }}">
                                         <td>{{$d->judul}}</td>
                                         <td>{{$d->page_berwarna}}</td>
                                         <td>{{$d->page_hitamPutih}}</td>
-                                        <td>{{$d->page_exemplar}}</td>
+                                        <td>{{$d->exemplar}}</td>
                                         <td>{{$d->cover}}</td>
                                         <td>{{$d->total}}</td>
                                         <td><a href="{{$d->bukti_Pembayaran}}" target="_blank">Link File</a></td>
@@ -102,7 +104,7 @@
                     processData: false,
                     contentType: false,
                     success: function(res) {
-                    $('#table-document').DataTable().ajax.reload(null, false);
+                    $('#table-jilid').DataTable().ajax.reload(null, false);
                     $('#modalAction').modal('hide');
 },
                     error: function(res) {
@@ -120,7 +122,7 @@
             })
         }
 
-        $('#table-document').on('click', '#btn-edit', function() {
+        $('#table-jilid').on('click', '#btn-edit', function() {
             let data = $(this).data()
             let id = data.id
             let jenis = data.jenis

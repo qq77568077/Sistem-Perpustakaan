@@ -27,8 +27,10 @@
                         <h4>Exemplar</h4> 
                         {{$jilid->exemplar}}
                         <hr>
-                        <h4>Cover</h4> 
-                        {{$jilid->cover}}
+                        <h4>Soft Jilid</h4> 
+                        {{$jilid->hard_jilid}}
+                        <h4>Hard Jilid</h4> 
+                        {{$jilid->hard_jilid}}
                         <hr>
                         <h4>Total</h4> 
                         {{$jilid->total}}

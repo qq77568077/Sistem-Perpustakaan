@@ -98,8 +98,8 @@ class PriceController extends Controller
         //
         $price->pageBerwarnaPrice = $request->pageBerwarnaPrice;
         $price->pageHitamPutihPrice = $request->pageHitamPutihPrice;
-        $price->coverprice = $request->coverprice;
-        $price->perjilidprice = $request->perjilidprice;
+        $price->softjilidprice = $request->softjilidprice;
+        $price->hardjilidprice = $request->hardjilidprice;
         $price->save();
 
         return response()->json([

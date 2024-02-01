@@ -54,12 +54,12 @@ class FileController extends Controller
             ->where('kategori', $request->kategori)
             ->first();
 
-        if ($existingEntry) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Anda sudah memiliki entri dengan jenis Kategori ini.'
-            ]);
-        }
+        // if ($existingEntry) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Anda sudah memiliki entri dengan jenis Kategori ini.'
+        //     ]);
+        // }
 
         $berka = new File();
         $berka->user_id = auth()->id();

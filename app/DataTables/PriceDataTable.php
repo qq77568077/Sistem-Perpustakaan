@@ -76,8 +76,8 @@ class PriceDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('pageBerwarnaPrice'),
             Column::make('pageHitamPutihPrice'),
-            Column::make('coverprice'),
-            Column::make('perjilidprice'),
+            Column::make('hardjilidprice'),
+            Column::make('softjilidprice'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

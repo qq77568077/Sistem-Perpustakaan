@@ -53,7 +53,8 @@ class PengajuanPlagiarismController extends Controller
         $plagiarism = new Plagiarism();
         $plagiarism->user_id = auth()->id();
         $plagiarism->file = $request->file;
-        $plagiarism->hasil_cek = 'Belum ada hasil';
+        $plagiarism->similarity = null;
+        $plagiarism->hasil_cek = null;
         $plagiarism->status = 'Belum Validasi';
         $plagiarism->save();
 
@@ -99,6 +100,7 @@ class PengajuanPlagiarismController extends Controller
     {
         $pengajuan_plagiarism->file = $request->file;
         $pengajuan_plagiarism->hasil_cek = $request->hasil_cek;
+        $pengajuan_plagiarism->similarity = $request->similarity;
         $pengajuan_plagiarism->keterangan = $request->keterangan;
         $pengajuan_plagiarism->status = $request->status;
         $pengajuan_plagiarism->save();

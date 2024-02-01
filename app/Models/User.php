@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany(Plagiarism::class);
     }
 
+    public function jilid()
+    {
+        return $this->hasMany(Jilid::class);
+    }
+
     public function files()
 {
     return $this->hasMany(File::class, 'user_id');

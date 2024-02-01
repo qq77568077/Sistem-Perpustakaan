@@ -27,16 +27,16 @@
                 </div>
                 <div class="col-md-4">
                     <div class="mb-3">
-                        <label for="guard_name">Harga Cover</label>
-                        <input type="number" placeholder="Input price" value="{{ $price->coverprice }}"
-                            class="form-control" id="coverprice" name="coverprice">
+                        <label for="guard_name">Harga Hard File</label>
+                        <input type="number" placeholder="Input price" value="{{ $price->hardjilidprice }}"
+                            class="form-control" id="hardjilidprice" name="hardjilidprice">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mb-3">
-                        <label for="guard_name">Harga Jilid</label>
-                        <input type="number" placeholder="Input price" value="{{ $price->perjilidprice }}"
-                            class="form-control" id="perjilidprice" name="perjilidprice">
+                        <label for="guard_name">Harga Soft File</label>
+                        <input type="number" placeholder="Input price" value="{{ $price->softjilidprice }}"
+                            class="form-control" id="softjilidprice" name="softjilidprice">
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ class Price extends Model
     protected $fillable = [
         'pageBerwarnaPrice',
         'pageHitamPutihPrice',
-        'coverprice',
-        'perjilidprice',
+        'softjilidprice',
+        'hardjilidprice',
     ];
 }

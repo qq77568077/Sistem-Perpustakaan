@@ -31,28 +31,28 @@ class DocumentController extends Controller
         // Retrieve categories from the database
         $categories = Category::all();
 
+        // Ambil nilai filter dari inputan formulir
         $prodiFilter = $request->input('prodi');
         $kategoriFilter = $request->input('kategori');
 
+        // Query untuk mendapatkan data berkas dengan filter yang diberikan
         $files = File::with(['user', 'category'])
             ->when($prodiFilter, function ($query) use ($prodiFilter) {
                 return $query->whereHas('user', function ($userQuery) use ($prodiFilter) {
-                    $userQuery->where('prodi', $prodiFilter);
+                    $userQuery->where('prodi', 'like', '%' . $prodiFilter . '%');
                 });
             })
             ->when($kategoriFilter, function ($query) use ($kategoriFilter) {
-                return $query->whereHas('category', function ($categoryQuery) use ($kategoriFilter) {
-                    // Assuming kategori is a string, cast categories.id to a string
-                    $categoryQuery->where('id', '=', (string)$kategoriFilter);
-                });
+                return $query->where('kategori', $kategoriFilter);
             })
             ->get()
             ->groupBy('user_id');
 
-        $document = Document::orderby('id', 'asc')->get();
+        $document = Document::orderBy('id', 'asc')->get();
 
         return view('layanan.perpustakaan.file.file', compact('document', 'files', 'categories'));
     }
+
 
     /**
      * Show the form for creating a new resource.

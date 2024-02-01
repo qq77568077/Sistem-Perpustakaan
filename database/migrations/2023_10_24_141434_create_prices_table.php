@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('pageBerwarnaPrice');
             $table->bigInteger('pageHitamPutihPrice');
-            $table->bigInteger('coverprice');
-            $table->bigInteger('perjilidprice');
+            $table->bigInteger('softjilidprice');
+            $table->bigInteger('hardjilidprice');
             $table->timestamps();
         });
     }

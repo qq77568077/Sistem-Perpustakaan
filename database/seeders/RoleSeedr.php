@@ -196,6 +196,8 @@ class RoleSeedr extends Seeder
             $role_admin->givePermissionTo('update konfigurasi/prices');
             $role_admin->givePermissionTo('delete konfigurasi/prices');
 
+            $role_perpustakaan->givePermissionTo('read konfigurasi');
+            $role_perpustakaan->givePermissionTo('create konfigurasi/prices');
             $role_perpustakaan->givePermissionTo('read konfigurasi/prices');
             $role_perpustakaan->givePermissionTo('update konfigurasi/prices');
 

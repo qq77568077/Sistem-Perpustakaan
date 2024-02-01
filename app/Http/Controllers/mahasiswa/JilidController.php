@@ -65,7 +65,8 @@ class JilidController extends Controller
         $jilid->page_berwarna = $request->page_berwarna;
         $jilid->page_hitamPutih = $request->page_hitamPutih;
         $jilid->exemplar = $request->exemplar;
-        $jilid->cover = $request->cover;
+        $jilid->soft_jilid = $request->soft_jilid;
+        $jilid->hard_jilid = $request->hard_jilid;
         $jilid->total = $request->total;
         $jilid->bukti_pembayaran = $request->bukti_pembayaran;
         $jilid->file = $request->file;
@@ -127,7 +128,8 @@ class JilidController extends Controller
         $jilid->page_berwarna = $request->page_berwarna;
         $jilid->page_hitamPutih = $request->page_hitamPutih;
         $jilid->exemplar = $request->exemplar;
-        $jilid->cover = $request->cover;
+        $jilid->soft_jilid = $request->soft_jilid;
+        $jilid->hard_jilid = $request->hard_jilid;
         $jilid->total = $request->total;
         $jilid->bukti_pembayaran = $request->bukti_pembayaran;
         $jilid->file = $request->file;

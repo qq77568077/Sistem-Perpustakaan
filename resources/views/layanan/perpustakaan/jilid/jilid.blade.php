@@ -18,36 +18,29 @@
                             <div class="table-responsive">
                                 <table class="table" id="myTable">
                                     <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Tanggal Pengajuan</th>
-                                        <th>Jenis Pengumpulan</th>
-                                        <th>Prodi</th>
-                                        <th>NRP</th>
-                                        <th>Nama</th>
-                                        <th>Status</th>
-                                        <th>action</th>
-                                    </tr>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Prodi</th>
+                                            <th>NRP</th>
+                                            <th>Nama</th>
+                                            <th>action</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                            @php $counter = 1; @endphp
-                                        @foreach($jilid as $userId => $userFiles)
-                                    @foreach($userFiles as $j)
-                                        <tr>
-                                            <td>{{ $counter++ }}</td>
-                                            <td>{{ $j->created_at }}</td>
-                                            <td>{{ $j->jenis_pengumpulan }}</td>
-                                            <td>{{ $j->user->prodi }}</td>
-                                            <td>{{ $j->user->nrp }}</td>
-                                            <td>{{ $j->user->name }}</td>
-                                            <td>{{ $j->status }}</td>
-                                            <td>
-                                                <button type="button" data-id="{{ $userId }}" data-jenis="detail" class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>
-                                            </td>
-                                        </tr>
-                                @endforeach
-                                    @endforeach
-                                </tbody>
+                                        @php $counter = 1; @endphp
+                                        @foreach ($jilids as $userId => $userFiles)
+                                            <tr>
+                                                <td>{{ $counter++ }}</td>
+                                                <td>{{ $userFiles->first()->user->prodi }}</td>
+                                                <td>{{ $userFiles->first()->user->nrp }}</td>
+                                                <td>{{ $userFiles->first()->user->name }}</td>
+                                                <td>
+                                                    <button type="button" data-id="{{ $userId }}" data-jenis="detail"
+                                                        class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -56,7 +49,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('js')
@@ -66,18 +58,21 @@
     <script src="{{ asset('') }}vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
     <script>
-        $(document).ready( function () {
-        $('#myTable').DataTable();
-        } );
-        
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+
         $(document).ready(function() {
             $('.action').on('click', function() {
                 var userId = $(this).data('id');
                 $.ajax({
                     method: 'GET',
-                    url: "{{ route('pengajuan-jilid.show', ':user_id') }}".replace(':user_id', userId),
+                    url: "{{ route('pengajuan-jilid.show', ':user_id') }}".replace(':user_id',
+                        userId),
                     success: function(response) {
-                        window.location.href = "{{ route('pengajuan-jilid.show', ':user_id') }}".replace(':user_id', userId);
+                        window.location.href =
+                            "{{ route('pengajuan-jilid.show', ':user_id') }}".replace(
+                                ':user_id', userId);
                     },
                     error: function(error) {
                         console.error(error);

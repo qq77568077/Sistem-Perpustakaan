@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('file');
             $table->string('hasil_cek')->nullable();
+            $table->string('similarity')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
