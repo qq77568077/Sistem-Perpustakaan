@@ -76,7 +76,7 @@
                                                                 ->where('status', 'Validasi')
                                                                 ->first();
                                                         @endphp
-                                                        @if ($jenisFile && $jenisFile->status === 'Validasi')
+                                                        @if ($jenisFile && $jenisFile->status === 'Valid')
                                                             <i class="fas fa-check-circle text-success"></i>
                                                         @else
                                                             <i class="fas fa-times-circle text-warning"></i>

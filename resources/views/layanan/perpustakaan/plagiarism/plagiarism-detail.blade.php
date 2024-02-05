@@ -114,8 +114,8 @@
                     processData: false,
                     contentType: false,
                     success: function(res) {
-                        $('#table-document').DataTable().ajax.reload();
-                        $('#modalAction').modal('hide');
+                        window.location.reload();
+
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',

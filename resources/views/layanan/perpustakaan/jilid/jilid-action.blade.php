@@ -1,5 +1,6 @@
 <div class="modal-content">
-    <form id="formAction" action="{{ $pengajuan_jilid->id ? route('file.update', $pengajuan_jilid->id) : route('file.store') }} "
+    <form id="formAction"
+        action="{{ $pengajuan_jilid->id ? route('pengajuan-jilid.update', $pengajuan_jilid->id) : route('pengajuan-jilid.store') }} "
         method="post" enctype="multipart/form-data">
         @csrf
         @if ($pengajuan_jilid->id)
@@ -14,10 +15,12 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="jenis_pengumpulan">Jenis Pengumpulan</label>
-                        <select class="form-select" aria-label="Default select example" id="jenis_pengumpulan" name="jenis_pengumpulan">
+                        <select class="form-select" aria-label="Default select example" id="jenis_pengumpulan"
+                            name="jenis_pengumpulan">
                             <option value="">Open this select menu</option>
                             @foreach ($pengumpulan as $p)
-                                <option value="{{ $p->id }}" {{ $p->id == $pengajuan_jilid->jenis_pengumpulan ? 'selected' : '' }}>
+                                <option value="{{ $p->id }}"
+                                    {{ $p->id == $pengajuan_jilid->jenis_pengumpulan ? 'selected' : '' }}>
                                     {{ $p->nama }}
                                 </option>
                             @endforeach
@@ -40,13 +43,18 @@
                     </div>
                     <div class="mb-3">
                         <label for="exemplar">Jumlah Examplar</label>
-                        <input type="number" class="form-control" value="{{ $pengajuan_jilid->exemplar }}" id="exemplar"
-                            name="exemplar">
+                        <input type="number" class="form-control" value="{{ $pengajuan_jilid->exemplar }}"
+                            id="exemplar" name="exemplar">
                     </div>
                     <div class="mb-3">
-                        <label for="cover">Jumlah Cover</label>
-                        <input type="number" class="form-control" value="{{ $pengajuan_jilid->cover }}" id="cover"
-                            name="cover">
+                        <label for="hard_jilid">Jumlah Hard File</label>
+                        <input type="number" class="form-control" value="{{ $pengajuan_jilid->hard_jilid }}" id="hard_jilid"
+                            name="hard_jilid">
+                    </div>
+                    <div class="mb-3">
+                        <label for="soft_jilid">Jumlah Soft File</label>
+                        <input type="number" class="form-control" value="{{ $pengajuan_jilid->soft_jilid }}" id="soft_jilid"
+                            name="soft_jilid">
                     </div>
                     <div class="mb-3">
                         <label for="total">Total</label>
@@ -64,31 +72,31 @@
                             name="file">
                     </div>
                     @if (request()->user()->can('status layanan/pengajuan-jilid'))
-                    <div class="mb-3">
-                        <label for="keterangan">Keterangan</label>
-                        <textarea class="form-control" id="keterangan" name='keterangan'>{{$pengajuan_jilid->keterangan}}</textarea>
-                      </div>
-                    <div class="mb-3" {{$pengajuan_jilid->id ? 'edit-mode' : ''}}>
-                        <label for="hasil_cek">Status</label>
-                        <select class="form-select" name="status">
-                            <option selected>Open this select menu</option>
-                            @php
-                                $array = ['Approved', 'selesai','Tidak Valid'];
-                                $selectedStatus = isset($pengajuan_jilid[0]['status']) ? $pengajuan_jilid[0]['status'] : null;
-                            @endphp
-                            @foreach($array as $element)
-                                @if ($element === $selectedStatus)
-                                    <option value="{{ $element }}" selected>{{ $element }}</option>
-                                @else
-                                    <option value="{{ $element }}">{{ $element }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        {{-- <select class="form-select" name="status">
+                        <div class="mb-3">
+                            <label for="keterangan">Keterangan</label>
+                            <textarea class="form-control" id="keterangan" name='keterangan'>{{ $pengajuan_jilid->keterangan }}</textarea>
+                        </div>
+                        <div class="mb-3" {{ $pengajuan_jilid->id ? 'edit-mode' : '' }}>
+                            <label for="hasil_cek">Status</label>
+                            <select class="form-select" name="status">
+                                <option selected>Open this select menu</option>
+                                @php
+                                    $array = ['Approved', 'selesai', 'Tidak Valid'];
+                                    $selectedStatus = isset($pengajuan_jilid[0]['status']) ? $pengajuan_jilid[0]['status'] : null;
+                                @endphp
+                                @foreach ($array as $element)
+                                    @if ($element === $selectedStatus)
+                                        <option value="{{ $element }}" selected>{{ $element }}</option>
+                                    @else
+                                        <option value="{{ $element }}">{{ $element }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            {{-- <select class="form-select" name="status">
                             <option value="Validasi" {{ $pengajuan_jilid->status === 'Validasi' ? 'selected' : '' }}>Validasi</option>
                             <option value="Belum Validasi" {{ $pengajuan_jilid->status === 'Belum Validasi' ? 'selected' : '' }}>Belum Validasi</option>
                         </select> --}}
-                    </div>
+                        </div>
                     @endif
                 </div>
             </div>

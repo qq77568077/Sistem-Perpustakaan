@@ -20,33 +20,32 @@
                             <div class="table-responsive">
                                 <hr>
                                 <table class="table" id="table-document">
-                                    <tr>
-                                        <thead>
+                                    <thead>
+                                        <tr>
                                             <th>Kategori</th>
                                             <th>Jenis File</th>
                                             <th>Bukti File</th>
                                             <th>Keterangan</th>
                                             <th>status</th>
                                             <th>Action</th>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($file->user->files as $d)
-                                                <tr id="index_{{ $d->id }}">
-                                                    <td>{{ $d->kategori }}</td>
-                                                    <td>{{ $d->document->dokumen }}</td>
-                                                    <td><a href="{{ $d->bukti_file }}" target="_blank">Link File</a></td>
-                                                    <td>{{ $d->keterangan }}</td>
-                                                    <td>{{ $d->status }}</td>
-                                                    <td>
-                                                        <button type="button" data-id="{{ $d->id }}"
-                                                            data-jenis="edit" id="btn-edit"
-                                                            class="btn btn-warning btn-sm"><i
-                                                                class="ti-pencil"></i></button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($file->user->files as $d)
+                                            <tr id="index_{{ $d->id }}">
+                                                <td>{{ $d->kategori }}</td>
+                                                <td>{{ $d->document->dokumen }}</td>
+                                                <td><a href="{{ $d->bukti_file }}" target="_blank">Link File</a></td>
+                                                <td>{{ $d->keterangan }}</td>
+                                                <td>{{ $d->status }}</td>
+                                                <td>
+                                                    <button type="button" data-id="{{ $d->id }}" data-jenis="edit"
+                                                        class="btn btn-warning btn-sm btn-edit"><i
+                                                            class="ti-pencil"></i></button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -70,60 +69,63 @@
     <script src="{{ asset('') }}vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
     <script>
-        const modal = new bootstrap.Modal($('#modalAction'))
+        $(document).ready(function() {
+            const modal = new bootstrap.Modal($('#modalAction'));
+            let dataTable = $('#table-document').DataTable();
 
-        function store() {
-            $('#formAction').on('submit', function(e) {
-                e.preventDefault()
-                const _form = this
-                const formData = new FormData(_form)
-                console.log(this);
+            function store() {
+                $('#formAction').on('submit', function(e) {
+                    e.preventDefault();
+                    const _form = this;
+                    const formData = new FormData(_form);
+                    console.log(this);
 
-                const url = this.getAttribute('action')
+                    const url = this.getAttribute('action');
+
+                    $.ajax({
+                        method: 'POST',
+                        url,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(res) {
+                            window.location.reload();
+                        },
+                        error: function(res) {
+                            let error = res.responseJSON?.errors;
+                            $(_form).find('.text-danger.text-small').remove();
+                            if (error) {
+                                for (const [key, value] of Object.entries(error)) {
+                                    $(`[name= '${key}']`).parent().append(
+                                        `<span class="text-danger text-small">${value}</span>`
+                                    );
+                                }
+                            }
+                            console.log(error);
+                        }
+                    });
+                });
+            }
+
+            // Handling klik tombol edit
+            $('#table-document').on('click', '.btn-edit', function() {
+                let data = $(this).data();
+                let id = data.id;
+                let jenis = data.jenis;
 
                 $.ajax({
-                    method: 'POST',
-                    url,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: formData,
-                    processData: false,
-                    contentType: false,
+                    method: 'get',
+                    url: `{{ url('layanan/file/') }}/${id}/edit`,
                     success: function(res) {
-                        $('#table-document').DataTable().ajax.reload(null, false);
-                        $('#modalAction').modal('hide');
-                    },
-                    error: function(res) {
-                        let error = res.responseJSON?.errors
-                        $(_form).find('.text-danger.text-small').remove()
-                        if (error) {
-                            for (const [key, value] of Object.entries(error)) {
-                                $(`[name= '${key}']`).parent().append(
-                                    `<span class="text-danger text-small">${value}</span>`)
-                            }
-                        }
-                        console.log(error);
+                        $('#modalAction').find('.modal-dialog').html(res);
+                        modal.show();
+                        store();
                     }
-                })
-            })
-        }
-
-        $('#table-document').on('click', '#btn-edit', function() {
-            let data = $(this).data()
-            let id = data.id
-            let jenis = data.jenis
-
-            $.ajax({
-                method: 'get',
-                url: `{{ url('layanan/file/') }}/${id}/edit`,
-                success: function(res) {
-                    $('#modalAction').find('.modal-dialog').html(res)
-                    modal.show()
-                    store()
-                }
-            })
-
-        })
+                });
+            });
+        });
     </script>
 @endpush

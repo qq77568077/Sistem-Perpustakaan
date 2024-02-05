@@ -27,7 +27,8 @@
                                     <th>Page Berwarna</th>
                                     <th>Page Hitam Putih</th>
                                     <th>Exemplar</th>
-                                    <th>Cover</th>
+                                    <th>Hard File</th>
+                                    <th>Soft File</th>
                                     <th>Total</th>
                                     <th>Bukti Pembayaran</th>
                                     <th>File</th>
@@ -42,7 +43,8 @@
                                         <td>{{$d->page_berwarna}}</td>
                                         <td>{{$d->page_hitamPutih}}</td>
                                         <td>{{$d->exemplar}}</td>
-                                        <td>{{$d->cover}}</td>
+                                        <td>{{$d->hard_jilid}}</td>
+                                        <td>{{$d->soft_jilid}}</td>
                                         <td>{{$d->total}}</td>
                                         <td><a href="{{$d->bukti_Pembayaran}}" target="_blank">Link File</a></td>
                                         <td><a href="{{$d->file}}" target="_blank">Link File</a></td>
@@ -104,8 +106,7 @@
                     processData: false,
                     contentType: false,
                     success: function(res) {
-                    $('#table-jilid').DataTable().ajax.reload(null, false);
-                    $('#modalAction').modal('hide');
+                        window.location.reload();
 },
                     error: function(res) {
                         let error = res.responseJSON?.errors
