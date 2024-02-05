@@ -80,8 +80,22 @@
                     processData: false,
                     contentType: false,
                     success: function(res) {
-                        window.LaravelDataTables["berkas-table"].ajax.reload()
-                        modal.hide()
+                        if (res.status === 'success') {
+                            window.LaravelDataTables["berkas-table"].ajax.reload()
+                            modal.hide()
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: res.message,
+                            });
+                        } else if (res.status === 'error') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: res.message,
+                            });
+                        }
                     },
                     error: function(res) {
                         let error = res.responseJSON?.errors
@@ -136,20 +150,20 @@
                 return
             }
 
-            if(jenis === 'detail'){
-            $.ajax({
-                        method: 'GET',
-                        url: `{{ url('layanan/berkas/')}}/${id}`,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(res) {
-                            console.log('berhasil' ,res);
-                            window.location.href = '{{ url('layanan/berkas/')}}/' + id;
-                        }
-                    })
-                    return
-        }
+            if (jenis === 'detail') {
+                $.ajax({
+                    method: 'GET',
+                    url: `{{ url('layanan/berkas/') }}/${id}`,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(res) {
+                        console.log('berhasil', res);
+                        window.location.href = '{{ url('layanan/berkas/') }}/' + id;
+                    }
+                })
+                return
+            }
 
             $.ajax({
                 method: 'get',

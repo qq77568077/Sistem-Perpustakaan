@@ -2,6 +2,7 @@
 @push('css')
     <link href="{{ asset('') }}vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <link href="{{ asset('') }}vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+   
 @endpush
 @section('content')
     <div class="main-content">
@@ -20,7 +21,7 @@
 
                             <div class="table-responsive">
                                 <hr>
-                                <table class="table" id="table-document">
+                                <table class="table display" id="table-document">
                                     <tr>
                                         <thead>
                                             <th>ID</th>
@@ -36,9 +37,23 @@
                                                 <tr id="index_{{ $d->id }}">
                                                     <td>{{ $d->id }}</td>
                                                     <td><a href="{{ $d->file }}" target="_blank">Link File</a></td>
-                                                    <td><a href="{{ $d->hasil_cek }}" target="_blank">Link File</a></td>
-                                                    <td>{{ $d->similarity }}%</td>
-                                                    <td>{{ $d->keterangan }}</td>
+                                                    <td>
+                                                        @if ($d->hasil_cek)
+                                                            <a href="{{ $d->hasil_cek }}" target="_blank">Link File</a>
+                                                        @else
+                                                            Null
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($d->similarity)
+                                                            {{ $d->similarity }}%
+                                                        @else
+                                                            Null
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        {{ $d->keterangan }}
+                                                    </td>
                                                     <td>{{ $d->status }}</td>
                                                     <td>
                                                         <button type="button" data-id="{{ $d->id }}"
@@ -67,15 +82,16 @@
 @endsection
 
 @push('js')
+   
     <script src="{{ asset('') }}vendor/jquery/jquery.min.js"></script>
     <script src="{{ asset('') }}vendor/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('') }}vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('') }}vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
     <script>
-        // $(document).ready(function() {
-        //     $('#myTable').DataTable();
-        // });
+        $(document).ready(function() {
+            $('#table-document').DataTable();
+        });
 
         const modal = new bootstrap.Modal($('#modalAction'))
 
@@ -84,7 +100,7 @@
                 e.preventDefault();
                 const _form = this;
                 const formData = new FormData(_form);
-                console.log(this);
+                console.log('data ==========>>>>>', this);
 
                 const url = _form.getAttribute('action');
 
@@ -98,8 +114,14 @@
                     processData: false,
                     contentType: false,
                     success: function(res) {
-                        $('#table-document').DataTable().ajax.reload(null, false);
+                        $('#table-document').DataTable().ajax.reload();
                         $('#modalAction').modal('hide');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'successful'
+                        });
+
                     },
                     error: function(res) {
                         let error = res.responseJSON?.errors;
@@ -111,6 +133,12 @@
                             }
                         }
                         console.log(error);
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Operation encountered an error'
+                        });
                     }
                 });
             });

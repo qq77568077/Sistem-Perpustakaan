@@ -17,19 +17,21 @@
                         <select class="form-select" aria-label="Default select example" id="kategori" name="kategori">
                             <option value="">Open this select menu</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" {{ $category->id == $berka->kategori ? 'selected' : '' }}>
+                                <option value="{{ $category->id }}"
+                                    {{ $category->id == $berka->kategori ? 'selected' : '' }}>
                                     {{ $category->kategori_ta }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3" id="jenis_file_1">
-                        <label for="jenis_file">Jenis Pengembangan</label>
+                        <label for="jenis_file_1">Jenis Pengembangan</label>
                         <div class="mb-3">
-                            <select class="form-select" aria-label="Default select example"  name="jenis_file_1">
+                            <select class="form-select" aria-label="Default select example" name="jenis_file_1">
                                 <option value="">Open this select menu</option>
                                 @foreach ($documents as $document)
-                                    <option value="{{ $document->id }}" {{ $document->id == $berka->jenis_file ? 'selected' : '' }}>
+                                    <option value="{{ $document->id }}"
+                                        {{ $document->id == $berka->jenis_file ? 'selected' : '' }}>
                                         {{ $document->dokumen }}
                                     </option>
                                 @endforeach
@@ -37,16 +39,29 @@
                         </div>
                     </div>
                     <div class="mb-3" id="jenis_file_2">
-                        <label for="jenis_file">Jenis Non Pengembangan</label>
+                        <label for="jenis_file2">Jenis Non Pengembangan</label>
                         <div class="mb-3">
-                            <select class="form-select" aria-label="Default select example" id="jenis_file" name="jenis_file_2">
+                            <select class="form-select" aria-label="Default select example" id="jenis_file"
+                                name="jenis_file_2">
                                 <option value="">Open this select menu</option>
-                                <option value="1" {{ "1" == $berka->jenis_file ? 'selected' : ''}}>Laporan TA</option>
-                                <option value="2" {{ "2" == $berka->jenis_file ? 'selected' : ''}}>Dokumen Penunjang Penelitian</option>
-                                <option value="3" {{ "3" == $berka->jenis_file ? 'selected' : ''}}>File Presentasi</option>
-                                <option value="6" {{ "6" == $berka->jenis_file ? 'selected' : ''}}>Video Trailer</option>
-                                <option value="7" {{ "7" == $berka->jenis_file ? 'selected' : ''}}>Poster Tugas Akhir</option>
-                                <option value="8" {{ "8" == $berka->jenis_file ? 'selected' : ''}}>Artikel Jurnal</option>
+                                <option value="1" {{ '1' == $berka->jenis_file ? 'selected' : '' }}
+                                    style="background-color: {{ $berka->jenis_file == '1' ? 'yellow' : 'white' }}">
+                                    Laporan TA</option>
+                                <option value="2" {{ '2' == $berka->jenis_file ? 'selected' : '' }}
+                                    style="background-color: {{ $berka->jenis_file == '2' ? 'yellow' : 'white' }}">
+                                    Dokumen Penunjang Penelitian</option>
+                                <option value="3" {{ '3' == $berka->jenis_file ? 'selected' : '' }}
+                                    style="background-color: {{ $berka->jenis_file == '3' ? 'yellow' : 'white' }}">File
+                                    Presentasi</option>
+                                <option value="6" {{ '6' == $berka->jenis_file ? 'selected' : '' }}
+                                    style="background-color: {{ $berka->jenis_file == '6' ? 'yellow' : 'white' }}">
+                                    Video Trailer</option>
+                                <option value="7" {{ '7' == $berka->jenis_file ? 'selected' : '' }}
+                                    style="background-color: {{ $berka->jenis_file == '7' ? 'yellow' : 'white' }}">
+                                    Poster Tugas Akhir</option>
+                                <option value="8" {{ '8' == $berka->jenis_file ? 'selected' : '' }}
+                                    style="background-color: {{ $berka->jenis_file == '8' ? 'yellow' : 'white' }}">
+                                    Artikel Jurnal</option>
                             </select>
                         </div>
                     </div>
@@ -56,24 +71,25 @@
                             name="bukti_file">
                     </div>
                     @if (request()->user()->can('status layanan/berkas'))
-                    <div class="mb-3">
-                        <label for="keterangan">Keterangan</label>
-                        <textarea class="form-control" id="keterangan" name='keterangan'>{{$berka->keterangan}}</textarea>
-                      </div>
-                    <div class="mb-3" {{$berka->id ? 'edit-mode' : ''}}>
-                        <label for="hasil_cek">Status</label>
-                        <select class="form-select" id="status" name="status">
-                            <option value="">Open this select menu</option>
-                            @php
-                                $array = ['Validasi', 'Belum Validasi'];
-                            @endphp
-                            @foreach ($array as $element)
-                                <option value="{{ $element }}" {{ $element === $berka->status ? 'selected' : '' }}>
-                                    {{ $element }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <div class="mb-3">
+                            <label for="keterangan">Keterangan</label>
+                            <textarea class="form-control" id="keterangan" name='keterangan'>{{ $berka->keterangan }}</textarea>
+                        </div>
+                        <div class="mb-3" {{ $berka->id ? 'edit-mode' : '' }}>
+                            <label for="hasil_cek">Status</label>
+                            <select class="form-select" id="status" name="status">
+                                <option value="">Open this select menu</option>
+                                @php
+                                    $array = ['Validasi', 'Belum Validasi'];
+                                @endphp
+                                @foreach ($array as $element)
+                                    <option value="{{ $element }}"
+                                        {{ $element === $berka->status ? 'selected' : '' }}>
+                                        {{ $element }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -86,20 +102,79 @@
 </div>
 
 <script>
-    document.getElementById('kategori').addEventListener('change', function () {
-        var selectedValue = this.value;
+    // Function to handle changes in the kategori dropdown
+    function handleKategoriChange() {
+        var selectedValue = document.getElementById('kategori').value;
 
-        // Hide all jenis_file divs
+        // Hide all jenis_file divs by default
         document.getElementById('jenis_file_1').style.display = 'none';
         document.getElementById('jenis_file_2').style.display = 'none';
 
         // Show the relevant jenis_file div based on the selected category
         if (selectedValue === '1') {
-            console.log("Selected Value: " + selectedValue);
             document.getElementById('jenis_file_1').style.display = 'block';
         } else if (selectedValue === '2') {
-            console.log("Selected Value: " + selectedValue);
             document.getElementById('jenis_file_2').style.display = 'block';
         }
+    }
+
+    // Add event listener to the kategori dropdown
+    document.getElementById('kategori').addEventListener('change', function() {
+        handleKategoriChange();
     });
+
+    // Function to handle changes in the jenis file dropdown
+    function handleJenisFileChange() {
+        var selectedValue = document.getElementById('jenis_file_1').value;
+
+        // Get all options within the jenis file dropdown
+        var options = document.getElementById('jenis_file_1').options;
+
+        // Loop through the options to set their style based on selection
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].value === selectedValue) {
+                // Set the background color for the selected option
+                options[i].style.backgroundColor = 'yellow';
+            } else {
+                // Reset the background color for other options
+                options[i].style.backgroundColor = 'white';
+            }
+        }
+    }
+
+    // Add event listener to the jenis file dropdown
+    function handleJenisFileChange() {
+        var selectedValue;
+        var jenisFileDropdown;
+
+        var selectedKategori = document.getElementById('kategori').value;
+
+        // Determine which jenis file dropdown to use based on the selected category
+        if (selectedKategori === '1') {
+            jenisFileDropdown = document.getElementById('jenis_file_1');
+        } else if (selectedKategori === '2') {
+            jenisFileDropdown = document.getElementById('jenis_file_2');
+        }
+
+        // Get the selected value from the jenis file dropdown
+        selectedValue = jenisFileDropdown.value;
+
+        // Get all options within the jenis file dropdown
+        var options = jenisFileDropdown.options;
+
+        // Loop through the options to set their style based on selection
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].value === selectedValue) {
+                // Set the background color for the selected option
+                options[i].style.backgroundColor = 'yellow';
+            } else {
+                // Reset the background color for other options
+                options[i].style.backgroundColor = 'white';
+            }
+        }
+    }
+
+
+    handleJenisFileChange();
+    handleKategoriChange();
 </script>

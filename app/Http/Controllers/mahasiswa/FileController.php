@@ -48,19 +48,38 @@ class FileController extends Controller
      */
     public function store(Request $request, File $berka)
     {
+        $userRole = auth()->user()->role;
 
-        $user = auth()->user();
-        $existingEntry = File::where('user_id', auth()->id())
-            ->where('kategori', $request->kategori)
-            ->first();
+        // Ambil entri terakhir pengguna
+        $lastEntry = File::where('user_id', auth()->id())->latest()->first();
 
-        // if ($existingEntry) {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => 'Anda sudah memiliki entri dengan jenis Kategori ini.'
-        //     ]);
-        // }
+        if ($lastEntry) {
+            // Periksa apakah kategori yang dipilih sama dengan kategori entri terakhir
+            if ($lastEntry->kategori != $request->kategori) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Anda hanya bisa memilih kategori yang sama.'
+                ]);
+            }
 
+            // Periksa apakah jenis file yang dipilih sudah digunakan sebelumnya dalam kategori yang sama
+            $existingJenisFile = File::where('user_id', auth()->id())
+                ->where('kategori', $request->kategori)
+                ->where(function ($query) use ($request) {
+                    $query->where('jenis_file', $request->jenis_file_1)
+                        ->orWhere('jenis_file', $request->jenis_file_2);
+                })
+                ->exists();
+
+            if ($existingJenisFile) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Anda sudah memiliki entri dengan jenis file yang sama dalam kategori yang dipilih. Harap pilih jenis file yang berbeda.'
+                ]);
+            }
+        }
+
+        // Jika validasi berhasil, lanjutkan dengan menyimpan data baru
         $berka = new File();
         $berka->user_id = auth()->id();
         $berka->kategori = $request->kategori;
@@ -76,9 +95,11 @@ class FileController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Create data successfully'
+            'message' => 'Data berhasil disimpan'
         ]);
     }
+
+
 
     /**
      * Display the specified resource.
@@ -104,7 +125,8 @@ class FileController extends Controller
     public function edit(File $berka)
     {
         $documents = Document::all();
-        return view('layanan.mahasiswa.file.file-action', compact('documents', 'berka'));
+        $categories = Category::all();
+        return view('layanan.mahasiswa.file.file-action', compact('documents', 'categories', 'berka'));
     }
 
     /**
