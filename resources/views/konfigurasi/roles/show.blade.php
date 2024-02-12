@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
+                                <div class="form-group" style="column-count: 3;">
                                     <strong>Permissions:</strong>
                                     @if(!empty($rolePermissions))
                                         @foreach($rolePermissions as $v)
