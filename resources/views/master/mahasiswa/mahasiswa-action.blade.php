@@ -28,6 +28,12 @@
                         <input type="text" placeholder="Input Email" value="{{ $mahasiswa->email }}"
                             class="form-control" id="email" name="email">
                     </div>
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <strong>Role:</strong>
+                            {!! Form::select('roles[]', $roles, [], ['class' => 'form-control', 'multiple']) !!}
+                        </div>
+                    </div>
                     <div class="mb-3" id="prodi_id">
                         <label for="prodi_id">Prodi</label>
                         <div class="mb-3">

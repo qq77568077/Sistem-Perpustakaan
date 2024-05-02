@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\MahasiswaDataTable;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,8 +35,9 @@ class MahasiswaController extends Controller
     public function create()
     {
         $prodis = Prodi::all();
+        $roles = Role::pluck('name','name')->all();
         $mahasiswa = new Mahasiswa();
-        return view('master.mahasiswa.mahasiswa-action', compact('prodis', 'mahasiswa'));
+        return view('master.mahasiswa.mahasiswa-action', compact('roles','prodis', 'mahasiswa'));
     }
 
     /**
@@ -55,6 +57,7 @@ class MahasiswaController extends Controller
         ];
 
         $user = User::create($userData);
+        $user->assignRole($request->input('roles'));
 
         $mahasiswaData['user_id'] = $user->id;
 
