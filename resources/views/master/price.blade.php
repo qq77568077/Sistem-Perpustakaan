@@ -16,7 +16,7 @@
                             <h4>Harga</h4>
                         </div>
                         <div class="card-body">
-                            @if (request()->user()->can('create konfigurasi/prices'))
+                            @if (request()->user()->can('create master/prices'))
                                 <button type="button" class="btn btn-primary btn-sm mb-3 btn-add"> <i class="ti-plus"></i>
                                     Tambah</button>
                             @endif
@@ -48,7 +48,7 @@
         $('.btn-add').on('click', function() {
             $.ajax({
                 method: 'GET',
-                url: `{{ url('konfigurasi/prices/create') }}`,
+                url: `{{ url('master/prices/create') }}`,
                 success: function(res) {
                     $('#modalAction').find('.modal-dialog').html(res)
                     modal.show()
@@ -113,7 +113,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             method: 'DELETE',
-                            url: `{{ url('konfigurasi/prices/') }}/${id}`,
+                            url: `{{ url('master/prices/') }}/${id}`,
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
@@ -134,7 +134,7 @@
 
             $.ajax({
                 method: 'get',
-                url: `{{ url('konfigurasi/prices/') }}/${id}/edit`,
+                url: `{{ url('master/prices/') }}/${id}/edit`,
                 success: function(res) {
                     $('#modalAction').find('.modal-dialog').html(res)
                     modal.show()
