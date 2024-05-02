@@ -117,7 +117,7 @@
             //ini mengambil dari table price 
 
             $.ajax({
-                url: '{{ url('konfigurasi/getPriceData') }}',
+                url: '{{ url('master/getPriceData') }}',
                 method: 'GET',
                 success: function(response) {
                     const data = response.data; // Mengambil data dari respons

@@ -16,7 +16,7 @@
                             <h4>Permissions</h4>
                         </div>
                         <div class="card-body">
-                            @if (request()->user()->can('create konfigurasi/permissions'))
+                            @if (request()->user()->can('create master/permissions'))
                                 <button type="button" class="btn btn-primary btn-sm mb-3 btn-add"> <i class="ti-plus"></i>
                                     Tambah</button>
                             @endif
@@ -49,7 +49,7 @@
         $('.btn-add').on('click', function() {
             $.ajax({
                 method: 'GET',
-                url: `{{ url('konfigurasi/permissions/create') }}`,
+                url: `{{ url('master/permissions/create') }}`,
                 success: function(res) {
                     $('#modalAction').find('.modal-dialog').html(res)
                     modal.show()
@@ -114,7 +114,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             method: 'DELETE',
-                            url: `{{ url('konfigurasi/permissions/') }}/${id}`,
+                            url: `{{ url('master/permissions/') }}/${id}`,
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
@@ -135,7 +135,7 @@
 
             $.ajax({
                 method: 'get',
-                url: `{{ url('konfigurasi/permissions/') }}/${id}/edit`,
+                url: `{{ url('master/permissions/') }}/${id}/edit`,
                 success: function(res) {
                     $('#modalAction').find('.modal-dialog').html(res)
                     modal.show()

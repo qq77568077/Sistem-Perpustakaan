@@ -16,7 +16,7 @@
                             <h4></h4>
                         </div>
                         <div class="card-body">
-                            @if (request()->user()->can('create konfigurasi/roles'))
+                            @if (request()->user()->can('create master/roles'))
                                 <a type="button" class="btn btn-primary btn-sm mb-3 btn-add"
                                     href="{{ route('roles.create') }}"> <i class="ti-plus"></i> Tambah</a>
                             @endif
@@ -71,7 +71,7 @@
         $('.btn-add').on('click', function() {
             $.ajax({
                 method: 'GET',
-                url: `{{ url('konfigurasi/roles/create') }}`,
+                url: `{{ url('master/roles/create') }}`,
                 success: function(res) {
                     $('#modalAction').find('.modal-dialog').html(res)
                     modal.show()
@@ -136,7 +136,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             method: 'DELETE',
-                            url: `{{ url('konfigurasi/roles/') }}/${id}`,
+                            url: `{{ url('master/roles/') }}/${id}`,
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
@@ -157,7 +157,7 @@
 
             $.ajax({
                 method: 'get',
-                url: `{{ url('konfigurasi/roles/') }}/${id}/edit`,
+                url: `{{ url('master/roles/') }}/${id}/edit`,
                 success: function(res) {
                     $('#modalAction').find('.modal-dialog').html(res)
                     modal.show()
