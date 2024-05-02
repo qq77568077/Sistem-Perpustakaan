@@ -10,7 +10,7 @@ class PriceController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:create konfigurasi/prices')->only('create');
+        $this->middleware('can:create master/prices')->only('create');
     }
 
     /**
@@ -21,8 +21,8 @@ class PriceController extends Controller
     public function index(PriceDataTable $dataTable)
     {
         //
-        $this->authorize('read konfigurasi/prices');
-        return $dataTable->render('konfigurasi.price');
+        $this->authorize('read master/prices');
+        return $dataTable->render('master.price');
     }
 
     public function getPriceData()
@@ -43,7 +43,7 @@ class PriceController extends Controller
     public function create()
     {
         //
-        return view('konfigurasi.price-action', ['price' => new Price()]);
+        return view('master.price-action', ['price' => new Price()]);
     }
 
     /**
@@ -83,7 +83,7 @@ class PriceController extends Controller
     public function edit(Price $price)
     {
         //
-        return view('konfigurasi.price-action', compact('price'));
+        return view('master.price-action', compact('price'));
     }
 
     /**

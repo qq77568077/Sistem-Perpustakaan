@@ -46,29 +46,21 @@ class RoleSeedr extends Seeder
             $mahasiswa1 = User::create(array_merge([
                 'email' => 'farel@stiki.ac.id',
                 'name'  => 'farel',
-                'nrp'  => '181111001',
-                'prodi'  => 'TI',
             ], $default_user_value));
 
             $mahasiswa2 = User::create(array_merge([
                 'email' => 'ramadhan@stiki.ac.id',
                 'name'  => 'ramadhan',
-                'nrp'  => '181111002',
-                'prodi'  => 'MI',
             ], $default_user_value));
 
             $mahasiswa3 = User::create(array_merge([
                 'email' => 'abid@stiki.ac.id',
                 'name'  => 'abid',
-                'nrp'  => '181111003',
-                'prodi'  => 'SI',
             ], $default_user_value));
 
             $mahasiswa4 = User::create(array_merge([
                 'email' => 'yusan@stiki.ac.id',
                 'name'  => 'yusan',
-                'nrp'  => '181111003',
-                'prodi'  => 'DKV',
             ], $default_user_value));
 
             $prodid3 = User::create(array_merge([
@@ -102,23 +94,38 @@ class RoleSeedr extends Seeder
             $role_koorLab = Role::create(['name' => 'koorLab']);
             $role_admin = Role::create(['name' => 'admin']);
 
-            //konfigurasi role
-            $permission = Permission::create(['name' => 'read konfigurasi']);
-            $permission = Permission::create(['name' => 'read konfigurasi/roles']);
-            $permission = Permission::create(['name' => 'create konfigurasi/roles']);
-            $permission = Permission::create(['name' => 'update konfigurasi/roles']);
-            $permission = Permission::create(['name' => 'delete konfigurasi/roles']);
+            //master role
+            $permission = Permission::create(['name' => 'read master']);
+            $permission = Permission::create(['name' => 'read master/roles']);
+            $permission = Permission::create(['name' => 'create master/roles']);
+            $permission = Permission::create(['name' => 'update master/roles']);
+            $permission = Permission::create(['name' => 'delete master/roles']);
 
-            //konfigurasi permission
-            $permission = Permission::create(['name' => 'read konfigurasi/permissions']);
-            $permission = Permission::create(['name' => 'create konfigurasi/permissions']);
-            $permission = Permission::create(['name' => 'update konfigurasi/permissions']);
-            $permission = Permission::create(['name' => 'delete konfigurasi/permissions']);
+            //master permission
+            $permission = Permission::create(['name' => 'read master/permissions']);
+            $permission = Permission::create(['name' => 'create master/permissions']);
+            $permission = Permission::create(['name' => 'update master/permissions']);
+            $permission = Permission::create(['name' => 'delete master/permissions']);
 
-            $permission = Permission::create(['name' => 'read konfigurasi/prices']);
-            $permission = Permission::create(['name' => 'create konfigurasi/prices']);
-            $permission = Permission::create(['name' => 'update konfigurasi/prices']);
-            $permission = Permission::create(['name' => 'delete konfigurasi/prices']);
+            $permission = Permission::create(['name' => 'read master/prices']);
+            $permission = Permission::create(['name' => 'create master/prices']);
+            $permission = Permission::create(['name' => 'update master/prices']);
+            $permission = Permission::create(['name' => 'delete master/prices']);
+
+            $permission = Permission::create(['name' => 'read master/prodi']);
+            $permission = Permission::create(['name' => 'create master/prodi']);
+            $permission = Permission::create(['name' => 'update master/prodi']);
+            $permission = Permission::create(['name' => 'delete master/prodi']);
+
+            $permission = Permission::create(['name' => 'read master/users']);
+            $permission = Permission::create(['name' => 'create master/users']);
+            $permission = Permission::create(['name' => 'update master/users']);
+            $permission = Permission::create(['name' => 'delete master/users']);
+
+            $permission = Permission::create(['name' => 'read master/mahasiswa']);
+            $permission = Permission::create(['name' => 'create master/mahasiswa']);
+            $permission = Permission::create(['name' => 'update master/mahasiswa']);
+            $permission = Permission::create(['name' => 'delete master/mahasiswa']);
 
             //layanan Plagiarism mhs
             $permission = Permission::create(['name' => 'read layanan']);
@@ -180,26 +187,41 @@ class RoleSeedr extends Seeder
             //role admin
 
             //give permission roles
-            $role_admin->givePermissionTo(['read konfigurasi/roles', 'read konfigurasi']);
-            $role_admin->givePermissionTo('create konfigurasi/roles');
-            $role_admin->givePermissionTo('update konfigurasi/roles');
-            $role_admin->givePermissionTo('delete konfigurasi/roles');
+            $role_admin->givePermissionTo(['read master/roles', 'read master']);
+            $role_admin->givePermissionTo('create master/roles');
+            $role_admin->givePermissionTo('update master/roles');
+            $role_admin->givePermissionTo('delete master/roles');
 
             //give permission permission
-            $role_admin->givePermissionTo('read konfigurasi/permissions');
-            $role_admin->givePermissionTo('create konfigurasi/permissions');
-            $role_admin->givePermissionTo('update konfigurasi/permissions');
-            $role_admin->givePermissionTo('delete konfigurasi/permissions');
+            $role_admin->givePermissionTo('read master/permissions');
+            $role_admin->givePermissionTo('create master/permissions');
+            $role_admin->givePermissionTo('update master/permissions');
+            $role_admin->givePermissionTo('delete master/permissions');
 
-            $role_admin->givePermissionTo('read konfigurasi/prices');
-            $role_admin->givePermissionTo('create konfigurasi/prices');
-            $role_admin->givePermissionTo('update konfigurasi/prices');
-            $role_admin->givePermissionTo('delete konfigurasi/prices');
+            $role_admin->givePermissionTo('read master/prices');
+            $role_admin->givePermissionTo('create master/prices');
+            $role_admin->givePermissionTo('update master/prices');
+            $role_admin->givePermissionTo('delete master/prices');
 
-            $role_perpustakaan->givePermissionTo('read konfigurasi');
-            $role_perpustakaan->givePermissionTo('create konfigurasi/prices');
-            $role_perpustakaan->givePermissionTo('read konfigurasi/prices');
-            $role_perpustakaan->givePermissionTo('update konfigurasi/prices');
+            $role_admin->givePermissionTo('read master/prodi');
+            $role_admin->givePermissionTo('create master/prodi');
+            $role_admin->givePermissionTo('update master/prodi');
+            $role_admin->givePermissionTo('delete master/prodi');
+
+            $role_admin->givePermissionTo('read master/users');
+            $role_admin->givePermissionTo('create master/users');
+            $role_admin->givePermissionTo('update master/users');
+            $role_admin->givePermissionTo('delete master/users');
+
+            $role_admin->givePermissionTo('read master/mahasiswa');
+            $role_admin->givePermissionTo('create master/mahasiswa');
+            $role_admin->givePermissionTo('update master/mahasiswa');
+            $role_admin->givePermissionTo('delete master/mahasiswa');
+
+            $role_perpustakaan->givePermissionTo('read master');
+            $role_perpustakaan->givePermissionTo('create master/prices');
+            $role_perpustakaan->givePermissionTo('read master/prices');
+            $role_perpustakaan->givePermissionTo('update master/prices');
 
 
             //give permission layanan plagiarism

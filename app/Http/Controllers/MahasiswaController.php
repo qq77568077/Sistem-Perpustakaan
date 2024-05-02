@@ -2,30 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\PermissionDataTable;
-use App\Http\Requests\PermissionRequest;
-use App\Models\Permission;
+use App\DataTables\MahasiswaDataTable;
+use App\Models\Mahasiswa;
+use App\Models\Prodi;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller
+class MahasiswaController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware('can:create master/permissions')->only('create');
+        $this->middleware('can:create master/mahasiswa')->only('create');
     }
-
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(PermissionDataTable $dataTable)
+    public function index(MahasiswaDataTable $dataTable)
     {
-        //
-        $this->authorize('read master/permissions');
-        return $dataTable->render('master.permission');
+        $this->authorize('read master/mahasiswa');
+        return $dataTable->render('master.mahasiswa.index');
     }
 
     /**
@@ -35,7 +33,9 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('master.permission-action', ['permission' => new Permission()]);
+        $prodis = Prodi::all();
+        $mahasiswa = new Mahasiswa();
+        return view('master.mahasiswa.mahasiswa-action', compact('prodis', 'mahasiswa'));
     }
 
     /**
@@ -44,16 +44,26 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PermissionRequest $request, Permission $permission)
+    public function store(Request $request)
     {
-        //
-        Permission::create($request->all());
+        $mahasiswaData = $request->all();
+
+        $userData = [
+            'name' => $mahasiswaData['nama'], 
+            'email' => $mahasiswaData['email'], 
+            'password' => bcrypt('password'), 
+        ];
+
+        $user = User::create($userData);
+
+        $mahasiswaData['user_id'] = $user->id;
+
+        Mahasiswa::create($mahasiswaData);
 
         return response()->json([
             'status' => 'success',
             'message' => 'Create data successfully'
         ]);
-
     }
 
     /**
@@ -73,11 +83,10 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Permission $permission)
+    public function edit(Mahasiswa $mahasiswa)
     {
-        //
-        return view('master.permission-action', compact('permission'));
-
+        $prodis = Prodi::all();
+        return view('master.mahasiswa.mahasiswa-action', compact('mahasiswa', 'prodis'));
     }
 
     /**
@@ -87,17 +96,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PermissionRequest $request, Permission $permission)
+    public function update(Request $request, $id)
     {
         //
-        $permission->name = $request->name;
-        $permission->guard_name = $request->guard_name;
-        $permission->save();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'updated data successfully'
-        ]);
     }
 
     /**
@@ -106,10 +107,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Permission $permission)
+    public function destroy(Mahasiswa $mahasiswa)
     {
-        //
-        $permission->delete();
+        $mahasiswa->delete();
         return response()->json([
             'status' => 'success',
             'message' => 'Delete data successfully'

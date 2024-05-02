@@ -7,21 +7,21 @@
 
     <div class="main-content">
         <div class="title">
-            Konfigurasi
+            Master
         </div>
         <div class="content-wrapper">
             <div class="row same-height">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Create New Role</h4>
+                            <h4>Edit New Role</h4>
                         </div>
                         <div class="card-body">
-                            <a type="button" class="btn btn-primary btn-sm mb-3" href="{{ route('roles.index') }}"> <i
-                                    class="ti-back-left"></i> Back</a>
+                            <a type="button" class="btn btn-primary btn-sm mb-3 btn-add" href="{{ route('roles.index') }}">
+                                <i class="ti-back"></i> Back</a>
                             @if (count($errors) > 0)
                                 <div class="alert alert-danger">
-                                    <strong>Whoops!</strong> Something went wrong.<br><br>
+                                    <strong>Whoops!</strong> something went wrong.<br><br>
                                     <ul>
                                         @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
@@ -29,7 +29,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            {!! Form::open(['route' => 'roles.store', 'method' => 'POST']) !!}
+                            {!! Form::model($role, ['method' => 'PATCH', 'route' => ['roles.update', $role->id]]) !!}
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
@@ -42,10 +42,9 @@
                                         <strong>Permission:</strong>
                                         <br />
                                         @foreach ($permission as $value)
-                                            <label>
-                                                {{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
-                                                {{ $value->name }}
-                                            </label>
+                                            <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, ['class' => 'name']) }}
+                                                {{ $value->name }}</label>
+                                            <br />
                                         @endforeach
                                     </div>
                                 </div>
@@ -54,6 +53,7 @@
                                 </div>
                             </div>
                             {!! Form::close() !!}
+
                         </div>
                     </div>
                 </div>

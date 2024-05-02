@@ -14,7 +14,7 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:create konfigurasi/roles')->only('create');
+        $this->middleware('can:create master/roles')->only('create');
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $roles  = Role::get();
-        return view('konfigurasi.roles.index', compact('roles'));
+        return view('master.roles.index', compact('roles'));
     }
 
     /**
@@ -35,7 +35,7 @@ class RoleController extends Controller
     public function create()
     {
         $permission = Permission::get();
-        return view('konfigurasi.roles.create', compact('permission'));
+        return view('master.roles.create', compact('permission'));
     }
 
     /**
@@ -54,7 +54,7 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('konfigurasi.roles.index')
+        return redirect()->route('master.roles.index')
             ->with('success', 'Role created successfully');
     }
 
@@ -70,7 +70,7 @@ class RoleController extends Controller
         $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
             ->where("role_has_permissions.role_id", $id)
             ->get();
-        return view('konfigurasi.roles.show', compact('role','rolePermissions'));
+        return view('master.roles.show', compact('role','rolePermissions'));
     }
 
     /**
@@ -87,7 +87,7 @@ class RoleController extends Controller
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
 
-        return view('konfigurasi.roles.edit', compact('role', 'permission', 'rolePermissions'));
+        return view('master.roles.edit', compact('role', 'permission', 'rolePermissions'));
     }
 
     /**
@@ -110,7 +110,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('konfigurasi.roles.index')
+        return redirect()->route('master.roles.index')
             ->with('success', 'Role updated successfully');
     }
 
@@ -123,7 +123,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('konfigurasi.roles.index')
+        return redirect()->route('master.roles.index')
                         ->with('success','Role deleted successfully');
     }
 }

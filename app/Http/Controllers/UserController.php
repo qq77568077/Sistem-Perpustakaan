@@ -14,7 +14,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:create konfigurasi/users')->only('create');
+        $this->middleware('can:create master/users')->only('create');
     }
 
     /**
@@ -25,7 +25,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $data = User::get();
-        return view('konfigurasi.users.index',compact('data'));
+        return view('master.users.index',compact('data'));
     }
 
     /**
@@ -36,7 +36,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
-        return view('konfigurasi.users.create',compact('roles'));
+        return view('master.users.create',compact('roles'));
     }
 
     /**
@@ -73,7 +73,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('konfigurasi.users.show',compact('user'));
+        return view('master.users.show',compact('user'));
     }
 
     /**
@@ -88,7 +88,7 @@ class UserController extends Controller
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
     
-        return view('konfigurasi.users.edit',compact('user','roles','userRole'));
+        return view('master.users.edit',compact('user','roles','userRole'));
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace App\DataTables;
 
-use App\Models\Price;
+use App\Models\Prodi;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\EloquentDataTable;
+use Illuminate\Support\Facades\Gate;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -13,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PriceDataTable extends DataTable
+class ProdiDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -28,10 +28,10 @@ class PriceDataTable extends DataTable
             ->addColumn('action', function ($row) {
                 $action = '';
 
-                if (Gate::allows('update master/prices')) {
+                if (Gate::allows('update master/prodi')) {
                     $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
                 }
-                if (Gate::allows('delete master/prices')) {
+                if (Gate::allows('delete master/prodi')) {
                     $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
                 }
 
@@ -42,10 +42,10 @@ class PriceDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Price $model
+     * @param \App\Models\Prodi $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Price $model): QueryBuilder
+    public function query(Prodi $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -59,7 +59,7 @@ class PriceDataTable extends DataTable
     {
         return $this->builder()
             ->parameters(['searchDelay' => 1000])
-            ->setTableId('price-table')
+            ->setTableId('prodi-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1);
@@ -74,10 +74,9 @@ class PriceDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
-            Column::make('pageBerwarnaPrice'),
-            Column::make('pageHitamPutihPrice'),
-            Column::make('hardjilidprice'),
-            Column::make('softjilidprice'),
+            Column::make('nama'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -93,6 +92,6 @@ class PriceDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Price_' . date('YmdHis');
+        return 'Prodi_' . date('YmdHis');
     }
 }

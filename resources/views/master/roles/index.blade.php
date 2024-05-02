@@ -6,14 +6,14 @@
 @section('content')
     <div class="main-content">
         <div class="title">
-            Konfigurasi
+            Master Roles
         </div>
         <div class="content-wrapper">
             <div class="row same-height">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Roles</h4>
+                            <h4></h4>
                         </div>
                         <div class="card-body">
                             @if (request()->user()->can('create konfigurasi/roles'))

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\DataTables;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\Berka;
 use App\Models\Document;
@@ -26,21 +27,26 @@ class BerkasDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-        ->editColumn('user_id', function ($row) {
-            return $row->user ? $row->user->name : 'No User';
-        })
-        ->editColumn('jenis_file', function ($row) {
-            // Mengambil data JenisFile berdasarkan relasi pada model File
-            $jenisFile = Document::find($row->id); // Ubah sesuai dengan relasi yang ada
-            if ($jenisFile) {
-                return $jenisFile->dokumen; // Ganti dengan nama field yang ingin ditampilkan
-            }
-            return ''; // Atau return kosong jika data tidak ditemukan
-        })
-        ->addColumn('kategori', function ($row) {
-            // Menggunakan relasi untuk mengakses data pengumpulan
-            return optional($row->category)->kategori_ta;
-        })
+            ->editColumn('user_id', function ($row) {
+                return $row->user ? $row->user->name : 'No User';
+            })
+
+            ->editColumn('jenis_file', function ($row) {
+                // Ambil Dokumen Terkait dari Tabel Document
+                $document = Document::find($row->jenis_file);
+
+                // Periksa apakah Dokumen ditemukan
+                if ($document) {
+                    // Jika ditemukan, kembalikan nilai dari kolom 'dokumen'
+                    return $document->dokumen;
+                }
+
+                return 'tidak ada'; // Jika tidak ada dokumen atau tidak ditemukan
+            })
+
+            ->addColumn('kategori', function ($row) {
+                return optional($row->category)->kategori_ta;
+            })
 
             ->editColumn('created_at', function ($row) {
                 return $row->created_at->format('d-m-Y H:i:s');
@@ -52,7 +58,7 @@ class BerkasDataTable extends DataTable
             ->addColumn('action', function ($row) {
                 $action = '';
 
-               
+
                 if (Gate::allows('update layanan/berkas')) {
                     $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
                 }
@@ -78,8 +84,8 @@ class BerkasDataTable extends DataTable
     public function query(File $model): QueryBuilder
     {
         $loggedInUserId = Auth::id();
-        return $model->select(['id', 'user_id','kategori', 'jenis_file','status', 'created_at', 'updated_at'])
-        ->where('user_id', $loggedInUserId);
+        return $model->select(['id', 'user_id', 'kategori', 'jenis_file', 'status', 'created_at', 'updated_at'])
+            ->where('user_id', $loggedInUserId);
     }
 
     /**

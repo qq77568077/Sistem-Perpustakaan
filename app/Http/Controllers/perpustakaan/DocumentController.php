@@ -27,26 +27,15 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $this->authorize('read layanan/file');
-
-        // Retrieve categories from the database
         $categories = Category::all();
-
-        // Ambil nilai filter dari inputan formulir
         $prodiFilter = $request->input('prodi');
         $kategoriFilter = $request->input('kategori');
-
-        // Query untuk mendapatkan data berkas dengan filter yang diberikan
-        $files = File::with(['user', 'category'])
-            ->when($prodiFilter, function ($query) use ($prodiFilter) {
+        $files = File::with(['user', 'category'])->when($prodiFilter, function ($query) use ($prodiFilter) {
                 return $query->whereHas('user', function ($userQuery) use ($prodiFilter) {
                     $userQuery->where('prodi', 'like', '%' . $prodiFilter . '%');
                 });
-            })
-            ->when($kategoriFilter, function ($query) use ($kategoriFilter) {
-                return $query->where('kategori', $kategoriFilter);
-            })
-            ->get()
-            ->groupBy('user_id');
+            })->when($kategoriFilter, function ($query) use ($kategoriFilter) {
+                return $query->where('kategori', $kategoriFilter);})->get()->groupBy('user_id');
 
         $document = Document::orderBy('id', 'asc')->get();
 

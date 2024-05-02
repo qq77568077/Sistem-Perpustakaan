@@ -1,0 +1,30 @@
+[
+    {
+        "nama":"farel",
+        "nrp" : 18100001,
+        "email": "farel@stiki.ac.id",
+        "user_id": 3,
+        "prodi_id": 1
+    },
+    {
+        "nama":"ramadhan",
+        "nrp" : 18100002,
+        "email": "ramadhan@stiki.ac.id",
+        "user_id": 4,
+        "prodi_id": 2
+    },
+    {
+        "nama":"abid",
+        "nrp" : 18100003,
+        "email": "abid@stiki.ac.id",
+        "user_id": 5,
+        "prodi_id": 3
+    },
+    {
+        "nama":"yusan",
+        "nrp" : 18100003,
+        "email": "yusan@stiki.ac.id",
+        "user_id": 6,
+        "prodi_id": 4
+    }
+]

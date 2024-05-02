@@ -1,6 +1,9 @@
 ## create datatables
 
 cara membuat datatable
+php artisan datatables:make Prodi
+php artisan datatables:make Mahasiswa
+
 php artisan datatables:make Plagiarism
 php artisan datatables:make PengajuanPlagiarism
 php artisan datatables:make Berkas
@@ -23,6 +26,9 @@ php artisan make:controller PlagiarismController -r
 php artisan make:controller perpustakaan/PengajuanPlagiarismController -r
 php artisan make:controller perpustakaan/PengajuanJilidController -r
 php artisan make:model Plagiarism -m 
+
+php artisan make:controller ProdiController -r
+php artisan make:controller MahasiswaController -r
 
 php artisan make:controller FileController -r
 php artisan make:model File -m 

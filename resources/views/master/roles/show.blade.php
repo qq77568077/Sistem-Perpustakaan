@@ -7,7 +7,7 @@
 
 <div class="main-content">
     <div class="title">
-        Konfigurasi
+        Master
     </div>
     <div class="content-wrapper">
         <div class="row same-height">

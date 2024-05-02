@@ -8,10 +8,13 @@ use App\Http\Controllers\perpustakaan\PengajuanJilidController;
 use App\Http\Controllers\mahasiswa\FileController;
 use App\Http\Controllers\mahasiswa\JilidController;
 use App\Http\Controllers\mahasiswa\PlagiarismController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PriceController;
+use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 
@@ -43,10 +46,13 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
-    Route::resource('konfigurasi/roles', RoleController::class);
-    Route::resource('konfigurasi/permissions', PermissionController::class);
-    Route::resource('konfigurasi/prices', PriceController::class);
-    Route::get('konfigurasi/getPriceData', [PriceController::class, 'getPriceData']);
+    Route::resource('master/roles', RoleController::class);
+    Route::resource('master/permissions', PermissionController::class);
+    Route::resource('master/prices', PriceController::class);
+    Route::resource('master/prodi', ProdiController::class);
+    Route::resource('master/users', UserController::class);
+    Route::resource('master/mahasiswa', MahasiswaController::class);
+    Route::get('master/getPriceData', [PriceController::class, 'getPriceData']);
     
 });
 

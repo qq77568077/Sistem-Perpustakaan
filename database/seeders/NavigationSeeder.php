@@ -16,63 +16,78 @@ class NavigationSeeder extends Seeder
     public function run()
     {
         //
-        $konfigurasi = Navigation::create([
-        "name" => 'Konfigurasi',
-        "url"  => 'konfigurasi',
-        "icon" => 'ti-settings',
-        'main_menu' => null,
+        $master = Navigation::create([
+            "name" => 'Master',
+            "url"  => 'master',
+            "icon" => 'ti-settings',
+            'main_menu' => null,
         ]);
-            $konfigurasi->subMenus()->create([
-                "name" => 'Roles',
-                "url"  => 'konfigurasi/roles',
-                "icon" => '',
-            ]);
-            $konfigurasi->subMenus()->create([
-            "name" => 'Permissions',
-            "url"  => 'konfigurasi/permissions',
+        $master->subMenus()->create([
+            "name" => 'Roles',
+            "url"  => 'master/roles',
             "icon" => '',
-            ]);
-            $konfigurasi->subMenus()->create([
-                "name" => 'Harga',
-                "url"  => 'konfigurasi/prices',
-                "icon" => '',
-                ]);
-
-       $transaksi =  Navigation::create([
-        "name" => 'Layanan',
-        "url"  => 'layanan',
-        "icon" => 'ti-book',
-        'main_menu' => null,
         ]);
-            $transaksi->subMenus()->create([
+        $master->subMenus()->create([
+            "name" => 'Permissions',
+            "url"  => 'master/permissions',
+            "icon" => '',
+        ]);
+        $master->subMenus()->create([
+            "name" => 'Harga',
+            "url"  => 'master/prices',
+            "icon" => '',
+        ]);
+        $master->subMenus()->create([
+            "name" => 'Prodi',
+            "url"  => 'master/prodi',
+            "icon" => '',
+        ]);
+        $master->subMenus()->create([
+            "name" => 'User',
+            "url"  => 'master/users',
+            "icon" => '',
+        ]);
+        $master->subMenus()->create([
+            "name" => 'Mahasiswa',
+            "url"  => 'master/mahasiswa',
+            "icon" => '',
+        ]);
+
+        $transaksi =  Navigation::create([
+            "name" => 'Layanan',
+            "url"  => 'layanan',
+            "icon" => 'ti-book',
+            'main_menu' => null,
+        ]);
+        $transaksi->subMenus()->create([
             "name" => 'Plagiarism',
             "url"  => 'layanan/plagiarism',
             "icon" => '',
-            ]);
-            $transaksi->subMenus()->create([
+        ]);
+        $transaksi->subMenus()->create([
             "name" => 'Plagiarism',
             "url"  => 'layanan/pengajuan-plagiarism',
             "icon" => '',
-            ]);
-            $transaksi->subMenus()->create([
+        ]);
+        $transaksi->subMenus()->create([
             "name" => 'Jilid Laporan',
             "url"  => 'layanan/jilid',
             "icon" => '',
-            ]);
-            $transaksi->subMenus()->create([
-                "name" => 'Jilid Laporan',
-                "url"  => 'layanan/pengajuan-jilid',
-                "icon" => '',
-                ]);
-            $transaksi->subMenus()->create([
+        ]);
+        $transaksi->subMenus()->create([
+            "name" => 'Jilid Laporan',
+            "url"  => 'layanan/pengajuan-jilid',
+            "icon" => '',
+        ]);
+        $transaksi->subMenus()->create([
             "name" => 'Berkas Ta',
             "url"  => 'layanan/berkas',
             "icon" => '',
-            ]);
-            $transaksi->subMenus()->create([
+        ]);
+        $transaksi->subMenus()->create([
             "name" => 'Berkas Ta',
             "url"  => 'layanan/file',
             "icon" => '',
-            ]);
+        ]);
     }
 }

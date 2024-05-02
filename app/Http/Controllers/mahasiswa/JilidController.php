@@ -43,9 +43,8 @@ class JilidController extends Controller
      */
     public function store(Request $request, Jilid $jilid)
     {
-        $userRole = auth()->user()->role; // Ganti 'role' dengan nama kolom aktual di model User Anda
+        $userRole = auth()->user()->role; 
 
-        // Periksa apakah pengguna sudah memiliki entri dengan jenis_pengumpulan 'TA' atau 'PKL'
         $existingEntry = Jilid::where('user_id', auth()->id())
             ->where('jenis_pengumpulan', $request->jenis_pengumpulan)
             ->first();
@@ -56,7 +55,6 @@ class JilidController extends Controller
                 'message' => 'Anda sudah memiliki entri dengan jenis pengumpulan ini.'
             ]);
         }
-
 
         $jilid = new Jilid();
         $jilid->user_id = auth()->id();

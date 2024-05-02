@@ -28,7 +28,9 @@ class DatabaseSeeder extends Seeder
             NavigationSeeder::class,
             DokumenSeeder::class,
             CategorySeeder::class,
-            PengumpulanSeeder::class
+            PengumpulanSeeder::class,
+            ProdiSeeder::class,
+            MahasiswaSeeder::class
         ]);
     }
 }
