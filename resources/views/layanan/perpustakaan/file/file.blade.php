@@ -60,9 +60,9 @@
                                         @foreach ($files as $userId => $userFiles)
                                             <tr align="center" valign="middle">
                                                 <td>{{ $counter++ }}</td>
-                                                <td>{{ $userFiles->first()->user->prodi }}
+                                                <td>{{ $userFiles->first()->user->mahasiswa->prodi->nama }}
                                                 </td>
-                                                <td>{{ $userFiles->first()->user->nrp }}
+                                                <td>{{ $userFiles->first()->user->mahasiswa->nrp }}
                                                 </td>
                                                 <td>{{ $userFiles->first()->user->name }}
                                                 </td>

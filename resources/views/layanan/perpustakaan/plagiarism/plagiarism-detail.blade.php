@@ -17,7 +17,7 @@
                             <h4>Nama</h4>
                             {{ $plagiarisms->user->name }}
                             <h4>NRP</h4>
-                            {{ $plagiarisms->user->nrp }}
+                            {{ $plagiarisms->user->mahasiswa->nrp }}
 
                             <div class="table-responsive">
                                 <hr>

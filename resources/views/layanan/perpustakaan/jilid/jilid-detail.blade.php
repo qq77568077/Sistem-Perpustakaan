@@ -17,7 +17,7 @@
                         <h4>Nama</h4> 
                         {{$jilids->user->name}}
                         <h4>NRP</h4> 
-                        {{$jilids->user->nrp}}
+                        {{$jilids->user->mahasiswa->nrp}}
                         <div class="table-responsive">
                         <hr>
                         <table class="table text-center" id="table-jilid">

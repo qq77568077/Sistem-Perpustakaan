@@ -39,8 +39,8 @@
                                                 <tr>
                                                     <td>{{ $counter++ }}</td>
                                                     <td>{{ $plagiarism->created_at }}</td>
-                                                    <td>{{ $plagiarism->user->prodi }}</td>
-                                                    <td>{{ $plagiarism->user->nrp }}</td>
+                                                    <td>{{ $plagiarism->user->mahasiswa->prodi->nama }}</td>
+                                                    <td>{{ $plagiarism->user->mahasiswa->nrp }}</td>
                                                     <td>{{ $plagiarism->user->name }}</td>
                                                     <td>{{ $plagiarism->status }}</td>
                                                     <td>

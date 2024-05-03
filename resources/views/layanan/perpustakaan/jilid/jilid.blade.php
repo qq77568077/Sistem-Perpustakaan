@@ -31,8 +31,8 @@
                                         @foreach ($jilids as $userId => $userFiles)
                                             <tr>
                                                 <td>{{ $counter++ }}</td>
-                                                <td>{{ $userFiles->first()->user->prodi }}</td>
-                                                <td>{{ $userFiles->first()->user->nrp }}</td>
+                                                <td>{{ $userFiles->first()->user->mahasiswa->prodi->nama }}</td>
+                                                <td>{{ $userFiles->first()->user->mahasiswa->nrp}}</td>
                                                 <td>{{ $userFiles->first()->user->name }}</td>
                                                 <td>
                                                     <button type="button" data-id="{{ $userId }}" data-jenis="detail"

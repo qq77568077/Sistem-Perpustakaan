@@ -31,10 +31,12 @@ class DocumentController extends Controller
         $prodiFilter = $request->input('prodi');
         $kategoriFilter = $request->input('kategori');
         $files = File::with(['user', 'category'])->when($prodiFilter, function ($query) use ($prodiFilter) {
-                return $query->whereHas('user', function ($userQuery) use ($prodiFilter) {
-                    $userQuery->where('prodi', 'like', '%' . $prodiFilter . '%');
+            return $query->whereHas('user.mahasiswa', function ($mahasiswaQuery) use ($prodiFilter) {
+                $mahasiswaQuery->whereHas('prodi', function ($prodiQuery) use ($prodiFilter) {
+                    $prodiQuery->where('nama', 'like', '%' . $prodiFilter . '%');
                 });
-            })->when($kategoriFilter, function ($query) use ($kategoriFilter) {
+            });
+        })->when($kategoriFilter, function ($query) use ($kategoriFilter) {
                 return $query->where('kategori', $kategoriFilter);})->get()->groupBy('user_id');
 
         $document = Document::orderBy('id', 'asc')->get();
