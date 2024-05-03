@@ -33,7 +33,7 @@
                                     <tbody>
                                         @foreach ($file->user->files as $d)
                                             <tr id="index_{{ $d->id }}">
-                                                <td>{{ $d->kategori }}</td>
+                                                <td>{{ $d->category->kategori_ta }}</td>
                                                 <td>{{ $d->document->dokumen }}</td>
                                                 <td><a href="{{ $d->bukti_file }}" target="_blank">Link File</a></td>
                                                 <td>{{ $d->keterangan }}</td>
