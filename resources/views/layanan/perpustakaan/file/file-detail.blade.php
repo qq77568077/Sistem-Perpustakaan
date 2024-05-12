@@ -15,8 +15,8 @@
                         <div class="card-body">
                             <h4>Nama</h4>
                             {{ $file->user->name }}
-                            <h4>Nama</h4>
-                            {{ $file->user->NRP }}
+                            <h4>NRP</h4>
+                            {{ $file->user->mahasiswa->nrp }}
                             <div class="table-responsive">
                                 <hr>
                                 <table class="table" id="table-document">

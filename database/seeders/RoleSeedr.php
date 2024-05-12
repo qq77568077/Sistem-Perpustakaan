@@ -321,8 +321,11 @@ class RoleSeedr extends Seeder
 
             //give permission layanan berkasTa
 
-            $role_prodi->givePermissionTo('read layanan/berkas', 'read layanan');
-            $role_koorLab->givePermissionTo('read layanan/berkas', 'read layanan');
+            // $role_prodi->givePermissionTo('read layanan/berkas', 'read layanan');
+            // $role_koorLab->givePermissionTo('read layanan/berkas', 'read layanan');
+
+            $role_prodi->givePermissionTo('read layanan/file', 'read layanan');
+            $role_koorLab->givePermissionTo('read layanan/file', 'read layanan');
 
 
 
