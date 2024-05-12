@@ -36,12 +36,12 @@ class PlagiarismDataTable extends DataTable
             ->addColumn('action', function ($row) {
                 $action = '';
 
-                if (Gate::allows('update layanan/plagiarism')) {
-                    $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
-                }
-                if (Gate::allows('delete layanan/plagiarism')) {
-                    $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
-                }
+                // if (Gate::allows('update layanan/plagiarism')) {
+                //     $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
+                // }
+                // if (Gate::allows('delete layanan/plagiarism')) {
+                //     $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
+                // }
 
                 if (Gate::allows('detail layanan/plagiarism')) {
                     $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="detail" class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>';
@@ -62,7 +62,7 @@ class PlagiarismDataTable extends DataTable
     public function query(Plagiarism $model): QueryBuilder
     {
         $loggedInUserId = Auth::id();
-        return $model->select(['id','user_id','file','keterangan','status' ,'created_at', 'updated_at'])
+        return $model->select(['id','user_id','file','keterangan','similarity','status' ,'created_at', 'updated_at'])
         ->where('user_id', $loggedInUserId);
     }
 
@@ -93,6 +93,7 @@ class PlagiarismDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('created_at')->title('Tanggal Pengajuan'),
             Column::make('keterangan'),
+            Column::make('similarity'),
             Column::make('status'),
             Column::computed('action')
                 ->exportable(false)

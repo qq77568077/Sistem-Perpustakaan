@@ -53,7 +53,6 @@
                 success: function(res) {
                     console.log(res);
                     $('#modalAction').find('.modal-dialog').html(res)
-                    $('#modalAction').removeClass('edit-mode').find('#keterangan').parent().hide();
                     $('#modalAction').removeClass('edit-mode').find('#status').parent().hide();
                     modal.show()
                     store()

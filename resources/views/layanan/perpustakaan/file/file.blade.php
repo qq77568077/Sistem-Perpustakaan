@@ -73,7 +73,7 @@
                                                         @php
                                                             $jenisFile = $userFiles
                                                                 ->where('jenis_file', $doc->id)
-                                                                ->where('status', 'Validasi')
+                                                                ->where('status', 'Valid')
                                                                 ->first();
                                                         @endphp
                                                         @if ($jenisFile && $jenisFile->status === 'Valid')

@@ -59,13 +59,13 @@ class BerkasDataTable extends DataTable
                 $action = '';
 
 
-                if (Gate::allows('update layanan/berkas')) {
-                    $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
-                }
+                // if (Gate::allows('update layanan/berkas')) {
+                //     $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
+                // }
 
-                if (Gate::allows('delete layanan/berkas')) {
-                    $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
-                }
+                // if (Gate::allows('delete layanan/berkas')) {
+                //     $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
+                // }
 
                 if (Gate::allows('detail layanan/berkas')) {
                     $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="detail" class="btn btn-info btn-sm action"><i class="ti-eye"></i></button>';
