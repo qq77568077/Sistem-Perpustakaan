@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('soft_jilid');
             $table->integer('hard_jilid');
             $table->integer('total');
-            $table->string('bukti_pembayaran');
+            $table->string('bukti_pembayaran')->nullable();
             $table->string('file');
             $table->string('keterangan')->nullable();
             $table->string('status')->nullable();

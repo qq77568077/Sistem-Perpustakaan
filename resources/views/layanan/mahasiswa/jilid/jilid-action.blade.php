@@ -60,11 +60,11 @@
                         <input type="number" class="form-control" value="{{ $jilid->total }}" id="total"
                             name="total">
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="bukti_pembayaran">Bukti Pembayaran</label>
                         <input type="text" class="form-control" value="{{ $jilid->bukti_pembayaran }}"
                             id="bukti_pembayaran" name="bukti_pembayaran">
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="file">Link File Berkas</label>
                         <input type="text" class="form-control" value="{{ $jilid->file }}" id="file"

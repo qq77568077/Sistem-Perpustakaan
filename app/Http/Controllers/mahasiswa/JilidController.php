@@ -66,7 +66,7 @@ class JilidController extends Controller
         $jilid->soft_jilid = $request->soft_jilid;
         $jilid->hard_jilid = $request->hard_jilid;
         $jilid->total = $request->total;
-        $jilid->bukti_pembayaran = $request->bukti_pembayaran;
+        $jilid->bukti_pembayaran = null;
         $jilid->file = $request->file;
         $jilid->keterangan = $request->keterangan;
         $jilid->status = 'Belum Validasi';
