@@ -26,7 +26,9 @@ php artisan make:controller PlagiarismController -r
 php artisan make:controller perpustakaan/PengajuanPlagiarismController -r
 php artisan make:controller perpustakaan/PengajuanJilidController -r
 php artisan make:model Plagiarism -m 
+php artisan make:model Term -m 
 
+php artisan make:controller TermController -r
 php artisan make:controller ProdiController -r
 php artisan make:controller MahasiswaController -r
 

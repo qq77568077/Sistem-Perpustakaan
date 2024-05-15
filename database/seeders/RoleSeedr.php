@@ -127,6 +127,11 @@ class RoleSeedr extends Seeder
             $permission = Permission::create(['name' => 'update master/mahasiswa']);
             $permission = Permission::create(['name' => 'delete master/mahasiswa']);
 
+            $permission = Permission::create(['name' => 'read master/term']);
+            $permission = Permission::create(['name' => 'create master/term']);
+            $permission = Permission::create(['name' => 'update master/term']);
+            $permission = Permission::create(['name' => 'delete master/term']);
+
             //layanan Plagiarism mhs
             $permission = Permission::create(['name' => 'read layanan']);
             $permission = Permission::create(['name' => 'read layanan/plagiarism']);
@@ -217,6 +222,16 @@ class RoleSeedr extends Seeder
             $role_admin->givePermissionTo('create master/mahasiswa');
             $role_admin->givePermissionTo('update master/mahasiswa');
             $role_admin->givePermissionTo('delete master/mahasiswa');
+
+            $role_admin->givePermissionTo('read master/term');
+            $role_admin->givePermissionTo('create master/term');
+            $role_admin->givePermissionTo('update master/term');
+            $role_admin->givePermissionTo('delete master/term');
+
+            $role_perpustakaan->givePermissionTo('read master/term');
+            $role_perpustakaan->givePermissionTo('create master/term');
+            $role_perpustakaan->givePermissionTo('update master/term');
+            $role_perpustakaan->givePermissionTo('delete master/term');
 
             $role_perpustakaan->givePermissionTo('read master');
             $role_perpustakaan->givePermissionTo('create master/prices');

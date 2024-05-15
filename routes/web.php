@@ -14,6 +14,7 @@ use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TermController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
@@ -52,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('master/prodi', ProdiController::class);
     Route::resource('master/users', UserController::class);
     Route::resource('master/mahasiswa', MahasiswaController::class);
+    Route::resource('master/term', TermController::class);
     Route::get('master/getPriceData', [PriceController::class, 'getPriceData']);
     
 });

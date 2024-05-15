@@ -52,6 +52,11 @@ class NavigationSeeder extends Seeder
             "url"  => 'master/mahasiswa',
             "icon" => '',
         ]);
+        $master->subMenus()->create([
+            "name" => 'Syarat & Ketentuan',
+            "url"  => 'master/term',
+            "icon" => '',
+        ]);
 
         $transaksi =  Navigation::create([
             "name" => 'Layanan',
