@@ -22,10 +22,12 @@ class PlagiarismController extends Controller
      */
     public function index(PlagiarismDataTable $dataTable)
     {
+        $user_id = auth()->id();
         $this->authorize('read layanan/plagiarism');
+        $plagiarism = Plagiarism::where('user_id', $user_id)->orderBy('created_at', 'desc')->first();
+        $similarity = $plagiarism ? $plagiarism->similarity : null;
 
-
-        return $dataTable->render('layanan.mahasiswa.plagiarism.plagiarism');
+        return $dataTable->render('layanan.mahasiswa.plagiarism.plagiarism',compact('similarity'));
     }
 
     /**
