@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TermController;
 use App\Http\Controllers\UserController;
+use App\Models\Jilid;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 
@@ -54,7 +55,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('master/mahasiswa', MahasiswaController::class);
     Route::resource('master/term', TermController::class);
     Route::get('master/getPriceData', [PriceController::class, 'getPriceData']);
-    
 });
 
 
@@ -66,3 +66,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('layanan/berkas', FileController::class);
     Route::resource('layanan/file', DocumentController::class);
 });
+
+
+Route::get('layanan/jilid/{id}/submitPaymentProof', function ($id) {
+    $jilid = Jilid::findOrFail($id);
+    return view('layanan.mahasiswa.jilid.submit-payment-proof', compact('jilid'));
+})->name('jilid.submitPaymentProof');
+
+Route::post('layanan/jilid/{id}/submitPaymentProof', [JilidController::class, 'submitPaymentProof'])->name('jilid.submitPaymentProof');
+

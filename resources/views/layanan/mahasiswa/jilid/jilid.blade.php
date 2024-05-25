@@ -173,7 +173,27 @@
                     store()
                 }
             })
-
         })
+
+        $('#jilid-table').on('draw.dt', function() {
+            var table = $(this).DataTable();
+            table.rows().every(function(rowIdx, tableLoop, rowLoop) {
+                var data = this.data();
+                // Check if the status is 'Belum Validasi'
+                if (data.status === 'Belum Validasi') {
+                    // If status is 'Belum Validasi', display a danger alert indicating validation is pending
+                    $('td', this.node()).eq(3).html(
+                        '<span class="badge bg-danger">Butuh validasi petugas terlebih dahulu</span>');
+                } else if (!data.bukti_pembayaran) {
+                    // If bukti_pembayaran is empty and status is not 'Belum Validasi', construct the payment link
+                    var paymentLink = '<a href="/layanan/jilid/' + data.id +
+                        '/submitPaymentProof">belum di bayar silahkan lakukan pembayaran</a>';
+                    $('td', this.node()).eq(3).html(paymentLink);
+                } else {
+                    // If bukti_pembayaran is not empty, add a checkmark icon
+                    $('td', this.node()).eq(3).html('<span class="badge bg-success">Sudah Upload</span>');
+                }
+            });
+        });
     </script>
 @endpush

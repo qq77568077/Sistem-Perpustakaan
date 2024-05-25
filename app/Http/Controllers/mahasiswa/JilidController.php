@@ -43,7 +43,7 @@ class JilidController extends Controller
      */
     public function store(Request $request, Jilid $jilid)
     {
-        $userRole = auth()->user()->role; 
+        $userRole = auth()->user()->role;
 
         $existingEntry = Jilid::where('user_id', auth()->id())
             ->where('jenis_pengumpulan', $request->jenis_pengumpulan)
@@ -77,6 +77,26 @@ class JilidController extends Controller
             'message' => 'Create data successfully'
         ]);
     }
+
+    public function submitPaymentProof(Request $request, $id)
+    {
+        $jilid = Jilid::findOrFail($id);
+
+        // Validate the request
+        // $request->validate([
+        //     'bukti_pembayaran' => 'required',
+        // ]);
+
+        // Update the payment proof link
+        $jilid->bukti_pembayaran = $request->bukti_pembayaran;
+        $jilid->save();
+
+        return redirect()->route('jilid.index')->with([
+            'status' => 'success',
+            'message' => 'Payment proof link submitted successfully',
+        ]);
+    }
+
 
 
     public function show($id)

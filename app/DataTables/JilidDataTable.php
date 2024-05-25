@@ -61,8 +61,8 @@ class JilidDataTable extends DataTable
     public function query(Jilid $model): QueryBuilder
     {
         $loggedInUserId = Auth::id();
-        return $model->select(['id','user_id','jenis_pengumpulan','keterangan','status' ,'created_at', 'updated_at'])
-        ->where('user_id', $loggedInUserId);
+        return $model->select(['id', 'user_id', 'jenis_pengumpulan', 'bukti_pembayaran', 'keterangan', 'status', 'created_at', 'updated_at'])
+            ->where('user_id', $loggedInUserId);
     }
 
     /**
@@ -91,6 +91,7 @@ class JilidDataTable extends DataTable
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('created_at')->title('Tanggal Pengajuan'),
             Column::make('jenis_pengumpulan'),
+            Column::make('bukti_pembayaran')->title('Bukti Pembayaran'), // Ensure proper title is set
             Column::make('keterangan'),
             Column::make('status'),
             Column::computed('action')
