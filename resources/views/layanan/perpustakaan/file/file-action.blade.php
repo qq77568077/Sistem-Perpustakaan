@@ -43,7 +43,7 @@
                             <select class="form-select" id="status" name="status">
                                 <option value="" disabled>Open this select menu</option>
                                 @php
-                                    $array = ['Valid', 'Belum Validasi','Tidak Valid' ];
+                                    $array = ['Valid', 'Belum Validasi','Tidak Valid', 'File Tidak Bisa Dibuka' ];
                                 @endphp
                                 @foreach ($array as $element)
                                     <option value="{{ $element }}"

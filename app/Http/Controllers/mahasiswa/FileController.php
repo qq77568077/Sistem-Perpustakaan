@@ -65,6 +65,7 @@ class FileController extends Controller
             // Periksa apakah jenis file yang dipilih sudah digunakan sebelumnya dalam kategori yang sama
             $existingJenisFile = File::where('user_id', auth()->id())
                 ->where('kategori', $request->kategori)
+                ->where('status', '!=', 'File Tidak Bisa Dibuka')
                 ->where(function ($query) use ($request) {
                     $query->where('jenis_file', $request->jenis_file_1)
                         ->orWhere('jenis_file', $request->jenis_file_2);
@@ -98,8 +99,6 @@ class FileController extends Controller
             'message' => 'Data berhasil disimpan'
         ]);
     }
-
-
 
     /**
      * Display the specified resource.
