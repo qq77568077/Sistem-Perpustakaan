@@ -54,8 +54,35 @@
             }
         }
 
+        function checkStatus() {
+            let showButton = false;
+            $('#plagiarism-table tbody tr').each(function() {
+                let status = $(this).find('td').eq(4).text().trim();
+                if (status === "File Tidak Bisa Dibuka") {
+                    showButton = true;
+                    return false; // Exit loop early
+                }
+            });
+
+            if (showButton) {
+                $('#addButton').show();
+            } else {
+                $('#addButton').hide();
+            }
+        }
+
+
         $(document).ready(function() {
             checkSimilarity();
+
+
+            // Initialize DataTable and add a draw event listener
+            const table = $('#plagiarism-table').DataTable();
+
+            // Call checkStatus when the table is drawn
+            table.on('draw', function() {
+                checkStatus();
+            });
 
             $('.btn-add').on('click', function() {
                 $.ajax({

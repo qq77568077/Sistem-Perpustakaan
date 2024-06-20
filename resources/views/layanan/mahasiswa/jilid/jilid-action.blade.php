@@ -24,41 +24,49 @@
                                 </option>
                             @endforeach
                         </select>
+                        <span class="error-message text-danger" id="jenis_pengumpulan-error"></span>
                     </div>
                     <div class="mb-3">
                         <label for="judul">Judul</label>
                         <input type="text" class="form-control" value="{{ $jilid->judul }}" id="judul"
                             name="judul">
+                        <span class="error-message text-danger" id="judul-error"></span>
                     </div>
                     <div class="mb-3">
                         <label for="page_berwarna">Jumlah Halaman Berwarna</label>
                         <input type="number" class="form-control" value="{{ $jilid->page_berwarna }}"
                             id="page_berwarna" name="page_berwarna">
+                        <span class="error-message text-danger" id="page_berwarna-error"></span>
                     </div>
                     <div class="mb-3">
                         <label for="page_hitamPutih">Jumlah Halaman Hitam/Putih</label>
                         <input type="number" class="form-control" value="{{ $jilid->page_hitamPutih }}"
                             id="page_hitamPutih" name="page_hitamPutih">
+                        <span class="error-message text-danger" id="page_hitamPutih-error"></span>
                     </div>
                     <div class="mb-3">
                         <label for="exemplar">Jumlah Examplar</label>
                         <input type="number" class="form-control" value="{{ $jilid->exemplar }}" id="exemplar"
                             name="exemplar">
+                        <span class="error-message text-danger" id="exemplar-error"></span>
                     </div>
                     <div class="mb-3">
                         <label for="hard_jilid">Jumlah Hard File</label>
                         <input type="number" class="form-control" value="{{ $jilid->hard_jilid }}" id="hard_jilid"
                             name="hard_jilid">
+                        <span class="error-message text-danger" id="hard_jilid-error"></span>
                     </div>
                     <div class="mb-3">
                         <label for="soft_jilid">Jumlah Soft File</label>
                         <input type="number" class="form-control" value="{{ $jilid->soft_jilid }}" id="soft_jilid"
                             name="soft_jilid">
+                        <span class="error-message text-danger" id="soft_jilid-error"></span>
                     </div>
                     <div class="mb-3">
                         <label for="total">Total</label>
                         <input type="number" class="form-control" value="{{ $jilid->total }}" id="total"
                             name="total">
+                        <span class="error-message text-danger" id="total-error"></span>
                     </div>
                     {{-- <div class="mb-3">
                         <label for="bukti_pembayaran">Bukti Pembayaran</label>
@@ -69,11 +77,16 @@
                         <label for="file">Link File Berkas</label>
                         <input type="text" class="form-control" value="{{ $jilid->file }}" id="file"
                             name="file">
+                        <span class="error-message text-danger" id="file-error"></span>
                     </div>
                     <div class="mb-3">
                         <label for="keterangan">Keterangan</label>
                         <textarea class="form-control" id="keterangan" name='keterangan'
                             placeholder="Wajib diisi dengan halaman-halaman yang ingin dicetak berwarna">{{ $jilid->keterangan }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <h5>Catatan</h5>
+                        <span>pengambilan berkas dapat di ambil setelah pembayaran disetujui</span>
                     </div>
                     @if (request()->user()->can('status layanan/jilid'))
                         <div class="mb-3" {{ $jilid->id ? 'edit-mode' : '' }}>
@@ -139,6 +152,93 @@
             });
         }
     }
+
+
+    document.getElementById('formAction').addEventListener('submit', function(event) {
+        let valid = true;
+
+        // Clear previous error messages
+        document.querySelectorAll('.error-message').forEach(function(element) {
+            element.textContent = '';
+        });
+
+        // Validation logic for each input field
+        const jenisPengumpulan = document.getElementById('jenis_pengumpulan');
+        if (jenisPengumpulan.value === '') {
+            valid = false;
+            document.getElementById('jenis_pengumpulan-error').textContent = 'Jenis Pengumpulan harus dipilih.';
+        }
+
+        const judul = document.getElementById('judul');
+        if (judul.value.trim() === '') {
+            valid = false;
+            document.getElementById('judul-error').textContent = 'Judul tidak boleh kosong.';
+        }
+
+        const pageBerwarna = document.getElementById('page_berwarna');
+        if (pageBerwarna.value.trim() === '' || pageBerwarna.value < 0) {
+            valid = false;
+            document.getElementById('page_berwarna-error').textContent =
+                'Jumlah Halaman Berwarna tidak boleh kosong atau negatif.';
+        }
+
+        const pageHitamPutih = document.getElementById('page_hitamPutih');
+        if (pageHitamPutih.value.trim() === '' || pageHitamPutih.value < 0) {
+            valid = false;
+            document.getElementById('page_hitamPutih-error').textContent =
+                'Jumlah Halaman Hitam/Putih tidak boleh kosong atau negatif.';
+        }
+
+        const exemplar = document.getElementById('exemplar');
+        if (exemplar.value.trim() === '' || exemplar.value < 0) {
+            valid = false;
+            document.getElementById('exemplar-error').textContent =
+                'Jumlah Examplar tidak boleh kosong atau negatif.';
+        }
+
+        const hardJilid = document.getElementById('hard_jilid');
+        if (hardJilid.value.trim() === '' || hardJilid.value < 0) {
+            valid = false;
+            document.getElementById('hard_jilid-error').textContent =
+                'Jumlah Hard File tidak boleh kosong atau negatif.';
+        }
+
+        const softJilid = document.getElementById('soft_jilid');
+        if (softJilid.value.trim() === '' || softJilid.value < 0) {
+            valid = false;
+            document.getElementById('soft_jilid-error').textContent =
+                'Jumlah Soft File tidak boleh kosong atau negatif.';
+        }
+
+        const total = document.getElementById('total');
+        if (total.value.trim() === '' || total.value < 0) {
+            valid = false;
+            document.getElementById('total-error').textContent = 'Total tidak boleh kosong atau negatif.';
+        }
+
+        const file = document.getElementById('file');
+        if (file.value.trim() === '') {
+            valid = false;
+            document.getElementById('file-error').textContent = 'Link File Berkas tidak boleh kosong.';
+        }
+
+        const keterangan = document.getElementById('keterangan');
+        if (keterangan.value.trim() === '') {
+            valid = false;
+            document.getElementById('keterangan-error').textContent = 'Keterangan tidak boleh kosong.';
+        }
+
+        const status = document.getElementById('status');
+        if (status && status.value === '') {
+            valid = false;
+            document.getElementById('status-error').textContent = 'Status harus dipilih.';
+        }
+
+        // If not valid, prevent form submission
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
 
     // Attach the calculation function to input change events
     document.getElementById("page_berwarna").addEventListener("input", updateCalculations);

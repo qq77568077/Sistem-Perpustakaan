@@ -51,9 +51,9 @@ class PlagiarismController extends Controller
         $plagiarism = new Plagiarism();
         $plagiarism->user_id = auth()->id();
         $plagiarism->file = $request->file;
-        $plagiarism->similarity = null;
-        $plagiarism->hasil_cek = null;
-        $plagiarism->status = null;
+        $plagiarism->similarity = 0;
+        $plagiarism->hasil_cek = 'Hasil Belum di tampilkan';
+        $plagiarism->status = 'Belum Validasi';
         $plagiarism->save();
 
         return response()->json([

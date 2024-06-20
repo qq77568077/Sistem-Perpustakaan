@@ -41,12 +41,12 @@ class JilidController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Jilid $jilid)
-    {
+    public function store(Request $request, Jilid $jilid){
         $userRole = auth()->user()->role;
 
         $existingEntry = Jilid::where('user_id', auth()->id())
             ->where('jenis_pengumpulan', $request->jenis_pengumpulan)
+            ->where('status', '!=', 'File Tidak Bisa Dibuka')
             ->first();
 
         if ($existingEntry) {

@@ -38,7 +38,7 @@
                             <select class="form-select" id="status" name="status">
                                 <option value="">Open this select menu</option>
                                 @php
-                                    $array = ['Selesai', 'Belum Mencukupi'];
+                                    $array = ['Selesai', 'Belum Mencukupi', 'File Tidak Bisa Dibuka'];
                                 @endphp
                                 @foreach ($array as $element)
                                     <option value="{{ $element }}"

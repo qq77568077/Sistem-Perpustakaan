@@ -48,13 +48,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="hard_jilid">Jumlah Hard File</label>
-                        <input type="number" class="form-control" value="{{ $pengajuan_jilid->hard_jilid }}" id="hard_jilid"
-                            name="hard_jilid">
+                        <input type="number" class="form-control" value="{{ $pengajuan_jilid->hard_jilid }}"
+                            id="hard_jilid" name="hard_jilid">
                     </div>
                     <div class="mb-3">
                         <label for="soft_jilid">Jumlah Soft File</label>
-                        <input type="number" class="form-control" value="{{ $pengajuan_jilid->soft_jilid }}" id="soft_jilid"
-                            name="soft_jilid">
+                        <input type="number" class="form-control" value="{{ $pengajuan_jilid->soft_jilid }}"
+                            id="soft_jilid" name="soft_jilid">
                     </div>
                     <div class="mb-3">
                         <label for="total">Total</label>
@@ -81,8 +81,17 @@
                             <select class="form-select" name="status">
                                 <option selected>Open this select menu</option>
                                 @php
-                                    $array = ['Approved', 'selesai', 'Tidak Valid'];
-                                    $selectedStatus = isset($pengajuan_jilid[0]['status']) ? $pengajuan_jilid[0]['status'] : null;
+                                    $array = [
+                                        'Laporan Disetujui',
+                                        'Pembayaran Disetujui',
+                                        'Selesai',
+                                        'Proses',
+                                        'Tidak Disetujui',
+                                        'File Tidak Bisa Dibuka',
+                                    ];
+                                    $selectedStatus = isset($pengajuan_jilid[0]['status'])
+                                        ? $pengajuan_jilid[0]['status']
+                                        : null;
                                 @endphp
                                 @foreach ($array as $element)
                                     @if ($element === $selectedStatus)

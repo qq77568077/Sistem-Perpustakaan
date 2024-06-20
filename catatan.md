@@ -87,3 +87,70 @@ php artisan serve
 
 mmebuat database di phpmyadmin dengan nama SistemPerpus
 
+
+## Update Terbaru Rev Program 17 Juni 2024 berdasarkan rekaman
+
+- Dashboard 
+    ## user
+    - Menampilkan Syarat Ketentuan & Histori Terakhir yang dilakukan user V untuk history belum jelas
+    - 
+
+    ## admin
+- Harga 
+  ## admin
+
+- Plagiarism 
+  ## admin
+  - menambahkan update status file tidak bisa di buka & upload file baru pada user V
+     
+  ## user
+
+- jilid 
+
+  ## admin
+  - menambahkan update status file tidak bisa di buka v
+  - menambahkan update status approved pembayaran setelah user sudah upload bukti bayar v
+  
+  - jadi ada approved laporan sama approved pembayaran  v 
+  - tambahkan update status proses untuk yang setelah approved pembayaran , sebelum update status selesai  v
+
+  ## user
+    Di form pengajuan di tambahkan catatan , pengambilan berkas dapat di ambil setelah approved pengambayaran v 
+
+
+## 
+
+## Revisi Laporan
+
+- pengujian program di sesuaikan usecase
+  ditambahkan 1 tabel lagi 
+  judul melakukan cek plagiarism 
+  proses upload link file laporan untuk di cek 
+  output , file berhasil di kirim atau tersimpan
+  berhak tidak berhak di sesuaikan dengan fungsinya
+
+  tambahkan keter
+  berdasarkan adalah hasil pengujian terhadap fungsi
+  1. nomor 
+  2. nama fungsi 
+  3. kegunaan
+  4. output yang di harapkan
+  5. kesesuaian
+
+  sesuaikan nama usercase dengan nama fungsi yang ada di pengujian
+
+- berikan keterangan pada mockup atau gambar 
+
+  rincikan di usecase ada apa saja 
+- penambahan bab 2 & bab 3 diagram
+
+- pada segment program size 8 spasi 1 font arial
+  tambahkan keterangan 
+
+
+
+ 
+
+
+
+

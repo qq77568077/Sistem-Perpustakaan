@@ -23,6 +23,7 @@
                                 </option>
                             @endforeach
                         </select>
+                        <span class="error-message text-danger" id="kategori-error"></span>
                     </div>
                     <div class="mb-3" id="jenis_file_1">
                         <label for="jenis_file_1">Jenis Pengembangan</label>
@@ -36,6 +37,7 @@
                                     </option>
                                 @endforeach
                             </select>
+                            <span class="error-message text-danger" id="jenis_file_1-error"></span>
                         </div>
                     </div>
                     <div class="mb-3" id="jenis_file_2">
@@ -63,12 +65,14 @@
                                     style="background-color: {{ $berka->jenis_file == '8' ? 'yellow' : 'white' }}">
                                     Artikel Jurnal</option>
                             </select>
+                            <span class="error-message text-danger" id="jenis_file_2-error"></span>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="bukti_file">Bukti FIle</label>
                         <input type="text" class="form-control" value="{{ $berka->bukti_file }}" id="bukti_file"
                             name="bukti_file">
+                        <span class="error-message text-danger" id="bukti_file-error"></span>
                     </div>
                     @if (request()->user()->can('status layanan/berkas'))
                         <div class="mb-3">
@@ -177,4 +181,55 @@
 
     handleJenisFileChange();
     handleKategoriChange();
+
+
+    // Form validation
+    document.getElementById('formAction').addEventListener('submit', function(event) {
+        let valid = true;
+
+        // Clear previous error messages
+        document.querySelectorAll('.error-message').forEach(function(element) {
+            element.textContent = '';
+        });
+
+        // Validation logic for each input field
+        const kategori = document.getElementById('kategori');
+        if (kategori.value === '') {
+            valid = false;
+            document.getElementById('kategori-error').textContent = 'Kategori harus dipilih.';
+        }
+
+        const jenisFile1 = document.getElementById('jenis_file_1').querySelector('select');
+        const jenisFile2 = document.getElementById('jenis_file_2').querySelector('select');
+        if (kategori.value === '1' && jenisFile1.value === '') {
+            valid = false;
+            document.getElementById('jenis_file_1-error').textContent = 'Jenis Pengembangan harus dipilih.';
+        } else if (kategori.value === '2' && jenisFile2.value === '') {
+            valid = false;
+            document.getElementById('jenis_file_2-error').textContent = 'Jenis Non Pengembangan harus dipilih.';
+        }
+
+        const buktiFile = document.getElementById('bukti_file');
+        if (buktiFile.value.trim() === '') {
+            valid = false;
+            document.getElementById('bukti_file-error').textContent = 'Bukti File tidak boleh kosong.';
+        }
+
+        const keterangan = document.getElementById('keterangan');
+        if (keterangan && keterangan.value.trim() === '') {
+            valid = false;
+            document.getElementById('keterangan-error').textContent = 'Keterangan tidak boleh kosong.';
+        }
+
+        const status = document.getElementById('status');
+        if (status && status.value === '') {
+            valid = false;
+            document.getElementById('status-error').textContent = 'Status harus dipilih.';
+        }
+
+        // If not valid, prevent form submission
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
 </script>

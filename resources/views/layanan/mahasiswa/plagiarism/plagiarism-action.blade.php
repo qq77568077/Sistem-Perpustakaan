@@ -14,6 +14,7 @@
                     <div class="mb-3">
                         <label for="file">File</label>
                         <input type="text" class="form-control" value="{{$plagiarism->file}}" id="file" name="file" {{$plagiarism->id ? 'readonly' : ''}}>
+                        <span class="error-message text-danger" id="file-error"></span>
                     </div>
                     @if (request()->user()->can('hasil layanan/plagiarism'))
                     <div class="mb-3" {{$plagiarism->id ? 'edit-mode' : ''}}>
@@ -50,3 +51,48 @@
         </div>
     </form>
 </div>
+
+
+<script>
+    document.getElementById('formAction').addEventListener('submit', function(event) {
+        let valid = true;
+
+        // Clear previous error messages
+        document.querySelectorAll('.error-message').forEach(function(element) {
+            element.textContent = '';
+        });
+
+        // File validation
+        const file = document.getElementById('file');
+        if (file.value.trim() === '') {
+            valid = false;
+            document.getElementById('file-error').textContent = 'File tidak boleh kosong.';
+        }
+
+        // Hasil cek validation
+        const hasilCek = document.getElementById('hasil_cek');
+        if (hasilCek && hasilCek.value.trim() === '') {
+            valid = false;
+            document.getElementById('hasil_cek-error').textContent = 'Hasil cek tidak boleh kosong.';
+        }
+
+        // Keterangan validation
+        const keterangan = document.getElementById('keterangan');
+        if (keterangan && keterangan.value.trim() === '') {
+            valid = false;
+            document.getElementById('keterangan-error').textContent = 'Keterangan tidak boleh kosong.';
+        }
+
+        // Status validation
+        const status = document.getElementById('status');
+        if (status.value === '') {
+            valid = false;
+            document.getElementById('status-error').textContent = 'Status harus dipilih.';
+        }
+
+        // If not valid, prevent form submission
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
+</script>
