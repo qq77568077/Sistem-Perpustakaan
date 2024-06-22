@@ -129,7 +129,7 @@ mmebuat database di phpmyadmin dengan nama SistemPerpus
   output , file berhasil di kirim atau tersimpan
   berhak tidak berhak di sesuaikan dengan fungsinya
 
-  tambahkan keter
+  tambahkan keterangan
   berdasarkan adalah hasil pengujian terhadap fungsi
   1. nomor 
   2. nama fungsi 
@@ -137,14 +137,14 @@ mmebuat database di phpmyadmin dengan nama SistemPerpus
   4. output yang di harapkan
   5. kesesuaian
 
-  sesuaikan nama usercase dengan nama fungsi yang ada di pengujian
+  sesuaikan nama usercase dengan nama fungsi yang ada di pengujian 
 
 - berikan keterangan pada mockup atau gambar 
 
-  rincikan di usecase ada apa saja 
-- penambahan bab 2 & bab 3 diagram
+  rincikan di usecase ada apa saja  V
+- penambahan bab 2 & bab 3 diagram V
 
-- pada segment program size 8 spasi 1 font arial
+- pada segment program size 8 spasi 1 font arial v
   tambahkan keterangan 
 
 
