@@ -66,6 +66,7 @@ class FileController extends Controller
             $existingJenisFile = File::where('user_id', auth()->id())
                 ->where('kategori', $request->kategori)
                 ->where('status', '!=', 'File Tidak Bisa Dibuka')
+                ->where('status', '!=', 'Tidak Valid')
                 ->where(function ($query) use ($request) {
                     $query->where('jenis_file', $request->jenis_file_1)
                         ->orWhere('jenis_file', $request->jenis_file_2);

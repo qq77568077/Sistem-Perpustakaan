@@ -2,7 +2,6 @@
 @push('css')
     <link href="{{ asset('') }}vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <link href="{{ asset('') }}vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
-   
 @endpush
 @section('content')
     <div class="main-content">
@@ -60,6 +59,13 @@
                                                             data-jenis="edit" id="btn-edit"
                                                             class="btn btn-warning btn-sm"><i
                                                                 class="ti-pencil"></i></button>
+                                                        @if (request()->user()->can('status layanan/berkas'))
+                                                            <button type="button" data-id="{{ $d->id }}"
+                                                                data-jenis="delete"
+                                                                class="btn btn-danger btn-sm btn-delete"><i
+                                                                    class="ti-trash"></i></button>
+                                                        @endif
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -82,7 +88,6 @@
 @endsection
 
 @push('js')
-   
     <script src="{{ asset('') }}vendor/jquery/jquery.min.js"></script>
     <script src="{{ asset('') }}vendor/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('') }}vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
@@ -144,6 +149,44 @@
             });
         }
 
+        function deleteFile(id) {
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'DELETE',
+                        url: `{{ url('layanan/pengajuan-plagiarism/') }}/${id}`,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(res) {
+                            Swal.fire(
+                                'Deleted!',
+                                'File telah dihapus.',
+                                'success'
+                            )
+                            window.location.reload();
+                        },
+                        error: function(res) {
+                            Swal.fire(
+                                'Failed!',
+                                'File gagal dihapus.',
+                                'error'
+                            )
+                            console.log(res);
+                        }
+                    });
+                }
+            })
+        }
+
         $('#table-document').on('click', '#btn-edit', function() {
             let data = $(this).data();
             let id = data.id;
@@ -161,6 +204,11 @@
                 }
             });
 
+        });
+
+        $('#table-document').on('click', '.btn-delete', function() {
+            let id = $(this).data('id');
+            deleteFile(id);
         });
     </script>
 @endpush

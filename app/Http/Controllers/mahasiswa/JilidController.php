@@ -47,6 +47,7 @@ class JilidController extends Controller
         $existingEntry = Jilid::where('user_id', auth()->id())
             ->where('jenis_pengumpulan', $request->jenis_pengumpulan)
             ->where('status', '!=', 'File Tidak Bisa Dibuka')
+            ->where('status', '!=', 'Tidak Disetujui')
             ->first();
 
         if ($existingEntry) {

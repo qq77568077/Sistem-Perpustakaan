@@ -176,5 +176,6 @@
             })
 
         })
+        
     </script>
 @endpush

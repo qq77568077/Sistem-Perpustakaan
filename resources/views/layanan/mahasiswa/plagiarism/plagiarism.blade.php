@@ -55,7 +55,10 @@
         }
 
         function checkStatus() {
-            let showButton = false;
+            const table = $('#plagiarism-table').DataTable();
+            let showButton = table.rows().count() === 0; // Check if there are no rows
+
+            // Iterate through each row to check status
             $('#plagiarism-table tbody tr').each(function() {
                 let status = $(this).find('td').eq(4).text().trim();
                 if (status === "File Tidak Bisa Dibuka") {
@@ -64,6 +67,7 @@
                 }
             });
 
+            // Tampilkan atau sembunyikan tombol "Tambah" berdasarkan status
             if (showButton) {
                 $('#addButton').show();
             } else {
@@ -71,10 +75,8 @@
             }
         }
 
-
         $(document).ready(function() {
             checkSimilarity();
-
 
             // Initialize DataTable and add a draw event listener
             const table = $('#plagiarism-table').DataTable();

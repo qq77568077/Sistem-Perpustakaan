@@ -42,6 +42,11 @@
                                                     <button type="button" data-id="{{ $d->id }}" data-jenis="edit"
                                                         class="btn btn-warning btn-sm btn-edit"><i
                                                             class="ti-pencil"></i></button>
+                                                    @if (request()->user()->can('status layanan/berkas'))
+                                                        <button type="button" data-id="{{ $d->id }}"
+                                                            data-jenis="delete" class="btn btn-danger btn-sm btn-delete"><i
+                                                                class="ti-trash"></i></button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -99,7 +104,7 @@
                             $(_form).find('.text-danger.text-small').remove();
                             if (error) {
                                 for (const [key, value] of Object.entries(error)) {
-                                    $(`[name= '${key}']`).parent().append(
+                                    $(`[name='${key}']`).parent().append(
                                         `<span class="text-danger text-small">${value}</span>`
                                     );
                                 }
@@ -110,11 +115,47 @@
                 });
             }
 
+            function deleteFile(id) {
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: "Anda tidak akan dapat mengembalikan ini!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: 'DELETE',
+                            url: `{{ url('layanan/file/') }}/${id}`,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(res) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'File telah dihapus.',
+                                    'success'
+                                )
+                                window.location.reload();
+                            },
+                            error: function(res) {
+                                Swal.fire(
+                                    'Failed!',
+                                    'File gagal dihapus.',
+                                    'error'
+                                )
+                                console.log(res);
+                            }
+                        });
+                    }
+                })
+            }
+
             // Handling klik tombol edit
             $('#table-document').on('click', '.btn-edit', function() {
-                let data = $(this).data();
-                let id = data.id;
-                let jenis = data.jenis;
+                let id = $(this).data('id');
 
                 $.ajax({
                     method: 'get',
@@ -125,6 +166,12 @@
                         store();
                     }
                 });
+            });
+
+            // Handling klik tombol delete
+            $('#table-document').on('click', '.btn-delete', function() {
+                let id = $(this).data('id');
+                deleteFile(id);
             });
         });
     </script>

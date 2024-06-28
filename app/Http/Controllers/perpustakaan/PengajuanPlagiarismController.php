@@ -117,8 +117,12 @@ class PengajuanPlagiarismController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Plagiarism $pengajuan_plagiarism)
     {
-        //
+        $pengajuan_plagiarism->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Delete data successfully'
+        ]);
     }
 }
