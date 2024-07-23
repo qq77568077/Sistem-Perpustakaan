@@ -27,9 +27,15 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $this->authorize('read layanan/file');
+
+        // Mengambil semua kategori yang tersedia
         $categories = Category::all();
+
+        // Mengambil nilai filter program studi dan kategori dari request
         $prodiFilter = $request->input('prodi');
         $kategoriFilter = $request->input('kategori');
+
+        // Mengambil data berkas dengan menyertakan relasi user dan kategori
         $files = File::with(['user', 'category'])->when($prodiFilter, function ($query) use ($prodiFilter) {
             return $query->whereHas('user.mahasiswa', function ($mahasiswaQuery) use ($prodiFilter) {
                 $mahasiswaQuery->whereHas('prodi', function ($prodiQuery) use ($prodiFilter) {
@@ -37,10 +43,13 @@ class DocumentController extends Controller
                 });
             });
         })->when($kategoriFilter, function ($query) use ($kategoriFilter) {
-                return $query->where('kategori', $kategoriFilter);})->get()->groupBy('user_id');
+            return $query->where('kategori', $kategoriFilter);
+        })->get()->groupBy('user_id');
 
+        // Mengambil semua dokumen yang tersedia dan mengurutkannya berdasarkan id secara ascending
         $document = Document::orderBy('id', 'asc')->get();
 
+        // Mem-passing data ke view untuk dirender
         return view('layanan.perpustakaan.file.file', compact('document', 'files', 'categories'));
     }
 
@@ -113,15 +122,31 @@ class DocumentController extends Controller
      */
     public function update(Request $request, File $file)
     {
-        $file->jenis_file = $request->jenis_file;
-        $file->bukti_file = $request->bukti_file;
-        $file->keterangan = $request->keterangan;
-        $file->status = $request->status;
-        $file->save();
+        // Validasi input tidak boleh kosong
+        $request->validate([
+            'jenis_pengumpulan' => 'required',
+            'bukti_file' => 'required',
+            'keterangan' => 'required',
+            'status' => 'required',
+        ], [
+            'jenis_pengumpulan.required' => 'Jenis Pengumpulan tidak boleh kosong.',
+            'bukti_file.required' => 'Bukti File tidak boleh kosong.',
+            'keterangan.required' => 'Keterangan tidak boleh kosong.',
+            'status.required' => 'Status tidak boleh kosong.',
+        ]);
+        // Mengambil nilai dari request dan menyimpan ke atribut model file
+        $file->jenis_file = $request->jenis_file; // Mengupdate jenis file
+        $file->bukti_file = $request->bukti_file; // Mengupdate bukti file (tautan atau lokasi file)
+        $file->keterangan = $request->keterangan; // Mengupdate keterangan tambahan
+        $file->status = $request->status; // Mengupdate status berkas TA
 
+        // Menyimpan perubahan ke database
+        $file->save(); // Menyimpan data yang telah diupdate ke database
+
+        // Mengembalikan respon JSON dengan status sukses
         return response()->json([
-            'status' => 'success',
-            'message' => 'updated data successfully'
+            'status' => 'success', // Menyatakan bahwa operasi berhasil
+            'message' => 'updated data successfully' // Pesan sukses
         ]);
     }
 

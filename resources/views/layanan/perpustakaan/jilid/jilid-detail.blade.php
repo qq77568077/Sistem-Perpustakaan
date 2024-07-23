@@ -6,7 +6,7 @@
 @section('content')
     <div class="main-content">
         <div class="title">
-            Data Berkas Tugas Akhir
+            Data Berkas Jilid Laporan
         </div>
         <div class="content-wrapper">
             <div class="row same-height">
@@ -78,7 +78,6 @@
 
     <div class="modal fade" id="modalAction" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-
         </div>
     </div>
 @endsection

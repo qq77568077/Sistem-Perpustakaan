@@ -21,8 +21,10 @@ class FileController extends Controller
 
     public function index(BerkasDataTable $dataTable)
     {
-        //
+        // Memeriksa otorisasi untuk membaca layanan/berkas sebelum menampilkan data.
         $this->authorize('read layanan/berkas');
+
+        // Mengembalikan tampilan tabel data berkas menggunakan BerkasDataTable.
         return $dataTable->render('layanan.mahasiswa.file.file');
     }
 
@@ -48,9 +50,25 @@ class FileController extends Controller
      */
     public function store(Request $request, File $berka)
     {
+        $request->validate([
+            'kategori' => 'required',
+            'jenis_file_1' => 'required_if:kategori,1', // Adjust this based on your validation rules
+            'jenis_file_2' => 'required_if:kategori,2', // Adjust this based on your validation rules
+            'bukti_file' => 'required',
+            'keterangan' => 'required_if:status,Validasi', // Adjust this based on your validation rules
+            'status' => 'required_if:keterangan,Validasi', // Adjust this based on your validation rules
+        ], [
+            'kategori.required' => 'Kategori harus dipilih.',
+            'jenis_file_1.required_if' => 'Jenis Pengembangan harus dipilih.',
+            'jenis_file_2.required_if' => 'Jenis Non Pengembangan harus dipilih.',
+            'bukti_file.required' => 'Bukti File tidak boleh kosong.',
+            'keterangan.required_if' => 'Keterangan tidak boleh kosong jika status adalah Validasi.',
+            'status.required_if' => 'Status harus dipilih jika keterangan adalah Validasi.',
+        ]);
+        // Ambil peran pengguna yang sedang masuk
         $userRole = auth()->user()->role;
 
-        // Ambil entri terakhir pengguna
+        // Ambil entri terakhir pengguna yang sedang masuk
         $lastEntry = File::where('user_id', auth()->id())->latest()->first();
 
         if ($lastEntry) {
@@ -83,18 +101,21 @@ class FileController extends Controller
 
         // Jika validasi berhasil, lanjutkan dengan menyimpan data baru
         $berka = new File();
-        $berka->user_id = auth()->id();
-        $berka->kategori = $request->kategori;
+        $berka->user_id = auth()->id(); // Set user_id dengan ID pengguna yang sedang masuk
+        $berka->kategori = $request->kategori; // Set kategori berdasarkan input pengguna
+
         // Atur jenis_file berdasarkan kategori yang dipilih
         if ($request->kategori == '1') {
             $berka->jenis_file = $request->jenis_file_1;
         } elseif ($request->kategori == '2') {
             $berka->jenis_file = $request->jenis_file_2;
         }
-        $berka->bukti_file = $request->bukti_file;
-        $berka->status = 'Belum Validasi';
-        $berka->save();
 
+        $berka->bukti_file = $request->bukti_file; // Set bukti_file dengan data dari input pengguna
+        $berka->status = 'Belum Validasi'; // Set status awal menjadi 'Belum Validasi'
+        $berka->save(); // Simpan entri baru ke dalam database
+
+        // Kembalikan respons JSON dengan status sukses
         return response()->json([
             'status' => 'success',
             'message' => 'Data berhasil disimpan'

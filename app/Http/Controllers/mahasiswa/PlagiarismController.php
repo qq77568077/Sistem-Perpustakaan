@@ -27,7 +27,7 @@ class PlagiarismController extends Controller
         $plagiarism = Plagiarism::where('user_id', $user_id)->orderBy('created_at', 'desc')->first();
         $similarity = $plagiarism ? $plagiarism->similarity : null;
 
-        return $dataTable->render('layanan.mahasiswa.plagiarism.plagiarism',compact('similarity'));
+        return $dataTable->render('layanan.mahasiswa.plagiarism.plagiarism', compact('similarity'));
     }
 
     /**

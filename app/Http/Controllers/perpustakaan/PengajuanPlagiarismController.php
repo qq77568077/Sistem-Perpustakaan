@@ -24,11 +24,9 @@ class PengajuanPlagiarismController extends Controller
     public function index(Request $request)
     {
         $this->authorize('read layanan/pengajuan-plagiarism');
-
         $plagiarisms = Plagiarism::with('user')
-                                ->get()
-                                ->groupBy('user_id');
-
+            ->get()
+            ->groupBy('user_id');
         return view('layanan.perpustakaan.plagiarism.plagiarism', compact('plagiarisms'));
     }
 
@@ -48,7 +46,7 @@ class PengajuanPlagiarismController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , Plagiarism $plagiarism)
+    public function store(Request $request, Plagiarism $plagiarism)
     {
         $plagiarism = new Plagiarism();
         $plagiarism->user_id = auth()->id();
@@ -86,7 +84,6 @@ class PengajuanPlagiarismController extends Controller
     public function edit(Plagiarism $pengajuan_plagiarism)
     {
         return view('layanan.perpustakaan.plagiarism.plagiarism-action', compact('pengajuan_plagiarism'));
-
     }
 
     /**
@@ -98,6 +95,20 @@ class PengajuanPlagiarismController extends Controller
      */
     public function update(Request $request, Plagiarism $pengajuan_plagiarism)
     {
+        // Validasi input
+        $request->validate([
+            'file' => 'required',
+            'hasil_cek' => 'required',
+            'similarity' => 'required',
+            'keterangan' => 'required',
+            'status' => 'required',
+        ], [
+            'file.required' => 'File tidak boleh kosong.',
+            'hasil_cek.required' => 'Hasil Cek tidak boleh kosong.',
+            'similarity.required' => 'Similarity tidak boleh kosong.',
+            'keterangan.required' => 'Keterangan tidak boleh kosong.',
+            'status.required' => 'Status tidak boleh kosong.',
+        ]);
         $pengajuan_plagiarism->file = $request->file;
         $pengajuan_plagiarism->hasil_cek = $request->hasil_cek;
         $pengajuan_plagiarism->similarity = $request->similarity;

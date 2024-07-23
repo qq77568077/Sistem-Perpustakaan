@@ -73,13 +73,29 @@
                                                         @php
                                                             $jenisFile = $userFiles
                                                                 ->where('jenis_file', $doc->id)
-                                                                ->where('status', 'Valid')
+                                                                // ->where('status', 'Valid')
                                                                 ->first();
                                                         @endphp
-                                                        @if ($jenisFile && $jenisFile->status === 'Valid')
+                                                        {{-- @if ($jenisFile && $jenisFile->status === 'Valid')
                                                             <i class="fas fa-check-circle text-success"></i>
                                                         @else
                                                             <i class="fas fa-times-circle text-warning"></i>
+                                                        @endif --}}
+                                                        @if ($jenisFile && $jenisFile->status === 'Valid')
+                                                            <!-- Berkas TA yang diupload oleh mahasiswa sudah divalidasi dan sesuai -->
+                                                            <i class="fas fa-check-circle text-success"></i>
+                                                        @elseif ($jenisFile && $jenisFile->status === 'Belum Validasi')
+                                                            <!-- Berkas TA mahasiswa sudah diupload tetapi belum divalidasi oleh perpustakaan -->
+                                                            <i class="fas fa-hourglass-half text-info"></i>
+                                                        @elseif ($jenisFile && $jenisFile->status === 'Tidak Valid')
+                                                            <!-- Berkas TA mahasiswa sudah diupload tetapi tidak valid -->
+                                                            <i class="fas fa-times-circle text-warning"></i>
+                                                        @elseif ($jenisFile && $jenisFile->status === 'File Tidak Bisa Dibuka')
+                                                            <!-- Berkas TA mahasiswa sudah diupload tetapi file tidak bisa dibuka -->
+                                                            <i class="fas fa-times text-danger"></i>
+                                                        @else
+                                                            <!-- Mahasiswa belum melakukan upload -->
+                                                            <i class="fas fa-exclamation-circle text-danger"></i>
                                                         @endif
                                                     </td>
                                                 @endforeach

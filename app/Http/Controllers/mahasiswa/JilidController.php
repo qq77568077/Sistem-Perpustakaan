@@ -41,15 +41,14 @@ class JilidController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Jilid $jilid){
+    public function store(Request $request, Jilid $jilid)
+    {
         $userRole = auth()->user()->role;
-
         $existingEntry = Jilid::where('user_id', auth()->id())
             ->where('jenis_pengumpulan', $request->jenis_pengumpulan)
             ->where('status', '!=', 'File Tidak Bisa Dibuka')
             ->where('status', '!=', 'Tidak Disetujui')
             ->first();
-
         if ($existingEntry) {
             return response()->json([
                 'status' => 'error',
@@ -72,7 +71,6 @@ class JilidController extends Controller
         $jilid->keterangan = $request->keterangan;
         $jilid->status = 'Belum Validasi';
         $jilid->save();
-
         return response()->json([
             'status' => 'success',
             'message' => 'Create data successfully'
@@ -82,11 +80,6 @@ class JilidController extends Controller
     public function submitPaymentProof(Request $request, $id)
     {
         $jilid = Jilid::findOrFail($id);
-
-        // Validate the request
-        // $request->validate([
-        //     'bukti_pembayaran' => 'required',
-        // ]);
 
         // Update the payment proof link
         $jilid->bukti_pembayaran = $request->bukti_pembayaran;
@@ -102,16 +95,20 @@ class JilidController extends Controller
 
     public function show($id)
     {
-
+        // Ambil data jilid berdasarkan ID
         $jilid = Jilid::findOrFail($id);
 
+        // Kirim data ke view untuk ditampilkan
         return view('layanan.mahasiswa.jilid.jilid-detail', compact('jilid'));
     }
 
 
     public function edit(Jilid $jilid)
     {
+        // Ambil semua data pengumpulan
         $pengumpulan = Pengumpulan::all();
+
+        // Kirim data pengumpulan dan data jilid yang akan diedit ke view
         return view('layanan.mahasiswa.jilid.jilid-action', compact('pengumpulan', 'jilid'));
     }
 
@@ -124,7 +121,6 @@ class JilidController extends Controller
      */
     public function update(Request $request, Jilid $jilid)
     {
-
         $userRole = auth()->user()->role; // Ganti 'role' dengan nama kolom aktual di model User Anda
 
         // Periksa apakah pengguna sudah memiliki entri dengan jenis_pengumpulan 'TA' atau 'PKL'
@@ -132,14 +128,12 @@ class JilidController extends Controller
             ->whereIn('jenis_pengumpulan', [1, 2])
             ->where('id', '!=', $jilid->id) // Excluding the current entry from the check for update
             ->first();
-
         if ($existingEntry) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Anda sudah memiliki entri dengan jenis pengumpulan TA atau PKL.'
             ]);
         }
-
 
         $jilid->user_id = auth()->id();
         $jilid->jenis_pengumpulan = $request->jenis_pengumpulan;
