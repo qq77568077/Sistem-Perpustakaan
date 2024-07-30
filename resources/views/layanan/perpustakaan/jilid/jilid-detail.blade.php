@@ -61,7 +61,6 @@
                                                                 class="btn btn-danger btn-sm btn-delete"><i
                                                                     class="ti-trash"></i></button>
                                                         @endif
-
                                                     </td>
                                                 </tr>
                                             @endforeach
