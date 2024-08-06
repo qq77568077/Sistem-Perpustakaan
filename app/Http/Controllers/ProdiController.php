@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\DataTables\ProdiDataTable;
 use Illuminate\Http\Request;
+use App\Models\File;
+use App\Models\Document;
 
 class ProdiController extends Controller
 {
@@ -41,51 +43,37 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'jenis_file' => 'required|exists:documents,id',
+            'bukti_file' => 'required|string',
+            'keterangan' => 'nullable|string',
+            'status' => 'nullable|string|in:Valid,Belum Validasi,Tidak Valid,File Tidak Bisa Dibuka',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        File::create($validated);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return redirect()->route('files.index')->with('success', 'File successfully created!');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $validated = $request->validate([
+            'jenis_file' => 'required|exists:documents,id',
+            'bukti_file' => 'required|string',
+            'keterangan' => 'nullable|string',
+            'status' => 'nullable|string|in:Valid,Belum Validasi,Tidak Valid,File Tidak Bisa Dibuka',
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $file = File::findOrFail($id);
+        $file->update($validated);
+
+        return redirect()->route('files.index')->with('success', 'File successfully updated!');
     }
 }

@@ -40,6 +40,10 @@
                     </div>
                 </div>
             </div>
+            <div class="mb-3" id="current-date">
+            </div>
+            <div class="mb-3" id="current-time">
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -47,3 +51,31 @@
         </div>
     </form>
 </div>
+
+<script>
+    // Function to get and display the current time and date
+    function displayCurrentTime() {
+        var currentTime = new Date();
+        var hours = currentTime.getHours();
+        var minutes = currentTime.getMinutes();
+        var seconds = currentTime.getSeconds();
+        var day = currentTime.getDate();
+        var month = currentTime.getMonth() + 1;
+        var year = currentTime.getFullYear();
+
+        // Format the time as HH:MM:SS
+        var formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' +
+            seconds.toString().padStart(2, '0');
+
+        // Format the date as DD/MM/YYYY
+        var formattedDate = day.toString().padStart(2, '0') + '/' + month.toString().padStart(2, '0') + '/' +
+            year.toString();
+
+        // Display the time and date in a specific element on the form
+        document.getElementById('current-time').textContent = 'Current Time: ' + formattedTime 
+        document.getElementById('current-date').textContent = 'Current Date: ' +formattedDate;
+    }
+
+    // Call the function to display the current time and date every second
+    setInterval(displayCurrentTime, 1000);
+</script>

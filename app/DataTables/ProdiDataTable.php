@@ -24,7 +24,7 @@ class ProdiDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addIndexColumn('')
+            ->addIndexColumn('No')
             ->addColumn('action', function ($row) {
                 $action = '';
 
@@ -47,7 +47,7 @@ class ProdiDataTable extends DataTable
      */
     public function query(Prodi $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('updated_at', 'asc');
     }
 
     /**
@@ -62,7 +62,7 @@ class ProdiDataTable extends DataTable
             ->setTableId('prodi-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(1);
+            ->orderBy(3, 'asc');
     }
 
     /**
@@ -75,8 +75,8 @@ class ProdiDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
             Column::make('nama'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

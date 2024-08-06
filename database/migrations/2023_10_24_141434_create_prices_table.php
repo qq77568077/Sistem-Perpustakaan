@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('softjilidprice');
             $table->bigInteger('hardjilidprice');
             $table->timestamps();
+            $table->boolean('is_active')->default(false);
         });
     }
 

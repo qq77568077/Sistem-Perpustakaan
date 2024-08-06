@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('kategori');
-            $table->string('jenis_file');
+            $table->foreignId('user_id')->constrained('users'); // Tabel 'users' sudah ada
+            $table->foreignId('kategori')->constrained('categories'); // Mengacu ke tabel 'categories'
+            $table->foreignId('jenis_file')->constrained('documents'); // Mengacu ke tabel 'documents'
             $table->string('bukti_file');
             $table->string('keterangan')->nullable();
             $table->string('status')->nullable();

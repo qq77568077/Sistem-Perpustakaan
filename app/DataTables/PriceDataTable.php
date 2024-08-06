@@ -74,10 +74,12 @@ class PriceDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->searchable(false)->orderable(false),
+            Column::make('is_active')->title('Active'), // Kolom is_active ditampilkan paling atas
             Column::make('pageBerwarnaPrice'),
             Column::make('pageHitamPutihPrice'),
             Column::make('hardjilidprice'),
             Column::make('softjilidprice'),
+            Column::make('created_at')->title('Created At'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

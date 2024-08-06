@@ -88,6 +88,10 @@
                         <h5>Catatan</h5>
                         <span>pengambilan berkas dapat di ambil setelah pembayaran disetujui</span>
                     </div>
+                    <div class="mb-3" id="current-date">
+                    </div>
+                    <div class="mb-3" id="current-time">
+                    </div>
                     @if (request()->user()->can('status layanan/jilid'))
                         <div class="mb-3" {{ $jilid->id ? 'edit-mode' : '' }}>
                             <label for="hasil_cek">Status</label>
@@ -129,10 +133,35 @@
         const soft_jilid = parseFloat(document.getElementById("soft_jilid").value);
         const exemplar = parseFloat(document.getElementById("exemplar").value);
 
+        // Function to get and display the current time and date
+        function displayCurrentTime() {
+            var currentTime = new Date();
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var seconds = currentTime.getSeconds();
+            var day = currentTime.getDate();
+            var month = currentTime.getMonth() + 1;
+            var year = currentTime.getFullYear();
+
+            // Format the time as HH:MM:SS
+            var formattedTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' +
+                seconds.toString().padStart(2, '0');
+
+            // Format the date as DD/MM/YYYY
+            var formattedDate = day.toString().padStart(2, '0') + '/' + month.toString().padStart(2, '0') + '/' +
+                year.toString();
+
+            // Display the time and date in a specific element on the form
+            document.getElementById('current-time').textContent = 'Current Time: ' + formattedTime
+            document.getElementById('current-date').textContent = 'Current Date: ' + formattedDate;
+        }
+
+        // Call the function to display the current time and date every second
+        setInterval(displayCurrentTime, 1000);
+
         if (!isNaN(pageBerwarna) && !isNaN(pageHitamPutih) && !isNaN(hard_jilid) && !isNaN(soft_jilid) && !isNaN(
                 exemplar)) {
             //ini mengambil dari table price 
-
             $.ajax({
                 url: '{{ url('master/getPriceData') }}',
                 method: 'GET',
@@ -152,7 +181,6 @@
             });
         }
     }
-
 
     document.getElementById('formAction').addEventListener('submit', function(event) {
         let valid = true;

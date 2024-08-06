@@ -36,9 +36,9 @@ class PlagiarismDataTable extends DataTable
             ->addColumn('action', function ($row) {
                 $action = '';
 
-                // if (Gate::allows('update layanan/plagiarism')) {
-                //     $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
-                // }
+                if (Gate::allows('update layanan/plagiarism') && ($row->similarity > 10)) {
+                    $action =  '<button type="button" data-id=' . $row->id . ' data-jenis="edit" class="btn btn-warning btn-sm action"><i class="ti-pencil"></i></button>';
+                }
                 // if (Gate::allows('delete layanan/plagiarism')) {
                 //     $action .=  ' <button type="button" data-id=' . $row->id . ' data-jenis="delete" class="btn btn-danger btn-sm action"><i class="ti-trash"></i></button>';
                 // }

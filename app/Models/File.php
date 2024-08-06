@@ -16,6 +16,7 @@ class File extends Model
         'bukti_file',
         'keterangan',
         'status',
+        'updated_at'
     ];
 
     public function user()

@@ -1,8 +1,44 @@
 @extends('layouts.master')
+
 @push('css')
     <link href="{{ asset('') }}vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <link href="{{ asset('') }}vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <style>
+        .legend {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .legend h5 {
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+            color: #333;
+        }
+
+        .legend ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .legend ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .legend ul li i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+    </style>
 @endpush
+
 @section('content')
     <div class="main-content">
         <div class="title">
@@ -52,7 +88,8 @@
                                             @foreach ($document as $doc)
                                                 <th>{{ $doc->dokumen }}</th>
                                             @endforeach
-                                            <th>action</th>
+                                            <th>Updated At</th> <!-- Tambahkan kolom baru -->
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,54 +97,61 @@
                                         @foreach ($files as $userId => $userFiles)
                                             <tr align="center" valign="middle">
                                                 <td>{{ $counter++ }}</td>
-                                                <td>{{ $userFiles->first()->user->mahasiswa->prodi->nama }}
-                                                </td>
-                                                <td>{{ $userFiles->first()->user->mahasiswa->nrp }}
-                                                </td>
-                                                <td>{{ $userFiles->first()->user->name }}
-                                                </td>
-                                                <td>
-                                                    {{ $userFiles->first()->category->kategori_ta }} </td>
+                                                <td>{{ $userFiles->first()->user->mahasiswa->prodi->nama }}</td>
+                                                <td>{{ $userFiles->first()->user->mahasiswa->nrp }}</td>
+                                                <td>{{ $userFiles->first()->user->name }}</td>
+                                                <td>{{ $userFiles->first()->category->kategori_ta }}</td>
                                                 @foreach ($document as $doc)
                                                     <td>
                                                         @php
                                                             $jenisFile = $userFiles
                                                                 ->where('jenis_file', $doc->id)
-                                                                // ->where('status', 'Valid')
                                                                 ->first();
                                                         @endphp
-                                                        {{-- @if ($jenisFile && $jenisFile->status === 'Valid')
-                                                            <i class="fas fa-check-circle text-success"></i>
-                                                        @else
-                                                            <i class="fas fa-times-circle text-warning"></i>
-                                                        @endif --}}
                                                         @if ($jenisFile && $jenisFile->status === 'Valid')
-                                                            <!-- Berkas TA yang diupload oleh mahasiswa sudah divalidasi dan sesuai -->
                                                             <i class="fas fa-check-circle text-success"></i>
                                                         @elseif ($jenisFile && $jenisFile->status === 'Belum Validasi')
-                                                            <!-- Berkas TA mahasiswa sudah diupload tetapi belum divalidasi oleh perpustakaan -->
                                                             <i class="fas fa-hourglass-half text-info"></i>
                                                         @elseif ($jenisFile && $jenisFile->status === 'Tidak Valid')
-                                                            <!-- Berkas TA mahasiswa sudah diupload tetapi tidak valid -->
                                                             <i class="fas fa-times-circle text-warning"></i>
                                                         @elseif ($jenisFile && $jenisFile->status === 'File Tidak Bisa Dibuka')
-                                                            <!-- Berkas TA mahasiswa sudah diupload tetapi file tidak bisa dibuka -->
                                                             <i class="fas fa-times text-danger"></i>
                                                         @else
-                                                            <!-- Mahasiswa belum melakukan upload -->
                                                             <i class="fas fa-exclamation-circle text-danger"></i>
                                                         @endif
                                                     </td>
                                                 @endforeach
                                                 <td>
+                                                    <!-- Menampilkan tanggal pembaruan terakhir -->
+                                                    {{ $userFiles->first()->updated_at->format('d-m-Y H:i:s') }}
+                                                </td>
+                                                <td>
                                                     <button type="button" data-id="{{ $userId }}"
-                                                        data-jenis="detail" class="btn btn-info btn-sm action"><i
-                                                            class="ti-eye"></i></button>
+                                                        data-jenis="detail" class="btn btn-info btn-sm action">
+                                                        <i class="ti-eye"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                     </tbody>
                                     @endforeach
                                 </table>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="legend">
+                                <h5>Keterangan Status Berkas:</h5>
+                                <ul>
+                                    <li><i class="fas fa-check-circle text-success"></i> Valid: Berkas telah divalidasi dan
+                                        sesuai</li>
+                                    <li><i class="fas fa-hourglass-half text-info"></i> Belum Validasi: Berkas sudah
+                                        diupload tetapi belum divalidasi</li>
+                                    <li><i class="fas fa-times-circle text-warning"></i> Tidak Valid: Berkas sudah diupload
+                                        tetapi tidak valid</li>
+                                    <li><i class="fas fa-times text-danger"></i> File Tidak Bisa Dibuka: Berkas tidak dapat
+                                        dibuka</li>
+                                    <li><i class="fas fa-exclamation-circle text-danger"></i> Tidak Diupload: Mahasiswa
+                                        belum mengupload berkas</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -127,6 +171,7 @@
         $(document).ready(function() {
             $('#myTable').DataTable();
         });
+
         $(document).ready(function() {
             $('.action').on('click', function() {
                 var userId = $(this).data('id');
@@ -137,7 +182,6 @@
                     url: "{{ route('file.show', ':user_id') }}".replace(':user_id', userId),
                     success: function(response) {
                         // Lakukan sesuatu dengan respons dari AJAX, seperti menampilkan di modal atau halaman lain
-                        // Contoh: Redirect ke halaman file-detail
                         window.location.href = "{{ route('file.show', ':user_id') }}".replace(
                             ':user_id', userId);
                     },

@@ -124,12 +124,12 @@ class DocumentController extends Controller
     {
         // Validasi input tidak boleh kosong
         $request->validate([
-            'jenis_pengumpulan' => 'required',
+            'jenis_file' => 'required',
             'bukti_file' => 'required',
             'keterangan' => 'required',
             'status' => 'required',
         ], [
-            'jenis_pengumpulan.required' => 'Jenis Pengumpulan tidak boleh kosong.',
+            'jenis_file.required' => 'Jenis File tidak boleh kosong.',
             'bukti_file.required' => 'Bukti File tidak boleh kosong.',
             'keterangan.required' => 'Keterangan tidak boleh kosong.',
             'status.required' => 'Status tidak boleh kosong.',

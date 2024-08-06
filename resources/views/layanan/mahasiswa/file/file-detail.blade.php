@@ -23,6 +23,9 @@
                         <h4>Keterangan</h4> 
                         {{$berka->keterangan}}
                         <hr>
+                        <h4>Keterangan diperbaharui pada</h4> 
+                        {{$berka->updated_at}}
+                        <hr>
                     </div>
                 </div>
             </div>

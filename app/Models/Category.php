@@ -10,6 +10,10 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kategori_ta',
+        'kategori_ta'
     ];
+    public function files()
+    {
+        return $this->hasMany(File::class, 'kategori');
+    }
 }

@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\DataTables\PriceDataTable;
 use App\Models\Price;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class PriceController extends Controller
 {
+    public function getActivePrice(): JsonResponse
+    {
+        $price = Price::where('is_active', true)->first();
+        return response()->json($price);
+    }
+
     public function __construct()
     {
         $this->middleware('can:create master/prices')->only('create');
@@ -20,10 +27,10 @@ class PriceController extends Controller
      */
     public function index(PriceDataTable $dataTable)
     {
-        //
         $this->authorize('read master/prices');
         return $dataTable->render('master.price');
     }
+
 
     public function getPriceData()
     {
@@ -42,7 +49,6 @@ class PriceController extends Controller
      */
     public function create()
     {
-        //
         return view('master.price-action', ['price' => new Price()]);
     }
 
@@ -54,24 +60,16 @@ class PriceController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        Price::create($request->all());
+        // Nonaktifkan harga lama jika ada
+        Price::where('is_active', true)->update(['is_active' => false]);
+
+        // Buat harga baru
+        Price::create(array_merge($request->all(), ['is_active' => true]));
 
         return response()->json([
             'status' => 'success',
             'message' => 'Create data successfully'
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Price  $price
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Price $price)
-    {
-        //
     }
 
     /**
@@ -82,7 +80,6 @@ class PriceController extends Controller
      */
     public function edit(Price $price)
     {
-        //
         return view('master.price-action', compact('price'));
     }
 
@@ -95,16 +92,21 @@ class PriceController extends Controller
      */
     public function update(Request $request, Price $price)
     {
-        //
-        $price->pageBerwarnaPrice = $request->pageBerwarnaPrice;
-        $price->pageHitamPutihPrice = $request->pageHitamPutihPrice;
-        $price->softjilidprice = $request->softjilidprice;
-        $price->hardjilidprice = $request->hardjilidprice;
-        $price->save();
+        // Nonaktifkan harga lama jika ada
+        Price::where('is_active', true)->update(['is_active' => false]);
+
+        // Update harga yang ada
+        $price->update([
+            'pageBerwarnaPrice' => $request->pageBerwarnaPrice,
+            'pageHitamPutihPrice' => $request->pageHitamPutihPrice,
+            'hardjilidprice' => $request->hardjilidprice,
+            'softjilidprice' => $request->softjilidprice,
+            'is_active' => true,
+        ]);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'updated data successfully'
+            'message' => 'Updated data successfully'
         ]);
     }
 
@@ -116,7 +118,6 @@ class PriceController extends Controller
      */
     public function destroy(Price $price)
     {
-        //
         $price->delete();
         return response()->json([
             'status' => 'success',

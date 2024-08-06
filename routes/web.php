@@ -37,6 +37,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/api/prices', [DashboardController::class, 'getPrices']); // Route baru untuk mengambil data harga
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -74,4 +77,6 @@ Route::get('layanan/jilid/{id}/submitPaymentProof', function ($id) {
 })->name('jilid.submitPaymentProof');
 
 Route::post('layanan/jilid/{id}/submitPaymentProof', [JilidController::class, 'submitPaymentProof'])->name('jilid.submitPaymentProof');
+Route::get('/file/status/{id}', [FileController::class, 'getFileStatus']);
+Route::get('file/{id}', [App\Http\Controllers\mahasiswa\FileController::class, 'show'])->name('file.show');
 

@@ -197,16 +197,25 @@
                     return
                 }
 
-                $.ajax({
-                    method: 'get',
-                    url: `{{ url('layanan/plagiarism/') }}/${id}/edit`,
-                    success: function(res) {
-                        $('#modalAction').find('.modal-dialog').html(res)
-                        modal.show()
-                        store()
-                    }
-                })
-
+                // Check similarity before showing edit modal
+                if (similarity !== null && similarity > 10) {
+                    $.ajax({
+                        method: 'get',
+                        url: `{{ url('layanan/plagiarism/') }}/${id}/edit`,
+                        success: function(res) {
+                            $('#modalAction').find('.modal-dialog').html(res)
+                            modal.show()
+                            store()
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        title: 'Cannot Edit',
+                        text: "Nilai similiarity harus diatas 10% agar bisa di edit.",
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                }
             })
         });
     </script>

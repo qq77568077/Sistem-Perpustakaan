@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Term;
+use App\Models\Price;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,8 +15,16 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $data = Term::get();
-        return view('dashboard', compact('data'));
+        $terms = Term::all(); // Mengambil semua data dari model Term
+        $prices = Price::all(); // Mengambil semua data dari model Price
+
+        return view('dashboard', compact('terms', 'prices'));
+    }
+
+    public function getPrices()
+    {
+        $prices = Price::where('is_active', true)->first();
+        return response()->json($prices);
     }
 
     /**

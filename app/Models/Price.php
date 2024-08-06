@@ -14,5 +14,12 @@ class Price extends Model
         'pageHitamPutihPrice',
         'softjilidprice',
         'hardjilidprice',
+        'is_active',
     ];
+
+    // Accessor untuk memformat tanggal
+    public function getCreatedAtAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
+    }
 }

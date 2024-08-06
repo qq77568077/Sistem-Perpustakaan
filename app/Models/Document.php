@@ -10,12 +10,12 @@ class Document extends Model
     use HasFactory;
 
     protected $fillable = [
-        'dokumen',
+        'dokumen'
     ];
 
     public function file()
     {
 
-        return $this->hasMany(File::class);
+        return $this->hasMany(File::class, 'jenis_file');
     }
 }
