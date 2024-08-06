@@ -78,5 +78,5 @@ Route::get('layanan/jilid/{id}/submitPaymentProof', function ($id) {
 
 Route::post('layanan/jilid/{id}/submitPaymentProof', [JilidController::class, 'submitPaymentProof'])->name('jilid.submitPaymentProof');
 Route::get('/file/status/{id}', [FileController::class, 'getFileStatus']);
-Route::get('file/{id}', [App\Http\Controllers\mahasiswa\FileController::class, 'show'])->name('file.show');
+// Route::get('file/{id}', [App\Http\Controllers\mahasiswa\FileController::class, 'show'])->name('file.show');
 

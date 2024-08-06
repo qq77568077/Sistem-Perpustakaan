@@ -182,6 +182,7 @@
                     url: "{{ route('file.show', ':user_id') }}".replace(':user_id', userId),
                     success: function(response) {
                         // Lakukan sesuatu dengan respons dari AJAX, seperti menampilkan di modal atau halaman lain
+                        // Contoh: Redirect ke halaman file-detail
                         window.location.href = "{{ route('file.show', ':user_id') }}".replace(
                             ':user_id', userId);
                     },
