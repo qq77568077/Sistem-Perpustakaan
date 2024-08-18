@@ -9,7 +9,7 @@
             Data Jilid/Cetak
         </div>
         <div class="content-wrapper">
-            <div class="row same-height">
+            <div class="row same-height">   
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -179,13 +179,13 @@
             var table = $(this).DataTable();
             table.rows().every(function(rowIdx, tableLoop, rowLoop) {
                 var data = this.data();
-                // Check if the status is 'Belum Validasi'
+                // Cek jika status adalah 'Belum Validasi'
                 if (data.status === 'Belum Validasi') {
-                    // If status is 'Belum Validasi', display a danger alert indicating validation is pending
+                    // Jika status adalah 'Belum Validasi', tampilkan peringatan bahwa validasi oleh petugas diperlukan
                     $('td', this.node()).eq(3).html(
                         '<span class="badge bg-danger">Butuh validasi petugas terlebih dahulu</span>');
                 } else if (!data.bukti_pembayaran) {
-                    // If bukti_pembayaran is empty and status is not 'Belum Validasi', construct the payment link
+                    // Jika bukti_pembayaran kosong dan status bukan 'Belum Validasi', buat link untuk mengunggah bukti pembayaran
                     var paymentLink = '<a href="/layanan/jilid/' + data.id +
                         '/submitPaymentProof">belum di bayar silahkan lakukan pembayaran</a>';
                     $('td', this.node()).eq(3).html(paymentLink);

@@ -106,6 +106,7 @@
                                                         @php
                                                             $jenisFile = $userFiles
                                                                 ->where('jenis_file', $doc->id)
+                                                                ->where('is_active', true)
                                                                 ->first();
                                                         @endphp
                                                         @if ($jenisFile && $jenisFile->status === 'Valid')

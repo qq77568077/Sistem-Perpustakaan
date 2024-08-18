@@ -45,7 +45,7 @@
                                                     <td>{{ $d->hard_jilid }}</td>
                                                     <td>{{ $d->soft_jilid }}</td>
                                                     <td>{{ $d->total }}</td>
-                                                    <td><a href="{{ $d->bukti_Pembayaran }}" target="_blank">Link File</a>
+                                                    <td><a href="{{ $d->bukti_pembayaran }}" target="_blank">Link File</a>
                                                     </td>
                                                     <td><a href="{{ $d->file }}" target="_blank">Link File</a></td>
                                                     <td>{{ $d->keterangan }}</td>

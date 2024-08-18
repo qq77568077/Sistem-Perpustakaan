@@ -37,23 +37,27 @@
                                                     <td>{{ $d->id }}</td>
                                                     <td><a href="{{ $d->file }}" target="_blank">Link File</a></td>
                                                     <td>
-                                                        @if ($d->hasil_cek)
-                                                            <a href="{{ $d->hasil_cek }}" target="_blank">Link File</a>
+                                                        @if ($d->hasil_cek == 'Hasil Belum di tampilkan')
+                                                            <a data-toggle="modal" data-target="#hasilBelumDitampilkan">
+                                                                {{ $d->hasil_cek }}
+                                                            </a>
                                                         @else
-                                                            Null
+                                                            <a href="{{ $d->hasil_cek }}" target="_blank">Link File</a>
                                                         @endif
                                                     </td>
                                                     <td>
                                                         @if ($d->similarity)
                                                             {{ $d->similarity }}%
                                                         @else
-                                                            Null
+                                                            <a>Hasil belum ditampilkan</a>
                                                         @endif
                                                     </td>
                                                     <td>
                                                         {{ $d->keterangan }}
                                                     </td>
-                                                    <td>{{ $d->status }}</td>
+                                                    <td>
+                                                        {{ $d->status }}
+                                                    </td>
                                                     <td>
                                                         <button type="button" data-id="{{ $d->id }}"
                                                             data-jenis="edit" id="btn-edit"
