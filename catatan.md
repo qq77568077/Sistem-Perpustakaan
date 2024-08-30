@@ -78,7 +78,7 @@ php artisan migrate:fresh --seed
 php artisan serve
 npm run dev
 
-mebuat database di phpmyadmin dengan nama SistemPerpus
+mebuat database postgresql dengan nama SistemPerpus
 
 
 ## Update Terbaru Rev Program
